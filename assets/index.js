@@ -1649,4 +1649,4 @@ var menu = template('menu', {value: data});
 $('#main-menu').prepend(menu)
 
 var content = template('main-content', {value: data});
-$('.main-content').prepend(content)
+$('.main-content .navbar').after(content)
