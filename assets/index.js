@@ -1,4 +1,4 @@
-[
+var data = [
     {
         "name": "常用推荐",
         "en_name": "Recommended",
@@ -88,61 +88,61 @@
                 "logo": "assets/images/logos/36kr.png",
                 "title": "36kr",
                 "desc": "创业资讯、科技新闻"
-            }, 
+            },
             {
                 "url": "https://www.digitaling.com/",
                 "logo": "assets/images/logos/digitaling.png",
                 "title": "数英网",
                 "desc": "数字媒体及职业招聘网站"
-            }, 
+            },
             {
                 "url": "http://www.lieyunwang.com/",
                 "logo": "assets/images/logos/lieyunwang.png",
                 "title": "猎云网",
                 "desc": "互联网创业项目推荐和创业创新资讯"
-            }, 
+            },
             {
                 "url": "http://www.woshipm.com/",
                 "logo": "assets/images/logos/woshipm.png",
                 "title": "人人都是产品经理",
                 "desc": "产品经理、产品爱好者学习交流平台"
-            }, 
+            },
             {
                 "url": "https://www.zaodula.com/",
                 "logo": "assets/images/logos/zaodula.png",
                 "title": "互联网早读课",
                 "desc": "互联网行业深度阅读与学习平台"
-            }, 
+            },
             {
                 "url": "http://www.chanpin100.com/",
                 "logo": "assets/images/logos/chanpin100.png",
                 "title": "产品壹佰",
                 "desc": "为产品经理爱好者提供最优质的产品资讯、原创内容和相关视频课程"
-            }, 
+            },
             {
                 "url": "http://www.pmcaff.com/",
                 "logo": "assets/images/logos/pmcaff.png",
                 "title": "PMCAFF",
                 "desc": "中国第一产品经理人气组织，专注于研究互联网产品"
-            }, 
+            },
             {
                 "url": "http://www.iyunying.org/",
                 "logo": "assets/images/logos/iyunying.png",
                 "title": "爱运营",
                 "desc": "网站运营人员学习交流，专注于网站产品运营管理、淘宝运营。"
-            }, 
+            },
             {
                 "url": "http://www.niaogebiji.com/",
                 "logo": "assets/images/logos/niaogebiji.png",
                 "title": "鸟哥笔记",
                 "desc": "移动互联网第一干货平台"
-            }, 
+            },
             {
                 "url": "http://www.gtn9.com/",
                 "logo": "assets/images/logos/gtn9.png",
                 "title": "古田路9号",
                 "desc": "国内专业品牌创意平台"
-            }, 
+            },
             {
                 "url": "http://www.uigreat.com/",
                 "logo": "assets/images/logos/uigreat.png",
@@ -150,7 +150,7 @@
                 "desc": "UI设计师学习交流社区"
             }
         ]
-    }, 
+    },
     {
         "name": "灵感采集",
         "en_name": "Inspiration",
@@ -177,7 +177,7 @@
                         "logo": "assets/images/logos/sspai.png",
                         "title": "少数派",
                         "desc": "高品质数字消费指南"
-                    }, 
+                    },
                     {
                         "url": "http://liqi.io/",
                         "logo": "assets/images/logos/liqi.png",
@@ -1581,3 +1581,72 @@
         ]
     }
 ]
+
+// 锚点平滑移动
+$(document).ready(function () {
+    //img lazy loaded
+    const observer = lozad();
+    observer.observe();
+
+    $(document).on('click', '.has-sub', function () {
+        var _this = $(this)
+        if (!$(this).hasClass('expanded')) {
+            setTimeout(function () {
+                _this.find('ul').attr("style", "")
+            }, 300);
+
+        } else {
+            $('.has-sub ul').each(function (id, ele) {
+                var _that = $(this)
+                if (_this.find('ul')[0] != ele) {
+                    setTimeout(function () {
+                        _that.attr("style", "")
+                    }, 300);
+                }
+            })
+        }
+    })
+    $('.user-info-menu .hidden-sm').click(function () {
+        if ($('.sidebar-menu').hasClass('collapsed')) {
+            $('.has-sub.expanded > ul').attr("style", "")
+        } else {
+            $('.has-sub.expanded > ul').show()
+        }
+    })
+    $("#main-menu li ul li").click(function () {
+        $(this).siblings('li').removeClass('active'); // 删除其他兄弟元素的样式
+        $(this).addClass('active'); // 添加当前元素的样式
+    });
+    $("a.smooth").click(function (ev) {
+        ev.preventDefault();
+
+        public_vars.$mainMenu.add(public_vars.$sidebarProfile).toggleClass('mobile-is-visible');
+        ps_destroy();
+        $("html, body").animate({
+            scrollTop: $($(this).attr("href")).offset().top - 30
+        }, {
+            duration: 500,
+            easing: "swing"
+        });
+    });
+    return false;
+});
+
+var href = "";
+var pos = 0;
+$("a.smooth").click(function (e) {
+    $("#main-menu li").each(function () {
+        $(this).removeClass("active");
+    });
+    $(this).parent("li").addClass("active");
+    e.preventDefault();
+    href = $(this).attr("href");
+    pos = $(href).position().top - 30;
+});
+
+
+var menu = template('menu', {value: data});
+$('#main-menu').prepend(menu)
+
+var content = template('main-content', {value: data});
+$('.main-content').prepend(content)
