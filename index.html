@@ -37,9 +37,13 @@
     <meta name="twitter:title" content="WebStack - 收集国内外优秀设计网站、UI设计资源网站、灵感创意网站、素材资源网站，定时更新分享优质产品设计书签。bm.wqdy.top">
     <meta name="twitter:description" content="UI设计,UI设计素材,设计导航,网址导航,设计资源,创意导航,创意网站导航,设计师网址大全,设计素材大全,设计师导航,UI设计资源,优秀UI设计欣赏,设计师导航,设计师网址大全,设计师网址导航,产品经理网址导航,交互设计师网址导航,bm.wqdy.top">
     <meta name="twitter:image" content="https://bm.wqdy.top/assets/images/webstack_banner_cn.png">
+
+    <link rel="manifest" href="/manifest.json">
 </head>
 
 <body class="page-body">
+    <!-- <div id="loading">加载中</div> -->
+
     <div class="page-container">
         <div class="sidebar-menu toggle-others fixed">
             <div class="sidebar-menu-inner">
@@ -116,7 +120,7 @@
 
     <!-- 菜单 -->
     <script id="menu" type="text/html">
-        {{each value as v i}}
+        {{each value v i}}
             {{if v.children}}
                 <li>
                     <a >
@@ -150,13 +154,13 @@
 
     <!-- 导航 -->
     <script id="main-content" type="text/html">
-        {{each value as v i}}
+        {{each value v i}}
             {{if v.children}}
-                {{each v.children as v1}}
+                {{each v.children v1}}
                 <h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="{{v1.name}}"></i>{{v1.name}}</h4>
 
                 <div class="row">
-                    {{each v1.web as v2}}
+                    {{each v1.web v2}}
                     <div class="col-sm-3">
                         <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{{v2.url}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{v2.url}}">
                             <div class="xe-comment-entry">
@@ -180,7 +184,7 @@
                 <h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="{{v.name}}"></i>{{v.name}}</h4>
 
                 <div class="row">
-                    {{each v.web as v1 i1}}
+                    {{each v.web v1 i1}}
                     <div class="col-sm-3">
                         <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{{v1.url}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{v1.url}}">
                             <div class="xe-comment-entry">
@@ -212,6 +216,14 @@
     <!-- JavaScripts initializations and stuff -->
     <script src="./assets/js/xenon-custom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha512-21jyjW5+RJGAZ563i/Ug7e0AUkY7QiZ53LA4DWE5eNu5hvjW6KUf9LqquJ/ziLKWhecyvvojG7StycLj7bT39Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        if (typeof navigator.serviceWorker !== 'undefined') {
+            navigator.serviceWorker.register('sw.js')
+            // .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            // .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+        }
+    </script>
 </body>
 
 </html>
