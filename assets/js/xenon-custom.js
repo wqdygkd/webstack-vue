@@ -15,54 +15,21 @@ var public_vars = public_vars || {};
 		// Main Vars
 		public_vars.$body                 = $("body");
 		public_vars.$pageContainer        = public_vars.$body.find(".page-container");
-		public_vars.$chat                 = public_vars.$pageContainer.find("#chat");
 		public_vars.$sidebarMenu          = public_vars.$pageContainer.find('.sidebar-menu');
 		public_vars.$sidebarProfile       = public_vars.$sidebarMenu.find('.sidebar-user-info');
 		public_vars.$mainMenu             = public_vars.$sidebarMenu.find('.main-menu');
 
 		public_vars.$horizontalNavbar     = public_vars.$body.find('.navbar.horizontal-menu');
-		public_vars.$horizontalMenu       = public_vars.$horizontalNavbar.find('.navbar-nav');
 
 		public_vars.$mainContent          = public_vars.$pageContainer.find('.main-content');
 		public_vars.$mainFooter           = public_vars.$body.find('footer.main-footer');
 
-		public_vars.$userInfoMenuHor      = public_vars.$body.find('.navbar.horizontal-menu');
 		public_vars.$userInfoMenu         = public_vars.$body.find('nav.navbar.user-info-navbar');
-
-		public_vars.$settingsPane         = public_vars.$body.find('.settings-pane');
-		public_vars.$settingsPaneIn       = public_vars.$settingsPane.find('.settings-pane-inner');
 
 		public_vars.wheelPropagation      = true; // used in Main menu (sidebar)
 
-		public_vars.$pageLoadingOverlay   = public_vars.$body.find('.page-loading-overlay');
-
-		public_vars.defaultColorsPalette = ['#68b828','#7c38bc','#0e62c7','#fcd036','#4fcdfc','#00b19d','#ff6264','#f7aa47'];
-
-
-
-		// Page Loading Overlay
-		if(public_vars.$pageLoadingOverlay.length)
-		{
-			$(window).load(function()
-			{
-				public_vars.$pageLoadingOverlay.addClass('loaded');
-			});
-		}
-
-		window.onerror = function()
-		{
-			// failsafe remove loading overlay
-			public_vars.$pageLoadingOverlay.addClass('loaded');
-		}
-
-
 		// Setup Sidebar Menu
 		setup_sidebar_menu();
-
-
-		// Setup Horizontal Menu
-		setup_horizontal_menu();
-
 
 		// Sticky Footer
 		if(public_vars.$mainFooter.hasClass('sticky'))
@@ -91,13 +58,6 @@ var public_vars = public_vars || {};
 					wheelPropagation: false
 				});
 			});
-
-
-			// Chat Scrollbar
-			var $chat_inner = public_vars.$pageContainer.find('#chat .chat-inner');
-
-			if($chat_inner.parent().hasClass('fixed'))
-				$chat_inner.css({maxHeight: $(window).height()}).perfectScrollbar();
 
 
 			// User info opening dropdown trigger PS update
@@ -229,164 +189,10 @@ var public_vars = public_vars || {};
 				});
 			}
 		}
-
-		// jQuery Knob
-		if($.isFunction($.fn.knob))
-		{
-			$(".knob").knob({
-				change: function (value) {
-				},
-				release: function (value) {
-				},
-				cancel: function () {
-				},
-				draw: function () {
-
-					if (this.$.data('skin') == 'tron') {
-
-						var a = this.angle(this.cv) // Angle
-							,
-							sa = this.startAngle // Previous start angle
-							,
-							sat = this.startAngle // Start angle
-							,
-							ea // Previous end angle
-							, eat = sat + a // End angle
-							,
-							r = 1;
-
-						this.g.lineWidth = this.lineWidth;
-
-						this.o.cursor && (sat = eat - 0.3) && (eat = eat + 0.3);
-
-						if (this.o.displayPrevious) {
-							ea = this.startAngle + this.angle(this.v);
-							this.o.cursor && (sa = ea - 0.3) && (ea = ea + 0.3);
-							this.g.beginPath();
-							this.g.strokeStyle = this.pColor;
-							this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false);
-							this.g.stroke();
-						}
-
-						this.g.beginPath();
-						this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
-						this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false);
-						this.g.stroke();
-
-						this.g.lineWidth = 2;
-						this.g.beginPath();
-						this.g.strokeStyle = this.o.fgColor;
-						this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
-						this.g.stroke();
-
-						return false;
-					}
-				}
-			});
-		}
-
-
-
-
-		// Wysiwyg Editor
-		if($.isFunction($.fn.wysihtml5))
-		{
-			$(".wysihtml5").each(function(i, el)
-			{
-				var $this = $(el),
-					stylesheets = attrDefault($this, 'stylesheet-url', '')
-
-				$(".wysihtml5").wysihtml5({
-					size: 'white',
-					stylesheets: stylesheets.split(','),
-					"html": attrDefault($this, 'html', true),
-					"color": attrDefault($this, 'colors', true),
-				});
-			});
-		}
-
-		// Dropzone is prezent
-		if(typeof Dropzone != 'undefined')
-		{
-			Dropzone.autoDiscover = false;
-
-			$(".dropzone[action]").each(function(i, el)
-			{
-				$(el).dropzone();
-			});
-		}
-
-
-
-
-		// Tocify Table
-		if($.isFunction($.fn.tocify) && $("#toc").length)
-		{
-			$("#toc").tocify({
-				context: '.tocify-content',
-				selectors: "h2,h3,h4,h5"
-			});
-
-
-			var $this = $(".tocify"),
-				watcher = scrollMonitor.create($this.get(0));
-
-			$this.width( $this.parent().width() );
-
-			watcher.lock();
-
-			watcher.stateChange(function()
-			{
-				$($this.get(0)).toggleClass('fixed', this.isAboveViewport)
-			});
-		}
-
-
-
-		// Login Form Label Focusing
-		$(".login-form .form-group:has(label)").each(function(i, el)
-		{
-			var $this = $(el),
-				$label = $this.find('label'),
-				$input = $this.find('.form-control');
-
-			$input.on('focus', function()
-			{
-				$this.addClass('is-focused');
-			});
-
-			$input.on('keydown', function()
-			{
-				$this.addClass('is-focused');
-			});
-
-			$input.on('blur', function()
-			{
-				$this.removeClass('is-focused');
-
-				if($input.val().trim().length > 0)
-				{
-					$this.addClass('is-focused');
-				}
-			});
-
-			$label.on('click', function()
-			{
-				$input.focus();
-			});
-
-			if($input.val().trim().length > 0)
-			{
-				$this.addClass('is-focused');
-			}
-		});
-
 	});
-
 
 	// Enable/Disable Resizable Event
 	var wid = 0;
-
 	$(window).resize(function() {
 		clearTimeout(wid);
 		wid = setTimeout(trigger_resizable, 200);
@@ -554,160 +360,6 @@ function sidebar_menu_close_items_siblings($li)
 		sidebar_menu_item_collapse($_li, $_sub);
 	});
 }
-
-
-// Horizontal Menu
-function setup_horizontal_menu()
-{
-	if(public_vars.$horizontalMenu.length)
-	{
-		var $items_with_subs = public_vars.$horizontalMenu.find('li:has(> ul)'),
-			click_to_expand = public_vars.$horizontalMenu.hasClass('click-to-expand');
-
-		if(click_to_expand)
-		{
-			public_vars.$mainContent.add( public_vars.$sidebarMenu ).on('click', function(ev)
-			{
-				$items_with_subs.removeClass('hover');
-			});
-		}
-
-		$items_with_subs.each(function(i, el)
-		{
-			var $li = jQuery(el),
-				$a = $li.children('a'),
-				$sub = $li.children('ul'),
-				is_root_element = $li.parent().is('.navbar-nav');
-
-			$li.addClass('has-sub');
-
-			// Mobile Only
-			$a.on('click', function(ev)
-			{
-				if(isxs())
-				{
-					ev.preventDefault();
-
-					// Automatically will toggle other menu items in mobile view
-					if(true)
-					{
-						sidebar_menu_close_items_siblings($li);
-					}
-
-					if($li.hasClass('expanded') || $li.hasClass('opened'))
-						sidebar_menu_item_collapse($li, $sub);
-					else
-						sidebar_menu_item_expand($li, $sub);
-				}
-			});
-
-			// Click To Expand
-			if(click_to_expand)
-			{
-				$a.on('click', function(ev)
-				{
-					ev.preventDefault();
-
-					if(isxs())
-						return;
-
-					// For parents only
-					if(is_root_element)
-					{
-						$items_with_subs.filter(function(i, el){ return jQuery(el).parent().is('.navbar-nav'); }).not($li).removeClass('hover');
-						$li.toggleClass('hover');
-					}
-					// Sub menus
-					else
-					{
-						var sub_height;
-
-						// To Expand
-						if($li.hasClass('expanded') == false)
-						{
-							$li.addClass('expanded');
-							$sub.addClass('is-visible');
-
-							sub_height = $sub.outerHeight();
-
-							$sub.height(0);
-
-							TweenLite.to($sub, .15, {css: {height: sub_height}, ease: Sine.easeInOut, onComplete: function(){ $sub.attr('style', ''); }});
-
-							// Hide Existing in the list
-							$li.siblings().find('> ul.is-visible').not($sub).each(function(i, el)
-							{
-								var $el = jQuery(el);
-
-								sub_height = $el.outerHeight();
-
-								$el.removeClass('is-visible').height(sub_height);
-								$el.parent().removeClass('expanded');
-
-								TweenLite.to($el, .15, {css: {height: 0}, onComplete: function(){ $el.attr('style', ''); }});
-							});
-						}
-						// To Collapse
-						else
-						{
-							sub_height = $sub.outerHeight();
-
-							$li.removeClass('expanded');
-							$sub.removeClass('is-visible').height(sub_height);
-							TweenLite.to($sub, .15, {css: {height: 0}, onComplete: function(){ $sub.attr('style', ''); }});
-						}
-					}
-				});
-			}
-			// Hover To Expand
-			else
-			{
-				$li.hoverIntent({
-					over: function()
-					{
-						if(isxs())
-							return;
-
-						if(is_root_element)
-						{
-							$li.addClass('hover');
-						}
-						else
-						{
-							$sub.addClass('is-visible');
-							sub_height = $sub.outerHeight();
-
-							$sub.height(0);
-
-							TweenLite.to($sub, .25, {css: {height: sub_height}, ease: Sine.easeInOut, onComplete: function(){ $sub.attr('style', ''); }});
-						}
-					},
-					out: function()
-					{
-						if(isxs())
-							return;
-
-						if(is_root_element)
-						{
-							$li.removeClass('hover');
-						}
-						else
-						{
-							sub_height = $sub.outerHeight();
-
-							$li.removeClass('expanded');
-							$sub.removeClass('is-visible').height(sub_height);
-							TweenLite.to($sub, .25, {css: {height: 0}, onComplete: function(){ $sub.attr('style', ''); }});
-						}
-					},
-					timeout: 200,
-					interval: is_root_element ? 10 : 100
-				});
-			}
-		});
-	}
-}
-
 
 function stickFooterToBottom()
 {
