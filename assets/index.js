@@ -1,8 +1,25 @@
 const data = [
     {
+        name: '视频',
+        icon: 'fa fa-video-camera',
+        children: [
+            {
+                name: '影视站',
+                web: [
+                    {
+                        url: 'https://www.nfmovies.com/',
+                        logo: 'assets/images/logos/nfmovies.webp',
+                        title: '奈菲影视',
+                        desc: '永久免费的福利超清影视站，没有套路，完全免费！'
+                    }
+                ]
+            }
+        ]
+    },
+    {
         name: '常用推荐',
         en_name: 'Recommended',
-        icon: 'linecons-star',
+        icon: 'fa fa-star-o',
         web: [
             {
                 url: 'https://dribbble.com/',
@@ -75,7 +92,7 @@ const data = [
     {
         name: '社区资讯',
         en_name: 'Information',
-        icon: 'linecons-doc',
+        icon: 'fa fa-newspaper-o',
         web: [
             {
                 url: 'https://www.leiphone.com/',
@@ -154,7 +171,7 @@ const data = [
     {
         name: '灵感采集',
         en_name: 'Inspiration',
-        icon: 'linecons-lightbulb',
+        icon: 'fa fa-lightbulb-o',
         children: [
             {
                 name: '发现产品',
@@ -1643,8 +1660,27 @@ $('a.smooth').click(function (e) {
     pos = $(href).position().top - 30
 })
 
-const menu = template('menu', { value: data })
-$('#main-menu').prepend(menu)
+const menu = []
+const content = []
+data.forEach(item => {
+    if (item.children) {
+        const children = []
+        item.children.forEach(child => {
+            children.push({ name: child.name })
+            content.push(child)
+        })
+        menu.push({ name: item.name, icon: item.icon, children })
+    } else {
+        menu.push({ name: item.name, icon: item.icon })
+        content.push({ name: item.name, web: item.web })
+    }
+})
 
-const content = template('main-content', { value: data })
-$('.main-content .navbar').after(content)
+const menuHtml  = template('menu', { value: menu })
+$('#main-menu').prepend(menuHtml)
+
+const contentHtml = template('main-content', {
+        value: content,
+        local: location.hostname === 'localhost',
+    })
+$('.main-content .navbar').after(contentHtml)
