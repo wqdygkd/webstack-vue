@@ -1,6 +1,6 @@
 const data = [
     {
-        name: '视频',
+        name: '影视资源',
         icon: 'fa fa-video-camera',
         children: [
             {
@@ -11,6 +11,40 @@ const data = [
                         logo: 'assets/images/logos/nfmovies.webp',
                         title: '奈菲影视',
                         desc: '永久免费的福利超清影视站，没有套路，完全免费！'
+                    },
+                    {
+                        url: 'https://www.mypianku.net/',
+                        logo: 'assets/images/logos/pianku.ico',
+                        title: '片库',
+                        desc: '片库网是一个可在线观看、下载视频的网站。每日收集全网最新的电影、剧集、动漫高清资源供网友免费下载！'
+                    }
+                ]
+            },
+            {
+                name: '字幕',
+                web: [
+                    {
+                        url: 'https://zmk.pw/',
+                        logo: 'assets/images/logos/zmk.png',
+                        title: '字幕库',
+                        desc: '字幕下载网站'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        name: '常用工具',
+        icon: 'linecons-diamond',
+        children: [
+            {
+                name: '下载工具',
+                web: [
+                    {
+                        url: 'https://kinhdown.kinh.cc/',
+                        logo: 'assets/images/logos/Kinh.png',
+                        title: 'kinhdown',
+                        desc: '百度网盘文件高速下载'
                     }
                 ]
             }
