@@ -1,5 +1,17 @@
 const data = [
     {
+        name: '常用推荐',
+        icon: 'fa fa-star-o',
+        web: [
+            {
+                url: 'https://travellings.link/',
+                logo: 'assets/images/logos/travelling.png',
+                title: '开往',
+                desc: '开往-友链接力'
+            },
+        ]
+    },
+    {
         name: '影视资源',
         icon: 'fa fa-video-camera',
         children: [
@@ -47,79 +59,6 @@ const data = [
                         desc: '百度网盘文件高速下载'
                     }
                 ]
-            }
-        ]
-    },
-    {
-        name: '常用推荐',
-        en_name: 'Recommended',
-        icon: 'fa fa-star-o',
-        web: [
-            {
-                url: 'https://dribbble.com/',
-                logo: 'assets/images/logos/dribbble.png',
-                title: 'Dribbble',
-                desc: '全球UI设计师作品分享平台。'
-            },
-            {
-                url: 'https://behance.net/',
-                logo: 'assets/images/logos/behance.png',
-                title: 'Behance',
-                desc: 'Adobe旗下的设计师交流平台，来自世界各地的设计师在这里分享自己的作品。'
-            },
-            {
-                url: 'https://dribbble.com/',
-                logo: 'assets/images/logos/dribbble.png',
-                title: 'UI中国',
-                desc: '图形交互与界面设计交流、作品展示、学习平台。'
-            },
-            {
-                url: 'http://www.zcool.com.cn/',
-                logo: 'assets/images/logos/zcool.png',
-                title: '站酷',
-                desc: '中国人气设计师互动平台'
-            },
-            {
-                url: 'https://www.pinterest.com/',
-                logo: 'assets/images/logos/pinterest.png',
-                title: 'Pinterest',
-                desc: '全球美图收藏采集站'
-            },
-            {
-                url: 'http://huaban.com/',
-                logo: 'assets/images/logos/huaban.png',
-                title: '花瓣',
-                desc: '收集灵感,保存有用的素材'
-            },
-            {
-                url: 'https://medium.com/',
-                logo: 'assets/images/logos/medium.png',
-                title: 'Medium',
-                desc: '高质量设计文章'
-            },
-            {
-                url: 'http://www.uisdc.com/',
-                logo: 'assets/images/logos/uisdc.png',
-                title: '优设',
-                desc: '设计师交流学习平台'
-            },
-            {
-                url: 'https://www.producthunt.com',
-                logo: 'assets/images/logos/producthunt.png',
-                title: 'Producthunt',
-                desc: '发现新鲜有趣的产品'
-            },
-            {
-                url: 'https://www.youtube.com',
-                logo: 'assets/images/logos/youtube.png',
-                title: 'Youtube',
-                desc: '全球最大的学习分享平台'
-            },
-            {
-                url: 'https://www.google.com',
-                logo: 'assets/images/logos/google.png',
-                title: 'Google',
-                desc: '全球最大的UI学习分享平台'
             }
         ]
     },
