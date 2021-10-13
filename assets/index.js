@@ -35,7 +35,7 @@ const data = [
     },
     {
         name: '常用工具',
-        icon: 'linecons-diamond',
+        icon: 'fa fa-diamond',
         children: [
             {
                 name: '下载工具',
@@ -375,7 +375,7 @@ const data = [
     {
         name: '素材资源',
         en_name: 'Resources',
-        icon: 'linecons-thumbs-up',
+        icon: 'fa fa-thumbs-o-up',
         children: [
             {
                 name: '图标素材',
@@ -1048,7 +1048,7 @@ const data = [
     {
         name: '常用工具',
         en_name: 'Design Tools',
-        icon: 'linecons-diamond',
+        icon: 'fa fa-diamond',
         children: [
             {
                 name: '图形创意',
@@ -1367,7 +1367,7 @@ const data = [
     {
         name: '学习教程',
         en_name: 'Tutorial',
-        icon: 'linecons-pencil',
+        icon: 'fa fa-pencil',
         children: [
             {
                 name: '设计规范',
@@ -1530,11 +1530,10 @@ const data = [
     },
     {
         name: 'UED团队',
-        en_name: 'UED Team',
-        icon: 'linecons-user',
+        icon: 'fa fa-user-o',
         web: [
             {
-                url: 'https://airbnb.design',
+                url: 'https://airbnb.design/',
                 logo: 'assets/images/logos/AirbnbDesign.png',
                 title: 'Airbnb Design',
                 desc: 'Airbnb Design'
@@ -1710,7 +1709,7 @@ data.forEach(item => {
     }
 })
 
-const menuHtml  = template('menu', { value: menu })
+const menuHtml = template('menu', { value: menu })
 $('#main-menu').prepend(menuHtml)
 
 const contentHtml = template('main-content', {
@@ -1718,3 +1717,4 @@ const contentHtml = template('main-content', {
         local: location.hostname === 'localhost',
     })
 $('.main-content .navbar').after(contentHtml)
+$('.page-container').removeClass('d-none')
