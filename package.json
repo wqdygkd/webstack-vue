@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "eslint-config-wqdy": "^0.0.1"
+  }
+}
