@@ -2,197 +2,190 @@
 <html lang="zh">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="author" content="c" />
-    <title>WebStack.cc - 设计师网址导航</title>
-    <meta name="keywords" content="UI设计,UI设计素材,设计导航,网址导航,设计资源,创意导航,创意网站导航,设计师网址大全,设计素材大全,设计师导航,UI设计资源,优秀UI设计欣赏,设计师导航,设计师网址大全,设计师网址导航,产品经理网址导航,交互设计师网址导航,bm.wqdy.top">
-    <meta name="description" content="WebStack - 收集国内外优秀设计网站、UI设计资源网站、灵感创意网站、素材资源网站，定时更新分享优质产品设计书签。bm.wqdy.top">
-    <link rel="shortcut icon" href="./assets/images/favicon.png">
-    <!-- <link rel="stylesheet" href="./assets/css/fonts/fontawesome/css/font-awesome.min.css"> -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="author" content="c" />
+  <title>bm.wqdy.top - 网址导航</title>
+  <meta name="keywords" content="UI设计,UI设计素材,设计导航,网址导航,设计资源,创意导航,创意网站导航,设计师网址大全,设计素材大全,设计师导航,UI设计资源,优秀UI设计欣赏,设计师导航,设计师网址大全,设计师网址导航,产品经理网址导航,交互设计师网址导航,bm.wqdy.top">
+  <meta name="description" content="收集国内外优秀设计网站、UI设计资源网站、灵感创意网站、素材资源网站，定时更新分享优质产品设计书签。bm.wqdy.top">
+  <!-- FB Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://bm.wqdy.top">
+  <meta property="og:title" content="收集国内外优秀设计网站、UI设计资源网站、灵感创意网站、素材资源网站，定时更新分享优质产品设计书签。bm.wqdy.top">
+  <meta property="og:description" content="UI设计,UI设计素材,设计导航,网址导航,设计资源,创意导航,创意网站导航,设计师网址大全,设计素材大全,设计师导航,UI设计资源,优秀UI设计欣赏,设计师导航,设计师网址大全,设计师网址导航,产品经理网址导航,交互设计师网址导航,bm.wqdy.top">
+  <meta property="og:image" content="http://webstack.cc/assets/images/webstack_banner_cn.png">
+  <meta property="og:site_name" content="收集国内外优秀设计网站、UI设计资源网站、灵感创意网站、素材资源网站，定时更新分享优质产品设计书签。bm.wqdy.top">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" href="./assets/images/favicon.png">
 
-    <link rel="stylesheet" href="./assets/css/bootstrap.css">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"> -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./assets/css/bootstrap.css">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"> -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"> -->
 
-    <link rel="stylesheet" href="./assets/css/xenon-core.css">
-    <link rel="stylesheet" href="./assets/css/nav.css">
-    <script src="./assets/js/jquery-1.11.1.min.js"></script>
-    <script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!-- / FB Open Graph -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://bm.wqdy.top">
-    <meta property="og:title" content="WebStack - 收集国内外优秀设计网站、UI设计资源网站、灵感创意网站、素材资源网站，定时更新分享优质产品设计书签。bm.wqdy.top">
-    <meta property="og:description" content="UI设计,UI设计素材,设计导航,网址导航,设计资源,创意导航,创意网站导航,设计师网址大全,设计素材大全,设计师导航,UI设计资源,优秀UI设计欣赏,设计师导航,设计师网址大全,设计师网址导航,产品经理网址导航,交互设计师网址导航,bm.wqdy.top">
-    <meta property="og:image" content="http://webstack.cc/assets/images/webstack_banner_cn.png">
-    <meta property="og:site_name" content="WebStack - 收集国内外优秀设计网站、UI设计资源网站、灵感创意网站、素材资源网站，定时更新分享优质产品设计书签。bm.wqdy.top">
-    <!-- / Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="WebStack - 收集国内外优秀设计网站、UI设计资源网站、灵感创意网站、素材资源网站，定时更新分享优质产品设计书签。bm.wqdy.top">
-    <meta name="twitter:description" content="UI设计,UI设计素材,设计导航,网址导航,设计资源,创意导航,创意网站导航,设计师网址大全,设计素材大全,设计师导航,UI设计资源,优秀UI设计欣赏,设计师导航,设计师网址大全,设计师网址导航,产品经理网址导航,交互设计师网址导航,bm.wqdy.top">
-    <meta name="twitter:image" content="https://bm.wqdy.top/assets/images/webstack_banner_cn.png">
+  <link rel="stylesheet" href="./assets/css/xenon-core.css">
+  <link rel="stylesheet" href="./assets/css/nav.css">
+  <script src="./assets/js/jquery-1.11.1.min.js"></script>
+  <script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
-    <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="/manifest.json">
 </head>
 
 <body class="page-body">
-    <div class="page-container d-none">
-        <div class="sidebar-menu toggle-others fixed">
-            <div class="sidebar-menu-inner">
-                <header class="logo-env">
-                    <!-- logo -->
-                    <div class="logo">
-                        <a href="index.html" class="logo-expanded">
-                            <img src="./assets/images/logo@2x.png" width="100%" alt="" />
-                        </a>
-                        <a href="index.html" class="logo-collapsed">
-                            <img src="./assets/images/logo-collapsed@2x.png" width="40" alt="" />
-                        </a>
-                    </div>
-                    <div class="mobile-menu-toggle visible-xs">
-                        <a href="#" data-toggle="mobile-menu">
-                            <i class="fa-bars"></i>
-                        </a>
-                    </div>
-                </header>
+  <div class="page-container d-none">
+    <div class="sidebar-menu toggle-others fixed">
+      <div class="sidebar-menu-inner">
+        <header class="logo-env">
+          <!-- logo -->
+          <div class="logo">
+            <a href="index.html" class="logo-expanded">
+              <img src="./assets/images/logo@2x.png" width="100%" alt="" />
+            </a>
+            <a href="index.html" class="logo-collapsed">
+              <img src="./assets/images/logo-collapsed@2x.png" width="40" alt="" />
+            </a>
+          </div>
+          <div class="mobile-menu-toggle visible-xs">
+            <a href="#" data-toggle="mobile-menu">
+              <i class="fa-bars"></i>
+            </a>
+          </div>
+        </header>
 
-                <!-- 菜单 -->
-                <ul id="main-menu" class="main-menu">
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-heart-o"></i>
-                            <span class="tooltip-blue">关于本站</span>
-                            <span class="label label-Primary pull-right hidden-collapsed">♥︎</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="main-content">
-            <nav class="navbar user-info-navbar" role="navigation">
-                <!-- User Info, Notifications and Menu Bar -->
-                <!-- Left links for user info navbar -->
-                <ul class="user-info-menu left-links list-inline list-unstyled">
-                    <li class="hidden-sm hidden-xs">
-                        <a href="#" data-toggle="sidebar">
-                            <i class="fa-bars"></i>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="user-info-menu right-links list-inline list-unstyled">
-                    <li class="hidden-sm hidden-xs">
-                        <a href="https://github.com/cuilongjin/webstack" target="_blank">
-                            <i class="fa-github"></i>  GitHub
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
-            <!-- Main Footer -->
-            <!-- Choose between footer styles: "footer-type-1" or "footer-type-2" -->
-            <!-- Add class "sticky" to  always stick the footer to the end of page (if page contents is small) -->
-            <!-- Or class "fixed" to  always fix the footer to the end of page -->
-            <footer class="main-footer sticky footer-type-1">
-                <div class="footer-inner">
-                    <div class="footer-text">
-                        &copy; 2021
-                        <strong>WebStack</strong> design by <a href="http://viggoz.com" target="_blank"><strong>Viggo</strong></a>
-                    </div>
-                    <!-- Go to Top Link, just add rel="go-top" to any link to add this functionality -->
-                    <div class="go-up">
-                        <a href="#" rel="go-top">
-                            <i class="fa-angle-up"></i>
-                        </a>
-                    </div>
-                </div>
-            </footer>
-        </div>
+        <!-- 菜单 -->
+        <ul id="main-menu" class="main-menu">
+          <li>
+            <a href="#">
+              <i class="fa fa-heart-o"></i>
+              <span class="tooltip-blue">关于本站</span>
+              <span class="label label-Primary pull-right hidden-collapsed">♥︎</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <!-- 菜单 -->
-    <script id="menu" type="text/html">
-        {{each value v}}
-            {{if v.children}}
-                <li>
-                    <a><i class="{{v.icon}}"></i><span class="title">{{v.name}}</span></a>
-                    <ul>
-                        {{each v.children}}
-                            <li>
-                                <a href="#{{$value.name}}" class="smooth">
-                                    <span class="title">{{$value.name}}</span>
-                                    {{if $value.is_hot}}
-                                        <span class="label label-pink pull-right hidden-collapsed">Hot</span>
-                                    {{/if}}
-                                </a>
-                            </li>
-                        {{/each}}
-                    </ul>
-                </li>
-            {{else}}
-                <li>
-                    <a href="#{{v.name}}" class="smooth">
-                        <i class="{{v.icon}}"></i>
-                        <span class="title">{{v.name}}</span>
-                    </a>
-                </li>
-            {{/if}}
-        {{/each}}
-    </script>
+    <div class="main-content">
+      <nav class="navbar user-info-navbar" role="navigation">
+        <!-- User Info, Notifications and Menu Bar -->
+        <!-- Left links for user info navbar -->
+        <ul class="user-info-menu left-links list-inline list-unstyled">
+          <li class="hidden-sm hidden-xs">
+            <a href="#" data-toggle="sidebar">
+              <i class="fa-bars"></i>
+            </a>
+          </li>
+        </ul>
+        <ul class="user-info-menu right-links list-inline list-unstyled">
+          <li class="hidden-sm hidden-xs">
+            <a href="https://github.com/cuilongjin/webstack" target="_blank">
+              <i class="fa-github"></i> GitHub
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-    <!-- 导航 -->
-    <script id="main-content" type="text/html">
-        {{each value v}}
-            <h4 class="text-gray"><i class="fa fa-tag" style="margin-right: 7px;" id="{{v.name}}"></i>{{v.name}}</h4>
+      <!-- Main Footer -->
+      <!-- Choose between footer styles: "footer-type-1" or "footer-type-2" -->
+      <!-- Add class "sticky" to  always stick the footer to the end of page (if page contents is small) -->
+      <!-- Or class "fixed" to  always fix the footer to the end of page -->
+      <footer class="main-footer sticky footer-type-1">
+        <div class="footer-inner">
+          <div class="footer-text">
+            &copy; 2021
+            <strong>WebStack</strong> design by <a href="http://viggoz.com" target="_blank"><strong>Viggo</strong></a>
+          </div>
+          <!-- Go to Top Link, just add rel="go-top" to any link to add this functionality -->
+          <div class="go-up">
+            <a href="#" rel="go-top">
+              <i class="fa-angle-up"></i>
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
 
-            <div class="row">
-                {{each v.web v1}}
-                    <div class="col-sm-3">
-                        <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{{v1.url}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{v1.url}}">
-                            <div class="xe-comment-entry">
-                                <a class="xe-user-img">
-                                    <img data-src="{{!local ? 'https://cdn.jsdelivr.net/gh/cuilongjin/webstack@main/' + v1.logo : v1.logo}}" class="lozad img-circle" width="40">
-                                </a>
-                                <div class="xe-comment">
-                                    <a href="#" class="xe-user-name overflowClip_1">
-                                        <strong>{{v1.title}}</strong>
-                                    </a>
-                                    <p class="overflowClip_2">{{v1.desc}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {{/each}}
+  <!-- 菜单 -->
+  <script id="menu" type="text/html">
+    {{each value v}}
+      {{if v.children}}
+        <li>
+          <a><i class="{{v.icon}}"></i><span class="title">{{v.name}}</span></a>
+          <ul>
+            {{each v.children}}
+              <li>
+                <a href="#{{$value.name}}" class="smooth">
+                  <span class="title">{{$value.name}}</span>
+                  {{if $value.is_hot}}
+                    <span class="label label-pink pull-right hidden-collapsed">Hot</span>
+                  {{/if}}
+                </a>
+              </li>
+            {{/each}}
+          </ul>
+        </li>
+      {{else}}
+        <li>
+          <a href="#{{v.name}}" class="smooth">
+            <i class="{{v.icon}}"></i>
+            <span class="title">{{v.name}}</span>
+          </a>
+        </li>
+      {{/if}}
+    {{/each}}
+  </script>
+
+  <!-- 导航 -->
+  <script id="main-content" type="text/html">
+    {{each value v}}
+      <h4 class="text-gray"><i class="fa fa-tag" style="margin-right: 7px;" id="{{v.name}}"></i>{{v.name}}</h4>
+
+      <div class="row">
+        {{each v.web v1}}
+          <div class="col-sm-3">
+            <div class="xe-widget xe-conversations box2 label-info" onclick="window.open('{{v1.url}}', '_blank')" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{v1.url}}">
+              <div class="xe-comment-entry">
+                <a class="xe-user-img">
+                  <img data-src="{{!local ? 'https://cdn.jsdelivr.net/gh/cuilongjin/webstack@main/' + v1.logo : v1.logo}}" class="lozad img-circle" width="40">
+                </a>
+                <div class="xe-comment">
+                  <a class="xe-user-name overflowClip_1">
+                    <strong>{{v1.title}}</strong>
+                  </a>
+                  <p class="overflowClip_2">{{v1.desc}}</p>
+                </div>
+              </div>
             </div>
-            <br>
+          </div>
         {{/each}}
-    </script>
+      </div>
+      <br>
+    {{/each}}
+  </script>
 
-    <script src="./assets/index.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>
+  <script src="./assets/index.js"></script>
+  <script src="./assets/js/bootstrap.min.js"></script>
 
-    <script src="./assets/js/TweenMax.min.js"></script>
-    <script src="./assets/js/resizeable.js"></script>
-    <script src="./assets/js/xenon-toggles.js"></script>
-    <!-- JavaScripts initializations and stuff -->
-    <script src="./assets/js/xenon-custom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha512-21jyjW5+RJGAZ563i/Ug7e0AUkY7QiZ53LA4DWE5eNu5hvjW6KUf9LqquJ/ziLKWhecyvvojG7StycLj7bT39Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="./assets/js/TweenMax.min.js"></script>
+  <script src="./assets/js/resizeable.js"></script>
+  <script src="./assets/js/xenon-toggles.js"></script>
+  <script src="./assets/js/xenon-custom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha512-21jyjW5+RJGAZ563i/Ug7e0AUkY7QiZ53LA4DWE5eNu5hvjW6KUf9LqquJ/ziLKWhecyvvojG7StycLj7bT39Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script>
-        if (typeof navigator.serviceWorker !== 'undefined' && location.hostname !== 'localhost') {
-            navigator.serviceWorker.register('sw.js')
-            // .then((registration) => {console.log('Service Worker Registered. ', registration)})
-            // .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
-        }
-    </script>
+  <script>
+    if (typeof navigator.serviceWorker !== 'undefined' && location.hostname !== 'localhost') {
+      navigator.serviceWorker.register('sw.js')
+      // .then((registration) => {console.log('Service Worker Registered. ', registration)})
+      // .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+  </script>
 </body>
 
 </html>

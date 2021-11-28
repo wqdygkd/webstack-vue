@@ -633,15 +633,15 @@ const data = [
         web: [
           {
             url: 'https://fonts.google.com',
-            logo: 'assets/images/logos/googlefont.png',
+            logo: 'assets/images/logos/googlefont.svg',
             title: 'Google Font',
             desc: 'Making the web more beautiful, fast, and open through great typography'
           },
           {
-            url: 'https://typekit.com',
-            logo: 'assets/images/logos/typekit.png',
-            title: 'Typekit',
-            desc: 'Quality fonts from the world’s best foundries.'
+            url: 'https://fonts.adobe.com/fonts',
+            logo: 'assets/images/logos/adobefont.svg',
+            title: 'Adobe Fonts',
+            desc: '找到适合您下一个项目的字体'
           },
           {
             url: 'http://www.foundertype.com',
@@ -654,12 +654,6 @@ const data = [
             logo: 'assets/images/logos/ziticq.png',
             title: '字体传奇网',
             desc: '中国首个字体品牌设计师交流网'
-          },
-          {
-            url: 'http://sicangziti.com',
-            logo: 'assets/images/logos/sicangziti.png',
-            title: '私藏字体',
-            desc: '优质字体免费下载站'
           },
           {
             url: 'https://www.fontsquirrel.com',
@@ -1561,6 +1555,42 @@ const data = [
         desc: '携程设计委员会-Ctrip Design Committee'
       }
     ]
+  },
+  {
+    name: '我的',
+    icon: 'fa fa-user-o',
+    web: [
+      {
+        url: 'https://c10.wqdy.top/',
+        logo: 'assets/images/logos/dsm.png',
+        title: 'c10',
+        desc: ''
+      },
+      {
+        url: 'http://c10.wqdy.top:5700',
+        logo: 'assets/images/logos/qinglong.png',
+        title: '青龙控制面板',
+        desc: ''
+      },
+      {
+        url: 'http://c10.wqdy.top:1234/',
+        logo: 'assets/images/logos/yacd.png',
+        title: 'yacd',
+        desc: ''
+      },
+      {
+        url: 'https://c10.wqdy.top:8080/',
+        logo: 'assets/images/logos/Bitwarden.png',
+        title: 'Bitwarden',
+        desc: ''
+      },
+      {
+        url: 'http://c10.wqdy.top:5800/',
+        logo: 'assets/images/logos/RcloneBrowser.png',
+        title: 'RcloneBrowser',
+        desc: ''
+      }
+    ]
   }
 ]
 
@@ -1613,16 +1643,12 @@ $(document).ready(function () {
   return false
 })
 
-let href = ''
-let pos = 0
-$('a.smooth').click(function (e) {
+$('a.smooth').click(function (event) {
   $('#main-menu li').each(function () {
     $(this).removeClass('active')
   })
   $(this).parent('li').addClass('active')
-  e.preventDefault()
-  href = $(this).attr('href')
-  pos = $(href).position().top - 30
+  event.preventDefault()
 })
 
 const menu = []
