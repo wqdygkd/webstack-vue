@@ -1,14 +1,14 @@
 <template>
     <el-container>
-      <el-header>
+      <!-- <el-header>
         <img src="../assets/logo.png" alt="">
-      </el-header>
+      </el-header> -->
       <el-container>
         <el-aside width="201px">
-          <Aside :menu="menu" :active="active"/>
+          <Aside :menu="menu" :active="active" @update="update"/>
         </el-aside>
         <el-main>
-          <Main msg="Welcome to Your Vue.js App" :active="active" />
+          <Main  :active="active" :menu="menu"  />
         </el-main>
       </el-container>
     </el-container>
@@ -26,11 +26,8 @@ export default {
 
   computed: {
     active () {
-      const { type } = this.$route.params
-      if (type) {
-        return this.menu.find(item => { return item.key === type })
-      }
-      return this.menu[0]
+      const { hash } = this.$route
+      return decodeURIComponent(hash)
     }
   },
 
@@ -38,57 +35,40 @@ export default {
     return {
       menu: [
         {
-          key: 'qq',
-          name: 'qq',
-          url: '/api/upload/qq.php',
-          desc: '图片有压缩，最大可上传 5120 KB'
+          name: '常用推荐',
+          icon: 'fa fa-star-o',
+          web: [],
         },
         {
-          key: 'qq1',
-          name: 'qq1',
-          url: '/api/upload/qq1.php'
+          name: '影视资源',
+          icon: 'fa fa-video-camera',
+          children: [
+            {
+              name: '影视站',
+              web: [
+                {
+                  url: 'https://www.nfmovies.com/',
+                  logo: 'assets/images/logos/nfmovies.webp',
+                  title: '奈菲影视',
+                  desc: '永久免费的福利超清影视站，没有套路，完全免费！'
+                },
+              ]
+            },
+          ]
         },
         {
-          key: 'qq2',
-          name: 'qq2',
-          url: '/api/upload/qq2.php'
-        },
-        {
-          key: 'qq3',
-          name: 'qq3',
-          url: '/api/upload/qq3.php'
-        },
-        {
-          key: 'bd1',
-          name: 'bd1',
-          url: '/api/upload/bd1.php'
-        },
-        {
-          key: 'bd2',
-          name: 'bd2',
-          url: '/api/upload/bd2.php'
-        },
-        {
-          key: 'tt1',
-          name: 'tt1',
-          url: '/api/upload/tt1.php'
-        },
-        {
-          key: '581',
-          name: '581',
-          url: '/api/upload/581.php'
-        },
-        {
-          key: 'ali1',
-          name: 'ali1',
-          url: '/api/upload/ali1.php'
-        },
-        {
-          key: 'jd1',
-          name: 'jd1',
-          url: '/api/upload/jd1.php'
+          name: '常用推荐1',
+          icon: 'fa fa-star-o',
+          web: [],
         },
       ]
+    }
+  },
+
+  methods: {
+    update(val) {
+      console.log(val)
+
     }
   }
 }
@@ -103,5 +83,9 @@ body {
 }
 .el-container, .el-menu {
   height: 100%;
+}
+.el-main {
+  /* height:  calc(100vh - 60px); */
+  box-sizing: border-box;
 }
 </style>

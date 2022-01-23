@@ -1,19 +1,8 @@
 <template>
   <div class="main">
-    <el-upload
-      class="upload-demo"
-      drag
-      action=""
-      :http-request="upload"
-      multiple
-      :before-upload="beforeUpload"
-      :show-file-list="false"
-      accept="image/*"
-    >
-      <i class="el-icon-upload"></i>
-      <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-      <div class="el-upload__tip" slot="tip">{{active.desc}}</div>
-    </el-upload>
+    <div v-for="item in menu" :key="item.name" class="item" :id="item.name">
+      {{item.name}}
+    </div>
   </div>
 </template>
 
@@ -21,9 +10,10 @@
 import { post, get } from '@/api'
 export default {
   props: {
+    menu: Array,
     active: {
-      type: Object,
-      default: () => {}
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -50,4 +40,8 @@ export default {
 </script>
 
 <style scoped>
+
+.item {
+  height: calc(100vh - 60px);
+}
 </style>

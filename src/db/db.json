@@ -1,0 +1,20 @@
+{
+  "category": [
+    {
+      "id": 1,
+      "parentId": 0,
+      "name": "常用推荐",
+      "icon": "fa fa-star-o"
+    }
+  ],
+  "web": [
+    {
+      "id": 1,
+      "categoryId": 1,
+      "url": "https://www.nfmovies.com/",
+      "logo": "assets/images/logos/nfmovies.webp",
+      "title": "奈菲影视",
+      "desc": "永久免费的福利超清影视站，没有套路，完全免费！"
+    }
+  ]
+}
