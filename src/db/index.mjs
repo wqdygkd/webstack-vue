@@ -24,4 +24,83 @@ await db.read()
 // Write db.data content to db.json
 // await db.write()
 
-export default db
+async function getData(val) {
+    await db.read()
+    return db.data
+}
+
+async function addCategory(val) {
+    await db.read()
+    const { category } = db.data
+    category.push(val)
+    await db.write()
+    return true
+}
+
+async function updateCategory(val) {
+    await db.read()
+    const { category } = db.data
+    let target = category.find(item => item.id === val.id)
+    if (!target) return false
+    for(let key in val) {
+        if (key === 'id') continue
+        if (val[key] === undefined) continue
+        target[key] = val[key]
+    }
+
+    await db.write()
+    return true
+}
+
+async function deleteCategory(val) {
+    await db.read()
+    const { category } = db.data
+    let index = category.findIndex(item => item.id === val.id)
+    if (index === -1) return false
+    category.splice(index, 1)
+    await db.write()
+    return true
+}
+
+async function addWeb(val) {
+    await db.read()
+    const { web } = db.data
+    web.push(val)
+    await db.write()
+    return true
+}
+
+async function updateWeb(val) {
+    await db.read()
+    const { web } = db.data
+    let target = web.find(item => item.id === val.id)
+    if (!target) return false
+    for(let key in val) {
+        if (key === 'id') continue
+        if (val[key] === undefined) continue
+        target[key] = val[key]
+    }
+
+    await db.write()
+    return true
+}
+
+async function deleteWeb(val) {
+    await db.read()
+    const { web } = db.data
+    let index = web.findIndex(item => item.id === val.id)
+    if (index === -1) return false
+    web.splice(index, 1)
+    await db.write()
+    return true
+}
+
+export default {
+    getData,
+    addCategory,
+    updateCategory,
+    deleteCategory,
+    addWeb,
+    updateWeb,
+    deleteWeb
+}
