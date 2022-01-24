@@ -17,7 +17,9 @@
 <script>
 import Main from '@/components/main.vue'
 import Aside from '@/components/aside.vue'
+import data from '@/db/db.json'
 
+import {toTree} from '@/utils'
 export default {
   components: {
     Main,
@@ -33,6 +35,25 @@ export default {
 
   data () {
     return {
+      web: [],
+      category: [],
+      asideTree: [],
+
+      menu1: [
+        {
+          id: 1,
+          name: '测试1',
+        },
+        {
+          id: 2,
+          name: '测试2',
+        },
+        {
+          id: 3,
+          parentId: 2,
+          name: '测试2-1',
+        },
+      ],
       menu: [
         {
           name: '常用推荐',
@@ -64,12 +85,38 @@ export default {
       ]
     }
   },
+  created() {
+    this.web = data.web
+
+    let asideTree = toTree(data.category)
+    this.asideTree = asideTree
+
+    let category = []
+    asideTree.forEach(item => {
+      let {children} = item
+      if (children && children.length > 0 ) {
+        children.forEach(item => {
+          category.push(item)
+        })
+      } else {
+        category.push(item)
+      }
+    })
+    this.category = category
+
+    let map = new Map()
+    data.web.forEach(i => {
+        map[i.id] = i;
+    });
+    data.web.forEach(item => {
+      map[item.category].children
+    })
+  },
 
   methods: {
     update(val) {
       console.log(val)
-
-    }
+    },
   }
 }
 </script>

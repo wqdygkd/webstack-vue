@@ -21,7 +21,7 @@
       <el-button type="primary" @click="addCategory()">添加</el-button>
     </el-menu>
 
-    <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+    <el-dialog title="title" :visible.sync="dialogFormVisible">
       <el-form :model="form" ref="form">
         <el-form-item label="名称" >
           <el-input v-model="form.name"></el-input>
@@ -60,6 +60,7 @@ export default {
     return {
       isCollapse: false,
       dialogFormVisible: false,
+      title: '新增',
       form: {
           name: '',
           icon: '',
