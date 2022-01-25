@@ -31,7 +31,24 @@ async function getData(val) {
 
 async function addCategory(val) {
     await db.read()
-    const { category } = db.data
+    const { category,web } = db.data
+    let { parentId, id } = val
+
+    if (parentId) {
+        let flag = category.some(item => {
+            return item.parentId === parentId
+        })
+
+        if (!flag) {
+            web.map(item => {
+                if (item.categoryId === parentId) {
+                    item.categoryId = id
+                }
+                return item
+            })
+        }
+    }
+
     category.push(val)
     await db.write()
     return true

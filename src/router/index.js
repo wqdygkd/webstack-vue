@@ -3,8 +3,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-  // { path: '/', redirect: '/qq' },
-  { path: '/', component: () => import('@/view/index.vue') }
+  { path: '/', name: 'Index', component: () => import('@/view/index.vue') }
 ]
 
 const router = new VueRouter({

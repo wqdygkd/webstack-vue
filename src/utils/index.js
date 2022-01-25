@@ -1,10 +1,10 @@
 export function toTree(list) {
-  const map = {};
+    const map = {}
     list.forEach(i => {
-        map[i.id] = i;
-    });
+        map[i.id] = i
+    })
 
-    const _list = [];
+    const _list = []
     list.forEach(i => {
         if(map[i.parentId]) {
             if(!map[i.parentId]?.children) {
@@ -15,7 +15,7 @@ export function toTree(list) {
         }else if(!i.parentId){
             _list.push(i)
         }
-    });
+    })
     return _list
 }
 

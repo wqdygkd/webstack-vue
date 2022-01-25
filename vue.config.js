@@ -5,7 +5,8 @@ module.exports = {
       config.mode = 'production'
     } else {
       config.mode = 'development'
-      import('./src/db/server.mjs')
+      // import('./src/db/server.mjs')
+      require('./src/db/nodemon.js')
       config.devServer = {
         proxy:{
           '/api': {

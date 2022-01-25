@@ -5,10 +5,10 @@
       </el-header> -->
       <el-container>
         <el-aside width="201px">
-          <Aside :menu="menu" :active="active" @update="update"/>
+          <Aside :menu="asideTree" :active="active" @update="update"/>
         </el-aside>
         <el-main>
-          <Main  :active="active" :menu="menu"  />
+          <Main :menu="mainTree" :active="active"  />
         </el-main>
       </el-container>
     </el-container>
@@ -17,7 +17,7 @@
 <script>
 import Main from '@/components/main.vue'
 import Aside from '@/components/aside.vue'
-import data from '@/db/db.json'
+// import data from '@/db/db.json'
 
 import {toTree} from '@/utils'
 export default {
@@ -38,6 +38,7 @@ export default {
       web: [],
       category: [],
       asideTree: [],
+      mainTree: [],
 
       menu1: [
         {
@@ -86,36 +87,42 @@ export default {
     }
   },
   created() {
-    this.web = data.web
-
-    let asideTree = toTree(data.category)
-    this.asideTree = asideTree
-
-    let category = []
-    asideTree.forEach(item => {
-      let {children} = item
-      if (children && children.length > 0 ) {
-        children.forEach(item => {
-          category.push(item)
-        })
-      } else {
-        category.push(item)
-      }
-    })
-    this.category = category
-
-    let map = new Map()
-    data.web.forEach(i => {
-        map[i.id] = i;
-    });
-    data.web.forEach(item => {
-      map[item.category].children
-    })
+    this.update()
   },
 
   methods: {
-    update(val) {
-      console.log(val)
+    async update(val) {
+      let {category, web } = await import('@/db/db.json')
+
+      let asideTree = toTree(category, category, 'children')
+      this.asideTree = asideTree
+
+      let mainTree = []
+      asideTree.forEach(item => {
+        let { children } = item
+        if (children && children.length > 0 ) {
+          children.forEach(item => {
+            mainTree.push({ ...item })
+          })
+        } else {
+          mainTree.push({ ...item })
+        }
+      })
+
+      let map = new Map()
+      mainTree.forEach(i => {
+        map[i.id] = i
+      })
+
+      web.forEach(item => {
+        if(!map[item.categoryId].web) {
+          map[item.categoryId].web = [item]
+        } else {
+          map[item.categoryId].web.push(item)
+        }
+      })
+
+      this.mainTree = mainTree
     },
   }
 }
