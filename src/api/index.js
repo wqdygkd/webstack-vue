@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const instance = axios.create({
   timeout: 120000,
-  baseURL: 'http://localhost:8081/api'
+  baseURL: 'http://localhost:8080/api'
 })
 
 // http request 拦截器
@@ -11,9 +11,9 @@ instance.interceptors.request.use(
     // 上传
     if ( config.url.indexOf('/upload') > -1 ) {
       config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-  } else {
-      config.headers['Content-Type'] = 'application/json'
-  }
+    } else {
+        config.headers['Content-Type'] = 'application/json'
+    }
 
     return config
   },

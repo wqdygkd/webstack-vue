@@ -2,30 +2,63 @@
   "category": [
     {
       "id": "624e2c7313",
-      "name": "常用推荐1",
+      "name": "测试1",
       "icon": "fa fa-star-o"
     },
     {
       "id": "fd8b68f108",
       "parentId": "",
-      "name": "asd",
+      "name": "测试2",
       "icon": "asd"
     },
     {
       "id": "7f9a209ae7",
       "parentId": "624e2c7313",
-      "name": "sdfdddddddd",
+      "name": "测试3",
       "icon": "dddddddd"
+    },
+    {
+      "id": "62942ad24b",
+      "parentId": "fd8b68f108",
+      "name": "测试4",
+      "icon": "阿萨德"
+    },
+    {
+      "id": "30c30d81b7",
+      "parentId": "",
+      "name": "测试5",
+      "icon": "少时诵诗书所"
+    },
+    {
+      "id": "c533ff85e6",
+      "parentId": "",
+      "name": "测试6",
+      "icon": "儿童"
+    },
+    {
+      "id": "aa73e3dceb",
+      "parentId": "",
+      "name": "测试7",
+      "icon": "任天野"
+    },
+    {
+      "id": "80be8ea219",
+      "parentId": "624e2c7313",
+      "name": "测试8",
+      "icon": "阿萨德"
+    },
+    {
+      "id": "c73572f150",
+      "parentId": "fd8b68f108",
+      "name": "测试9",
+      "icon": "阿萨德"
+    },
+    {
+      "id": "e5faddb9e8",
+      "parentId": "fd8b68f108",
+      "name": "测试10",
+      "icon": "阿萨德"
     }
   ],
-  "web": [
-    {
-      "id": "e6eebfe6d4",
-      "categoryId": "7f9a209ae7",
-      "url": "https://www.nfmovies.com/",
-      "logo": "assets/images/logos/nfmovies.webp",
-      "name": "奈菲影视",
-      "desc": "永久免费的福利超清影视站，没有套路，完全免费！"
-    }
-  ]
+  "web": []
 }

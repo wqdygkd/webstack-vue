@@ -1,17 +1,17 @@
 <template>
+  <el-container>
+    <!-- <el-header>
+      <img src="../assets/logo.png" alt="">
+    </el-header> -->
     <el-container>
-      <!-- <el-header>
-        <img src="../assets/logo.png" alt="">
-      </el-header> -->
-      <el-container>
-        <el-aside width="201px">
-          <Aside :menu="asideTree" :active="active" @update="update"/>
-        </el-aside>
-        <el-main>
-          <Main :menu="mainTree" :active="active"  />
-        </el-main>
-      </el-container>
+      <el-aside width="201px">
+        <Aside :menu="asideTree" :active="active" @update="update"/>
+      </el-aside>
+      <el-main>
+        <Main :menu="mainTree" :active="active"  />
+      </el-main>
     </el-container>
+  </el-container>
 </template>
 
 <script>
