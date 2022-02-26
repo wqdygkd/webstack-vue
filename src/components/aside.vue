@@ -17,8 +17,8 @@
             <i :class="item.icon" class="icon" />
             <span>{{ item.name }}</span>
           </template>
-          <el-menu-item v-for="item in item.children" :key="item.id" :index="'#' + item.name">
-            <a :href="'#' + item.name">{{ item.name }}</a>
+          <el-menu-item v-for="child in item.children" :key="child.id" :index="'#' + child.name">
+            <a :href="'#' + child.name">{{ child.name }}</a>
           </el-menu-item>
         </el-submenu>
         <el-menu-item v-else :key="item.id" :index="'#' + item.name">
@@ -81,10 +81,13 @@
 </template>
 <script>
 // import db from '../db/index.mjs'
-import { post, get } from '@/api'
+import { post } from '@/api'
 export default {
   props: {
-    menu: Array,
+    menu: {
+      type: Array,
+      default: () => {}
+    },
     active: {
       type: String,
       default: ''

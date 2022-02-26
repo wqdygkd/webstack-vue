@@ -22,7 +22,7 @@
     "@vue/cli-service": "^4.5.15",
     "body-parser": "^1.19.1",
     "eslint": "^7.32.0",
-    "eslint-config-wqdy": "C:\\c\\project\\eslint-config-wqdy\\packages\\eslint-config",
+    "eslint-config-wqdy": "^0.0.3",
     "express": "^4.17.2",
     "less": "^4.1.2",
     "less-loader": "7.3.0",

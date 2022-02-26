@@ -5,10 +5,10 @@
     </el-header> -->
     <el-container>
       <el-aside width="201px">
-        <Aside :menu="asideTree" :active="active" @update="update"/>
+        <Aside :menu="asideTree" :active="active" @update="update" />
       </el-aside>
       <el-main>
-        <Main :menu="mainTree" :active="active"  />
+        <Main :menu="mainTree" :active="active" />
       </el-main>
     </el-container>
   </el-container>
@@ -19,11 +19,19 @@ import Main from '@/components/main.vue'
 import Aside from '@/components/aside.vue'
 // import data from '@/db/db.json'
 
-import {toTree} from '@/utils'
+import { toTree } from '@/utils'
 export default {
   components: {
     Main,
     Aside
+  },
+
+  data () {
+    return {
+      // active: '',
+      asideTree: [],
+      mainTree: []
+    }
   },
 
   computed: {
@@ -32,29 +40,21 @@ export default {
       return decodeURIComponent(hash)
     }
   },
-
-  data () {
-    return {
-      active: '',
-      asideTree: [],
-      mainTree: [],
-    }
-  },
-  created() {
+  created () {
     this.update()
   },
 
   methods: {
-    async update(val) {
-      let {category, web } = await import('@/db/db.json')
+    async update (val) {
+      const { category, web } = await import('@/db/db.json')
 
-      let asideTree = toTree(category, category, 'children')
+      const asideTree = toTree(category, category, 'children')
       this.asideTree = asideTree
 
-      let mainTree = []
+      const mainTree = []
       asideTree.forEach(item => {
-        let { children } = item
-        if (children && children.length > 0 ) {
+        const { children } = item
+        if (children && children.length > 0) {
           children.forEach(item => {
             mainTree.push({ ...item })
           })
@@ -63,13 +63,13 @@ export default {
         }
       })
 
-      let map = new Map()
+      const map = new Map()
       mainTree.forEach(i => {
         map[i.id] = i
       })
 
       web.forEach(item => {
-        if(!map[item.categoryId].web) {
+        if (!map[item.categoryId].web) {
           map[item.categoryId].web = [item]
         } else {
           map[item.categoryId].web.push(item)
@@ -77,7 +77,7 @@ export default {
       })
 
       this.mainTree = mainTree
-    },
+    }
   }
 }
 </script>

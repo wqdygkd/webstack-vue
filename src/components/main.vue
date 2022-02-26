@@ -38,20 +38,25 @@
                 片库网是一个可在线观看、下载视频的网站。每日收集全网最新的电影、剧集、动漫高清资源供网友免费下载！
               </p>
             </div>
-          </div>
-          <!-- <el-dropdown trigger="click" class="operate">
-              <span class="el-dropdown-link">
-                <i class="el-icon-s-tools  el-icon--right"></i>
-              </span>
+
+            <el-dropdown trigger="click" class="operate">
+              <!-- <span class=""> -->
+              <i class="fa fa-ellipsis-h" />
+              <!-- </span> -->
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item class="clearfix">
-                  <el-button @click="del(i)" type="">删除</el-button>
+                  <el-button type="" @click="del(i)">
+                    删除
+                  </el-button>
                 </el-dropdown-item>
                 <el-dropdown-item class="clearfix">
-                  <el-button @click="edit(i)" type="">编辑</el-button>
+                  <el-button type="" @click="edit(i)">
+                    编辑
+                  </el-button>
                 </el-dropdown-item>
               </el-dropdown-menu>
-            </el-dropdown> -->
+            </el-dropdown>
+          </div>
         </el-col>
       </el-row>
       <br>
@@ -98,10 +103,13 @@
 </template>
 
 <script>
-import { post, get } from '@/api'
+import { post } from '@/api'
 export default {
   props: {
-    menu: Array,
+    menu: {
+      type: Array,
+      default: () => {}
+    },
     active: {
       type: String,
       default: ''
@@ -200,13 +208,12 @@ export default {
     border-radius: 4px;
   }
   .web-item {
-    position: relative;
+    // position: relative;
     padding: 10px;
     .web-item-inner {
+      position: relative;
       border-radius: 4px;
       min-height: 36px;
-      // background: #d3dce6;
-      // background: #f9fafc;
       padding: 15px;
       display: flex;
       align-items: center;
@@ -235,12 +242,23 @@ export default {
           color: #979898;
         }
       }
-    }
 
-    .operate {
-      position: absolute;
-      right: 0;
-      cursor: pointer;
+      .operate {
+        position: absolute;
+        right: 15px;
+        top: 7px;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3px;
+        transition: 0.5s;
+        &:hover {
+          background: rgba(55,53, 47,0.08);
+        }
+      }
     }
   }
 
