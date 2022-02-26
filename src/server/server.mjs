@@ -74,6 +74,10 @@ routers.post('/delete-web', async (request, res) => {
   res.json({ code: 0 })
 })
 
+routers.post('/upload-logo', async (request, res) => {
+  // TODO:
+})
+
 app.use('/', routers)
 app.listen(8088, () => {
   console.log('server is running...')

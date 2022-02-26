@@ -26,36 +26,31 @@
             <el-image
               class="logo"
               lazy
-              src="https://www.baidu.com/img/baidu_85beaf5496f291521eb75ba38eacbd87.svg"
+              :src="i.logo"
               fit="fit"
-              alt=""
             />
             <div class="right">
               <p class="name overflowClip_1">
                 <strong>{{ i.name }}</strong>
               </p>
               <p class="desc overflowClip_2">
-                片库网是一个可在线观看、下载视频的网站。每日收集全网最新的电影、剧集、动漫高清资源供网友免费下载！
+                {{ i.desc }}
               </p>
             </div>
-
-            <el-dropdown trigger="click" class="operate">
-              <!-- <span class=""> -->
-              <i class="fa fa-ellipsis-h" />
-              <!-- </span> -->
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item class="clearfix">
-                  <el-button type="" @click="del(i)">
-                    删除
-                  </el-button>
-                </el-dropdown-item>
-                <el-dropdown-item class="clearfix">
-                  <el-button type="" @click="edit(i)">
-                    编辑
-                  </el-button>
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+            <el-popover
+              placement="bottom-start"
+              width="70"
+              class="operate"
+              popper-class="operate-popper"
+            >
+              <li class="el-dropdown-menu__item" @click="del(i)">
+                删除
+              </li>
+              <li class="el-dropdown-menu__item" @click="edit(i)">
+                编辑
+              </li>
+              <i slot="reference" class="fa fa-ellipsis-h" />
+            </el-popover>
           </div>
         </el-col>
       </el-row>
@@ -153,6 +148,10 @@ export default {
         this.dialogFormVisible = false
         // this.$emit('update')
       }
+    },
+
+    handleOperate (command, t) {
+      this[command](t)
     },
 
     del (t) {
@@ -285,5 +284,11 @@ p {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+}
+</style>
+
+<style lang="less">
+.operate-popper {
+  min-width: 70px;
 }
 </style>
