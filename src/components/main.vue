@@ -5,31 +5,41 @@
     </div>
     <div
       v-for="item in menu"
+      :id="item.name"
       :key="item.id"
       class="item"
-      :id="item.name"
     >
-
       <div class="title">
         <!-- <i :class="item.icon" class="icon"></i> -->
-        <i class="fa fa-tag icon" ></i>
-        {{item.name}}
+        <i class="fa fa-tag icon" />
+        {{ item.name }}
       </div>
 
-
-
-      <el-row :gutter="20" v-if="item.web && item.web.length > 0">
-        <el-col :span="6" v-for="i in item.web" :key="i.id" class="web-item">
-            <div class="web-item-inner">
-              <el-image class="logo" lazy src="https://www.baidu.com/img/baidu_85beaf5496f291521eb75ba38eacbd87.svg" fit="fit" alt="" ></el-image>
-              <div class="right">
-                <p class="name overflowClip_1">
-                  <strong>{{i.name}}</strong>
-                </p>
-                <p class="desc overflowClip_2">片库网是一个可在线观看、下载视频的网站。每日收集全网最新的电影、剧集、动漫高清资源供网友免费下载！</p>
-              </div>
+      <el-row v-if="item.web && item.web.length > 0" :gutter="20">
+        <el-col
+          v-for="i in item.web"
+          :key="i.id"
+          :span="6"
+          class="web-item"
+        >
+          <div class="web-item-inner">
+            <el-image
+              class="logo"
+              lazy
+              src="https://www.baidu.com/img/baidu_85beaf5496f291521eb75ba38eacbd87.svg"
+              fit="fit"
+              alt=""
+            />
+            <div class="right">
+              <p class="name overflowClip_1">
+                <strong>{{ i.name }}</strong>
+              </p>
+              <p class="desc overflowClip_2">
+                片库网是一个可在线观看、下载视频的网站。每日收集全网最新的电影、剧集、动漫高清资源供网友免费下载！
+              </p>
             </div>
-            <!-- <el-dropdown trigger="click" class="operate">
+          </div>
+          <!-- <el-dropdown trigger="click" class="operate">
               <span class="el-dropdown-link">
                 <i class="el-icon-s-tools  el-icon--right"></i>
               </span>
@@ -44,33 +54,44 @@
             </el-dropdown> -->
         </el-col>
       </el-row>
-      <br />
+      <br>
     </div>
 
-    <el-button class="add" type="primary" @click="addWeb()">添加</el-button>
+    <el-button class="add" type="primary" @click="addWeb()">
+      添加
+    </el-button>
     <el-dialog :title="title" :visible.sync="dialogFormVisible" @close="reset">
-      <el-form :model="form" ref="form">
-        <el-form-item label="分类" >
+      <el-form ref="form" :model="form">
+        <el-form-item label="分类">
           <el-select v-model="form.categoryId" placeholder="请选择" clearable>
-            <el-option :label="item.name" :value="item.id" v-for="item in menu" :key="item.id"></el-option>
+            <el-option
+              v-for="item in menu"
+              :key="item.id"
+              :label="item.name"
+              :value="item.id"
+            />
           </el-select>
         </el-form-item>
         <el-form-item label="name">
-          <el-input v-model="form.name"></el-input>
+          <el-input v-model="form.name" />
         </el-form-item>
         <el-form-item label="url">
-          <el-input v-model="form.url"></el-input>
+          <el-input v-model="form.url" />
         </el-form-item>
         <el-form-item label="logo">
-          <el-input v-model="form.logo"></el-input>
+          <el-input v-model="form.logo" />
         </el-form-item>
         <el-form-item label="desc">
-          <el-input v-model="form.desc"></el-input>
+          <el-input v-model="form.desc" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="confirm">确 定</el-button>
+        <el-button @click="dialogFormVisible = false">
+          取 消
+        </el-button>
+        <el-button type="primary" @click="confirm">
+          确 定
+        </el-button>
       </div>
     </el-dialog>
   </div>
@@ -91,12 +112,12 @@ export default {
       dialogFormVisible: false,
       title: '新增',
       form: {
-          name: '',
-          url: '',
-          logo: '',
-          desc: '',
-          categoryId: ''
-        },
+        name: '',
+        url: '',
+        logo: '',
+        desc: '',
+        categoryId: ''
+      }
     }
   },
 
@@ -113,26 +134,26 @@ export default {
       //   console.log(res)
       // })
     },
-    addWeb() {
+    addWeb () {
       this.dialogFormVisible = true
     },
 
-    async confirm() {
-      let url = this.form.id ? '/update-web' : '/add-web'
-      let res = await post(url, this.form)
+    async confirm () {
+      const url = this.form.id ? '/update-web' : '/add-web'
+      const res = await post(url, this.form)
       if (res.code === 0) {
         this.dialogFormVisible = false
         // this.$emit('update')
       }
     },
 
-    del(t) {
+    del (t) {
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
-        let res = await post('/delete-web', { id: t.id})
+        const res = await post('/delete-web', { id: t.id })
         if (res.code === 0) {
           // this.$emit('update')
         }
@@ -144,21 +165,18 @@ export default {
       })
     },
 
-    edit(t) {
+    edit (t) {
       this.dialogFormVisible = true
-      this.form = {...t}
+      this.form = { ...t }
     },
 
-
-
-
-    reset() {
-      this.form.name= ''
-      this.form.id= ''
-      this.form.url= ''
-      this.form.logo= ''
-      this.form.desc= ''
-      this.form.categoryId= ''
+    reset () {
+      this.form.name = ''
+      this.form.id = ''
+      this.form.url = ''
+      this.form.logo = ''
+      this.form.desc = ''
+      this.form.categoryId = ''
     }
   }
 }
@@ -232,7 +250,6 @@ export default {
   top: 0;
   right: 0;
 }
-
 
 p {
   margin: 0;
