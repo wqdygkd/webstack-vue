@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const instance = axios.create({
-  timeout: 120000,
+  timeout: 120_000,
   baseURL: 'http://localhost:8080/api'
 })
 
@@ -9,11 +9,7 @@ export const instance = axios.create({
 instance.interceptors.request.use(
   config => {
     // 上传
-    if ( config.url.indexOf('/upload') > -1 ) {
-      config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-    } else {
-        config.headers['Content-Type'] = 'application/json'
-    }
+    config.headers['Content-Type'] = config.url.includes('/upload') ? 'application/x-www-form-urlencoded' : 'application/json'
 
     return config
   },
@@ -40,35 +36,31 @@ instance.interceptors.response.use(
 )
 
 // get请求
-export function get (url, params = {}, responseType) {
+export function get (url, parameters = {}, responseType) {
   return new Promise((resolve, reject) => {
-    let urlParams = []
-    Object.keys(params).forEach(key => {
-      urlParams.push(`${key}=${encodeURIComponent(params[key])}`)
-    })
-    if (urlParams.length) {
-      urlParams = `${url}?${urlParams.join('&')}`
-    } else {
-      urlParams = url
+    let urlParameters = []
+    for (const key of Object.keys(parameters)) {
+      urlParameters.push(`${key}=${encodeURIComponent(parameters[key])}`)
     }
+    urlParameters = urlParameters.length > 0 ? `${url}?${urlParameters.join('&')}` : url
     instance({
-      url: urlParams,
+      url: urlParameters,
       params: {
-        randomTime: new Date().getTime() // 防止缓存
+        randomTime: Date.now() // 防止缓存
       },
       responseType
     })
       .then(response => {
         resolve(response)
       })
-      .catch(err => {
-        reject(err)
+      .catch(error => {
+        reject(error)
       })
   })
 }
 
 // 封装post请求
-export function post (url, data = {}, responseType, props) {
+export function post (url, data = {}, responseType, properties) {
   return new Promise((resolve, reject) => {
     instance({
       method: 'post',
@@ -76,13 +68,13 @@ export function post (url, data = {}, responseType, props) {
       data,
       responseType,
       headers: { 'Content-Type': 'multipart/form-data' },
-      ...props
+      ...properties
     })
       .then(response => {
         resolve(response)
       })
-      .catch(err => {
-        reject(err)
+      .catch(error => {
+        reject(error)
       })
   })
 }

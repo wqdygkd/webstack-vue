@@ -1,14 +1,23 @@
 <template>
   <div class="aside">
-    <el-menu :default-active="active" :router="true" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+    <el-menu
+      :default-active="active"
+      :router="true"
+      @open="handleOpen"
+      @close="handleClose"
+      :collapse="isCollapse"
+      background-color="#2c2e2f"
+      text-color="#979898"
+      active-text-color="#fff"
+      :unique-opened="true"
+    >
       <template v-for="item in menu" >
-        <el-submenu :index="item.id" v-if="item.children && item.children.length > 0"  :key="item.id" >
+        <el-submenu :index="item.id" v-if="item.children && item.children.length > 0" :key="item.id" >
           <template slot="title">
-            <i class="el-icon-location"></i>
+            <i :class="item.icon" class="icon"></i>
             <span>{{item.name}}</span>
           </template>
             <el-menu-item :index="'#' + item.name"  v-for="item in item.children" :key="item.id">
-              <i class="el-icon-location"></i>
               <a :href="'#' + item.name">{{item.name}}</a>
             </el-menu-item>
         </el-submenu>
@@ -133,9 +142,21 @@ export default {
 <style scoped lang="less">
 .aside {
   height: 100%;
-  a {
-    text-decoration: none;
-    color: #333;
+  .el-menu-item {
+    &.is-active {
+      a {
+        color: #fff;
+      }
+    }
+    a {
+      text-decoration: none;
+      color: #979898;
+    }
+  }
+
+
+  .icon {
+    margin-right: 10px;
   }
 }
 </style>

@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/eslint-parser": "^7.17.0",
     "axios": "^0.24.0",
     "core-js": "^3.20.2",
     "element-ui": "^2.15.6",
@@ -18,9 +20,9 @@
     "@vue/cli-plugin-babel": "^4.5.15",
     "@vue/cli-plugin-eslint": "^4.5.15",
     "@vue/cli-service": "^4.5.15",
-    "babel-eslint": "^10.1.0",
     "body-parser": "^1.19.1",
     "eslint": "^7.32.0",
+    "eslint-config-wqdy": "C:\\c\\project\\eslint-config-wqdy\\packages\\eslint-config",
     "express": "^4.17.2",
     "less": "^4.1.2",
     "less-loader": "7.3.0",

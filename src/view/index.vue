@@ -35,55 +35,9 @@ export default {
 
   data () {
     return {
-      web: [],
-      category: [],
+      active: '',
       asideTree: [],
       mainTree: [],
-
-      menu1: [
-        {
-          id: 1,
-          name: '测试1',
-        },
-        {
-          id: 2,
-          name: '测试2',
-        },
-        {
-          id: 3,
-          parentId: 2,
-          name: '测试2-1',
-        },
-      ],
-      menu: [
-        {
-          name: '常用推荐',
-          icon: 'fa fa-star-o',
-          web: [],
-        },
-        {
-          name: '影视资源',
-          icon: 'fa fa-video-camera',
-          children: [
-            {
-              name: '影视站',
-              web: [
-                {
-                  url: 'https://www.nfmovies.com/',
-                  logo: 'assets/images/logos/nfmovies.webp',
-                  title: '奈菲影视',
-                  desc: '永久免费的福利超清影视站，没有套路，完全免费！'
-                },
-              ]
-            },
-          ]
-        },
-        {
-          name: '常用推荐1',
-          icon: 'fa fa-star-o',
-          web: [],
-        },
-      ]
     }
   },
   created() {
@@ -139,7 +93,6 @@ body {
   height: 100%;
 }
 .el-main {
-  /* height:  calc(100vh - 60px); */
   box-sizing: border-box;
 }
 </style>
