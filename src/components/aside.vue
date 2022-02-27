@@ -16,37 +16,55 @@
           <template slot="title">
             <i :class="item.icon" class="icon" />
             <span>{{ item.name }}</span>
+
+            <el-popover
+              placement="bottom-start"
+              width="70"
+              class="operate"
+              popper-class="operate-popper"
+              trigger="hover"
+            >
+              <li class="el-dropdown-menu__item" @click="del(item)">删除</li>
+              <li class="el-dropdown-menu__item" @click="edit(item)">编辑</li>
+              <i slot="reference" class="fa fa-ellipsis-h" />
+            </el-popover>
           </template>
           <el-menu-item v-for="child in item.children" :key="child.id" :index="'#' + child.name">
             <a :href="'#' + child.name">{{ child.name }}</a>
+
+            <el-popover
+              placement="bottom-start"
+              width="70"
+              class="operate"
+              trigger="hover"
+              popper-class="operate-popper"
+            >
+              <li class="el-dropdown-menu__item" @click="del(child)">删除</li>
+              <li class="el-dropdown-menu__item" @click="edit(child)">编辑</li>
+              <i slot="reference" class="fa fa-ellipsis-h" />
+            </el-popover>
           </el-menu-item>
         </el-submenu>
         <el-menu-item v-else :key="item.id" :index="'#' + item.name">
-          <i class="el-icon-menu" />
+          <i :class="item.icon" class="icon" />
           <a :href="'#' + item.name">{{ item.name }}</a>
-          <el-dropdown trigger="click" class="operate">
-            <span class="el-dropdown-link">
-              <i class="el-icon-s-tools el-icon--right" />
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item class="clearfix">
-                <el-button type="" @click="del(item)">
-                  删除
-                </el-button>
-              </el-dropdown-item>
-              <el-dropdown-item class="clearfix">
-                <el-button type="" @click="edit(item)">
-                  编辑
-                </el-button>
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+
+          <el-popover
+            placement="bottom-start"
+            width="70"
+            class="operate"
+            trigger="hover"
+            popper-class="operate-popper"
+          >
+            <li class="el-dropdown-menu__item" @click="del(item)">删除</li>
+            <li class="el-dropdown-menu__item" @click="edit(item)">编辑</li>
+            <i slot="reference" class="fa fa-ellipsis-h" />
+          </el-popover>
         </el-menu-item>
       </template>
-
-      <el-button type="primary" @click="addCategory()">
-        添加
-      </el-button>
+      <div class="add">
+        <el-button type="primary" @click="addCategory()">添加</el-button>
+      </div>
     </el-menu>
 
     <el-dialog title="title" :visible.sync="dialogFormVisible" @close="reset">
@@ -126,7 +144,7 @@ export default {
     },
 
     del (t) {
-      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -161,6 +179,7 @@ export default {
 .aside {
   height: 100%;
   .el-menu-item {
+    position: relative;
     &.is-active {
       a {
         color: #fff;
@@ -172,8 +191,29 @@ export default {
     }
   }
 
+  .operate {
+      position: absolute;
+      right: 33px;
+      top: 17px;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 3px;
+      transition: 0.5s;
+      &:hover {
+        background: rgba(55,53, 47,0.08);
+      }
+    }
+
   .icon {
     margin-right: 10px;
+  }
+
+  .add {
+    text-align: center;
   }
 }
 </style>

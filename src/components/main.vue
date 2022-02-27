@@ -1,65 +1,50 @@
 <template>
   <div class="main">
-    <div>
-      👋Hi, Tahlia!
-    </div>
-    <div
-      v-for="item in menu"
-      :id="item.name"
-      :key="item.id"
-      class="item"
-    >
-      <div class="title">
-        <!-- <i :class="item.icon" class="icon"></i> -->
-        <i class="fa fa-tag icon" />
-        {{ item.name }}
-      </div>
+    <div>👋Hi, Tahlia!</div>
 
-      <el-row v-if="item.web && item.web.length > 0" :gutter="20">
-        <el-col
-          v-for="i in item.web"
-          :key="i.id"
-          :span="6"
-          class="web-item"
-        >
-          <div class="web-item-inner">
-            <el-image
-              class="logo"
-              lazy
-              :src="i.logo"
-              fit="fit"
-            />
-            <div class="right">
-              <p class="name overflowClip_1">
-                <strong>{{ i.name }}</strong>
-              </p>
-              <p class="desc overflowClip_2">
-                {{ i.desc }}
-              </p>
+    <!-- TODO: 搜索 -->
+
+    <!-- TODO: 推广 -->
+    <template v-for="item in menu">
+      <div v-if="!(item.id === '0' && (!item.web || item.web.length == 0))" :id="item.name" :key="item.id" class="item">
+        <div class="title">
+          <!-- <i :class="item.icon" class="icon"></i> -->
+          <i class="fa fa-tag icon" />
+          {{ item.name }}
+        </div>
+
+        <el-row v-if="item.web && item.web.length > 0" :gutter="20">
+          <!-- TODO: 第一个收藏展示谷歌广告 -->
+          <el-col v-for="i in item.web" :key="i.id" :span="6" class="web-item">
+            <div class="web-item-inner">
+              <el-image class="logo" lazy :src="getLogo(i.logo)" fit="fit">
+                <div slot="error" class="image-error">{{ i.name.slice(0, 1) }}</div>
+              </el-image>
+              <div class="right">
+                <p class="name overflowClip_1">
+                  <strong>{{ i.name }}</strong>
+                </p>
+                <p class="desc overflowClip_2">{{ i.desc }}</p>
+              </div>
+              <el-popover
+                placement="bottom-start"
+                width="70"
+                class="operate"
+                popper-class="operate-popper"
+              >
+                <li class="el-dropdown-menu__item" @click="del(i)">删除</li>
+                <li class="el-dropdown-menu__item" @click="edit(i)">编辑</li>
+                <i slot="reference" class="fa fa-ellipsis-h" />
+              </el-popover>
             </div>
-            <el-popover
-              placement="bottom-start"
-              width="70"
-              class="operate"
-              popper-class="operate-popper"
-            >
-              <li class="el-dropdown-menu__item" @click="del(i)">
-                删除
-              </li>
-              <li class="el-dropdown-menu__item" @click="edit(i)">
-                编辑
-              </li>
-              <i slot="reference" class="fa fa-ellipsis-h" />
-            </el-popover>
-          </div>
-        </el-col>
-      </el-row>
-      <br>
-    </div>
+          </el-col>
+        </el-row>
+        <br>
+      </div>
+    </template>
 
-    <el-button class="add" type="primary" @click="addWeb()">
-      添加
-    </el-button>
+    <el-button class="add" type="primary" @click="addWeb()">添加</el-button>
+
     <el-dialog :title="title" :visible.sync="dialogFormVisible" @close="reset">
       <el-form ref="form" :model="form">
         <el-form-item label="分类">
@@ -125,6 +110,14 @@ export default {
   },
 
   methods: {
+    getLogo (logo) {
+      try {
+        return process.env.NODE_ENV === 'development' ? require('../assets/images/logos/' + logo) : 'https://cdn.jsdelivr.net/gh/cuilongjin/webstack@main/assets/images/logos/' + logo
+      } catch (error) {
+        console.log(error)
+        return ''
+      }
+    },
     beforeUpload () {
       // console.log(file)
     },
@@ -155,7 +148,7 @@ export default {
     },
 
     del (t) {
-      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -212,10 +205,9 @@ export default {
     .web-item-inner {
       position: relative;
       border-radius: 4px;
-      min-height: 36px;
+      height: 51px;
       padding: 15px;
       display: flex;
-      align-items: center;
       border: 1px solid #e4ecf3;
       transition: all 0.3s ease;
       &:hover {
@@ -230,6 +222,14 @@ export default {
         img {
           width: 40px;
           height: 40px;
+        }
+        .image-error {
+          width: 40px;
+          height: 40px;
+          background: #e9e9e9;
+          font-size: 20px;
+          text-align: center;
+          line-height: 40px;
         }
       }
       .right {
@@ -264,8 +264,8 @@ export default {
 }
 .add {
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 10px;
+  right: 15px;
 }
 
 p {

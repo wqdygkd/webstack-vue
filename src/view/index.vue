@@ -51,7 +51,7 @@ export default {
       const asideTree = toTree(category, category, 'children')
       this.asideTree = asideTree
 
-      const mainTree = []
+      const mainTree = [{ id: '0', name: '未分类' }]
       asideTree.forEach(item => {
         const { children } = item
         if (children && children.length > 0) {
@@ -69,10 +69,12 @@ export default {
       })
 
       web.forEach(item => {
-        if (!map[item.categoryId].web) {
-          map[item.categoryId].web = [item]
+        const id = map[item.categoryId] ? item.categoryId : '0'
+
+        if (!map[id].web) {
+          map[id].web = [item]
         } else {
-          map[item.categoryId].web.push(item)
+          map[id].web.push(item)
         }
       })
 
