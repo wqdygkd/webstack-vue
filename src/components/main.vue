@@ -13,8 +13,13 @@
           {{ item.name }}
         </div>
 
-        <el-row v-if="item.web && item.web.length > 0" :gutter="20">
-          <!-- TODO: 第一个收藏展示谷歌广告 -->
+        <el-row v-if="item.web && item.web.length > 0 || item.id === '624e2c7313'" :gutter="20">
+          <el-col :span="6" class="web-item ">
+            <div class="web-item-inner custom">
+              <GoogleAd />
+            </div>
+          </el-col>
+
           <el-col v-for="i in item.web" :key="i.id" :span="6" class="web-item">
             <div class="web-item-inner">
               <el-image class="logo" lazy :src="getLogo(i.logo)" fit="fit">
@@ -84,7 +89,12 @@
 
 <script>
 import { post } from '@/api'
+
+import GoogleAd from '@/components/ad'
 export default {
+  components: {
+    GoogleAd
+  },
   props: {
     menu: {
       type: Array,
@@ -213,6 +223,10 @@ export default {
       &:hover {
         transform: translateY(-6px);
         box-shadow: 0 13px 40px -24px #0024644d;
+      }
+      &.custom {
+        height: 81px;
+        padding: 0;
       }
 
       /deep/.logo {
