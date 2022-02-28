@@ -14,7 +14,7 @@
         </div>
 
         <el-row v-if="item.web && item.web.length > 0 || item.id === '624e2c7313'" :gutter="20">
-          <el-col :span="6" class="web-item ">
+          <el-col v-if="item.id === '624e2c7313'" :span="6" class="web-item ">
             <div class="web-item-inner custom">
               <GoogleAd />
             </div>
