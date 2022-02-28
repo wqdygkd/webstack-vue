@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const instance = axios.create({
   timeout: 120_000,
-  baseURL: 'http://localhost:8080/api'
+  baseURL: 'http://localhost:8087/api'
 })
 
 // http request 拦截器

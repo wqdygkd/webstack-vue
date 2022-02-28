@@ -8,6 +8,7 @@ module.exports = {
       // import('./src/db/server.mjs')
       require('./src/server/nodemon.js')
       config.devServer = {
+        port: 8087,
         proxy: {
           '/api': {
             target: 'http://localhost:8088',
