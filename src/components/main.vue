@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div>👋Hi, Tahlia!</div>
+    <!-- <div>👋Hi, Tahlia!</div> -->
 
     <!-- TODO: 搜索 -->
 
@@ -50,7 +50,7 @@
 
     <el-button class="add" type="primary" @click="addWeb()">添加</el-button>
 
-    <el-dialog :title="title" :visible.sync="dialogFormVisible" @close="reset">
+    <el-dialog :title="title" :visible.sync="dialogFormVisible" :close-on-click-modal="false" :show-close="false" @close="reset">
       <el-form ref="form" :model="form">
         <el-form-item label="分类">
           <el-select v-model="form.categoryId" placeholder="请选择" clearable>

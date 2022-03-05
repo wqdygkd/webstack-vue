@@ -1,5 +1,13 @@
 module.exports = {
   lintOnSave: false,
+  chainWebpack: config => {
+    // 处理ico文件
+    config.module
+      .rule('image')
+      .test(/\.ico$/)
+      .use('url-loader')
+      .loader('url-loader')
+  },
   configureWebpack: config => {
     if (process.env.NODE_ENV === 'production') {
       config.mode = 'production'

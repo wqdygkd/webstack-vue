@@ -2,98 +2,148 @@
   "category": [
     {
       "id": "624e2c7313",
-      "name": "测试1",
+      "name": "常用推荐",
       "icon": "fa fa-star-o"
     },
     {
       "id": "fd8b68f108",
       "parentId": "",
-      "name": "测试2",
-      "icon": "fa fa-star-o"
-    },
-    {
-      "id": "7f9a209ae7",
-      "parentId": "624e2c7313",
-      "name": "测试3",
-      "icon": "fa fa-star-o"
-    },
-    {
-      "id": "62942ad24b",
-      "parentId": "fd8b68f108",
-      "name": "测试4",
-      "icon": "fa fa-star-o"
-    },
-    {
-      "id": "80be8ea219",
-      "parentId": "624e2c7313",
-      "name": "测试8",
-      "icon": "fa fa-star-o"
-    },
-    {
-      "id": "c73572f150",
-      "parentId": "fd8b68f108",
-      "name": "测试9",
-      "icon": "fa fa-star-o"
-    },
-    {
-      "id": "e5faddb9e8",
-      "parentId": "fd8b68f108",
-      "name": "测试10",
-      "icon": "fa fa-star-o"
-    },
-    {
-      "id": "bd99f6af46",
-      "parentId": "624e2c7313",
-      "name": "111",
-      "icon": "fa fa-star-o"
+      "name": "影视资源",
+      "icon": "fa fa-video-camera"
     },
     {
       "id": "4c7fd5af44",
       "parentId": "",
-      "name": "1113234234",
+      "name": "我的",
       "icon": "fa fa-star-o"
+    },
+    {
+      "id": "86bc2a8f2c",
+      "parentId": "fd8b68f108",
+      "name": "影视站",
+      "icon": ""
+    },
+    {
+      "id": "487e5255c3",
+      "parentId": "",
+      "name": "常用工具",
+      "icon": "fa fa-diamond"
+    },
+    {
+      "id": "aa0dbcb11d",
+      "parentId": "487e5255c3",
+      "name": "下载工具",
+      "icon": ""
+    },
+    {
+      "id": "3db370aea4",
+      "parentId": "",
+      "name": "素材资源",
+      "icon": "fa fa-thumbs-o-up"
+    },
+    {
+      "id": "4e8bbc7866",
+      "parentId": "3db370aea4",
+      "name": "图标素材",
+      "icon": ""
     }
   ],
   "web": [
     {
       "id": "9d3a635d04",
-      "categoryId": "7f9a209ae7",
-      "url": "阿萨德",
-      "logo": "https://www.baidu.com/img/baidu_85beaf5496f291521eb75ba38eacbd87.svg",
-      "name": "阿萨德",
-      "desc": "阿萨德"
+      "categoryId": "86bc2a8f2c",
+      "url": "https://www.nfmovies.com/",
+      "logo": "nfmovies.webp",
+      "name": "奈菲影视",
+      "desc": "永久免费的福利超清影视站，没有套路，完全免费！"
     },
     {
-      "id": "9f1d48aaa4",
-      "categoryId": "7f9a209ae7",
-      "url": "asdasd",
-      "logo": "",
-      "name": "asdad",
-      "desc": "asdads"
+      "id": "7ab1222fc1",
+      "categoryId": "4c7fd5af44",
+      "url": "https://c10.wqdy.top/",
+      "logo": "dsm.png",
+      "name": "c10",
+      "desc": ""
     },
     {
-      "id": "65c68e2b52",
-      "categoryId": "7f9a209ae7",
-      "url": "asdasd",
-      "logo": "asds",
-      "name": "asdasd",
-      "desc": "asdasd"
+      "id": "1a79269348",
+      "categoryId": "4c7fd5af44",
+      "url": "http://c10.wqdy.top:5700",
+      "logo": "qinglong.png",
+      "name": "青龙控制面板",
+      "desc": ""
     },
     {
-      "id": "048419958a",
-      "categoryId": "7f9a209ae7",
-      "url": "asdasd",
-      "logo": "asda",
-      "name": "asdasdasd",
-      "desc": "sdasdasdasd"
+      "id": "e26798122d",
+      "categoryId": "4c7fd5af44",
+      "url": "http://c10.wqdy.top:1234/",
+      "logo": "yacd.png",
+      "name": "yacd",
+      "desc": ""
     },
     {
-      "id": "94ab3414cb",
-      "categoryId": "7f9a209ae7",
-      "url": "asd",
-      "logo": "asd",
-      "name": "asdasd",
-      "desc": "asd"
+      "id": "10b32e63bf",
+      "categoryId": "4c7fd5af44",
+      "url": "https://c10.wqdy.top:8080/",
+      "logo": "bitwarden.png",
+      "name": "Bitwarden",
+      "desc": ""
+    },
+    {
+      "id": "fc016f54c3",
+      "categoryId": "4c7fd5af44",
+      "url": "http://c10.wqdy.top:5800/",
+      "logo": "rclone-browser.png",
+      "name": "RcloneBrowser",
+      "desc": ""
+    },
+    {
+      "id": "51dec0474e",
+      "categoryId": "aa0dbcb11d",
+      "url": "https://kinhdown.com/",
+      "logo": "kinhdown.png",
+      "name": "kinhdown",
+      "desc": "百度网盘文件高速下载"
+    },
+    {
+      "id": "ceaba92432",
+      "categoryId": "4e8bbc7866",
+      "url": "https://www.iconfont.cn/",
+      "logo": "iconfont.svg",
+      "name": "iconfont",
+      "desc": "阿里巴巴矢量图标库"
+    },
+    {
+      "id": "b47bd2826f",
+      "categoryId": "",
+      "url": "https://qwerty.dev/",
+      "logo": "qwerty.dev.png",
+      "name": "QWERTY.DEV",
+      "desc": "Unicode tools to help you stand out online."
+    },
+    {
+      "id": "8cf59572a3",
+      "categoryId": "4e8bbc7866",
+      "url": "https://iconarchive.com/",
+      "logo": "icon-archive.ico",
+      "name": "Icon Archive",
+      "desc": "搜索超过73.5万个免费图标。 按类别、艺术家、人气、日期浏览图标。 整理并分享你的收藏夹。  "
+    },
+    {
+      "id": "9953a08732",
+      "categoryId": "4e8bbc7866",
+      "url": "https://www.flaticon.com/",
+      "logo": "flaticon.png",
+      "name": "flaticon",
+      "desc": "Download Free Icons and Stickers for your projects.  Resources made by and for designers.  PNG, SVG, EPS, PSD and CSS formats"
+    },
+    {
+      "id": "7df83517cb",
+      "categoryId": "4e8bbc7866",
+      "url": "https://fontawesome.com/start",
+      "logo": "fontawesome.svg",
+      "name": "Font Awesome",
+      "desc": "Get vector icons and social logos on your website with the web’s most popular icon set and toolkit. Always open source and free for commercial use."
     }
   ]
 }
