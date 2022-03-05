@@ -46,6 +46,42 @@
       "parentId": "3db370aea4",
       "name": "图标素材",
       "icon": ""
+    },
+    {
+      "id": "a06342beaf",
+      "parentId": "3db370aea4",
+      "name": "设计灵感",
+      "icon": ""
+    },
+    {
+      "id": "5af25ea594",
+      "parentId": "3db370aea4",
+      "name": "字体资源",
+      "icon": ""
+    },
+    {
+      "id": "9e97750862",
+      "parentId": "3db370aea4",
+      "name": "摄影图库",
+      "icon": ""
+    },
+    {
+      "id": "b30f15a9ff",
+      "parentId": "3db370aea4",
+      "name": "PPT资源",
+      "icon": ""
+    },
+    {
+      "id": "b7dd5fa731",
+      "parentId": "487e5255c3",
+      "name": "设计工具",
+      "icon": ""
+    },
+    {
+      "id": "bd19328849",
+      "parentId": "487e5255c3",
+      "name": "在线工具",
+      "icon": ""
     }
   ],
   "web": [
@@ -144,6 +180,206 @@
       "logo": "fontawesome.svg",
       "name": "Font Awesome",
       "desc": "Get vector icons and social logos on your website with the web’s most popular icon set and toolkit. Always open source and free for commercial use."
+    },
+    {
+      "id": "2569da32d1",
+      "categoryId": "a06342beaf",
+      "url": "https://www.freepik.com/",
+      "logo": "",
+      "name": "freepik",
+      "desc": ""
+    },
+    {
+      "id": "8a3bdcffd2",
+      "categoryId": "a06342beaf",
+      "url": "https://freebiesupply.com/",
+      "logo": "",
+      "name": "freebiesupply",
+      "desc": ""
+    },
+    {
+      "id": "f79b5b6540",
+      "categoryId": "a06342beaf",
+      "url": "https://freebiesbug.com/",
+      "logo": "",
+      "name": "freebiesbug",
+      "desc": ""
+    },
+    {
+      "id": "2ac38a94b1",
+      "categoryId": "a06342beaf",
+      "url": "https://huaban.com/",
+      "logo": "",
+      "name": "花瓣",
+      "desc": ""
+    },
+    {
+      "id": "7f84e1d86e",
+      "categoryId": "a06342beaf",
+      "url": "https://dribbble.com/",
+      "logo": "",
+      "name": "dribbble",
+      "desc": ""
+    },
+    {
+      "id": "55da7ddd8e",
+      "categoryId": "a06342beaf",
+      "url": "https://www.pinterest.com/",
+      "logo": "",
+      "name": "pinterest",
+      "desc": ""
+    },
+    {
+      "id": "a4598d2679",
+      "categoryId": "a06342beaf",
+      "url": "https://www.zcool.com.cn/",
+      "logo": "",
+      "name": "站酷 (ZCOOL)",
+      "desc": ""
+    },
+    {
+      "id": "87c992117a",
+      "categoryId": "a06342beaf",
+      "url": "https://www.yrucd.com/",
+      "logo": "",
+      "name": "云端",
+      "desc": ""
+    },
+    {
+      "id": "1bf2466eee",
+      "categoryId": "a06342beaf",
+      "url": "https://www.uplabs.com/",
+      "logo": "",
+      "name": "uplabs",
+      "desc": ""
+    },
+    {
+      "id": "97fee4a30a",
+      "categoryId": "5af25ea594",
+      "url": "https://fonts.google.com/",
+      "logo": "",
+      "name": "Google Font",
+      "desc": ""
+    },
+    {
+      "id": "acd1fcc8d9",
+      "categoryId": "5af25ea594",
+      "url": "https://fonts.adobe.com/fonts",
+      "logo": "",
+      "name": "Adobe Fonts",
+      "desc": ""
+    },
+    {
+      "id": "e9b253a20f",
+      "categoryId": "9e97750862",
+      "url": "https://www.splitshire.com/",
+      "logo": "",
+      "name": "splitshire",
+      "desc": ""
+    },
+    {
+      "id": "645e800986",
+      "categoryId": "9e97750862",
+      "url": "https://unsplash.com/",
+      "logo": "",
+      "name": "unsplash",
+      "desc": ""
+    },
+    {
+      "id": "5195fb71a6",
+      "categoryId": "b30f15a9ff",
+      "url": "https://www.woodo.cn/design/",
+      "logo": "",
+      "name": "吾道",
+      "desc": ""
+    },
+    {
+      "id": "9d81a993a5",
+      "categoryId": "b7dd5fa731",
+      "url": "https://www.blender.org/",
+      "logo": "",
+      "name": "blender",
+      "desc": ""
+    },
+    {
+      "id": "d7f129fa7f",
+      "categoryId": "b7dd5fa731",
+      "url": "https://www.adobe.com/cn/products/photoshop.html",
+      "logo": "",
+      "name": "photoshop",
+      "desc": ""
+    },
+    {
+      "id": "55f2f8c653",
+      "categoryId": "b7dd5fa731",
+      "url": "https://affinity.serif.com/zh-cn/",
+      "logo": "",
+      "name": "affinity",
+      "desc": ""
+    },
+    {
+      "id": "f2dea40d9d",
+      "categoryId": "b7dd5fa731",
+      "url": "https://www.adobe.com/cn/products/illustrator.html",
+      "logo": "",
+      "name": "illustrator",
+      "desc": ""
+    },
+    {
+      "id": "8faf8272d9",
+      "categoryId": "b7dd5fa731",
+      "url": "https://www.sketch.com/",
+      "logo": "",
+      "name": "sketch",
+      "desc": ""
+    },
+    {
+      "id": "21ce63e85f",
+      "categoryId": "b7dd5fa731",
+      "url": "https://www.figma.com/",
+      "logo": "",
+      "name": "figma",
+      "desc": ""
+    },
+    {
+      "id": "01d3efb339",
+      "categoryId": "b7dd5fa731",
+      "url": "https://www.adobe.com/cn/products/aftereffects.html",
+      "logo": "",
+      "name": "aftereffects",
+      "desc": ""
+    },
+    {
+      "id": "743d5ee8ae",
+      "categoryId": "bd19328849",
+      "url": "https://tinypng.com/",
+      "logo": "",
+      "name": "tinypng",
+      "desc": ""
+    },
+    {
+      "id": "001b2cb81a",
+      "categoryId": "bd19328849",
+      "url": "https://ezgif.com/",
+      "logo": "",
+      "name": "ezgif",
+      "desc": "Online GIF maker and image editor"
+    },
+    {
+      "id": "8f6b74cee8",
+      "categoryId": "bd19328849",
+      "url": "https://www.gaoding.com/image",
+      "logo": "",
+      "name": "稿定|图片编辑",
+      "desc": ""
+    },
+    {
+      "id": "cd117e40c2",
+      "categoryId": "bd19328849",
+      "url": "https://ps.gaoding.com/#/",
+      "logo": "",
+      "name": "稿定|在线ps",
+      "desc": ""
     }
   ]
 }
