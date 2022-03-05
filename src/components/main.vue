@@ -122,7 +122,7 @@ export default {
   methods: {
     getLogo (logo) {
       try {
-        return process.env.NODE_ENV === 'development' ? require('../assets/images/logos/' + logo) : 'https://cdn.jsdelivr.net/gh/cuilongjin/webstack@main/assets/images/logos/' + logo
+        return process.env.NODE_ENV === 'development' ? require('../assets/images/logos/' + logo) : 'https://cdn.jsdelivr.net/gh/cuilongjin/webstack-vue@main/src/assets/images/logos/' + logo
       } catch (error) {
         console.log(error)
         return ''
