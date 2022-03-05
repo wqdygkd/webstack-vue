@@ -14,7 +14,7 @@
         </div>
 
         <el-row v-if="item.web && item.web.length > 0 || item.id === '624e2c7313'" :gutter="20">
-          <el-col v-if="item.id === '624e2c7313'" :span="6" class="web-item ">
+          <el-col v-if="item.id === '624e2c7313' && !isDev" :span="6" class="web-item ">
             <div class="web-item-inner custom">
               <GoogleAd />
             </div>
@@ -32,6 +32,7 @@
                 <p class="desc overflowClip_2">{{ i.desc }}</p>
               </div>
               <el-popover
+                v-if="isDev"
                 placement="bottom-start"
                 width="70"
                 class="operate"
@@ -48,7 +49,7 @@
       </div>
     </template>
 
-    <el-button class="add" type="primary" @click="addWeb()">添加</el-button>
+    <el-button v-if="isDev" class="add" type="primary" @click="addWeb()">添加</el-button>
 
     <el-dialog :title="title" :visible.sync="dialogFormVisible" :close-on-click-modal="false" :show-close="false" @close="reset">
       <el-form ref="form" :model="form">
@@ -95,6 +96,7 @@ export default {
   components: {
     GoogleAd
   },
+  inject: ['isDev'],
   props: {
     menu: {
       type: Array,
@@ -122,7 +124,7 @@ export default {
   methods: {
     getLogo (logo) {
       try {
-        return process.env.NODE_ENV === 'development' ? require('../assets/images/logos/' + logo) : 'https://cdn.jsdelivr.net/gh/cuilongjin/webstack-vue@main/src/assets/images/logos/' + logo
+        return this.isDev ? require('../assets/images/logos/' + logo) : 'https://cdn.jsdelivr.net/gh/cuilongjin/webstack-vue@main/src/assets/images/logos/' + logo
       } catch (error) {
         console.log(error)
         return ''

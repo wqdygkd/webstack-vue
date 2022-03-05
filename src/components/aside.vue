@@ -2,7 +2,6 @@
   <div class="aside">
     <el-menu
       :default-active="active"
-      :router="true"
       :collapse="isCollapse"
       background-color="#2c2e2f"
       text-color="#979898"
@@ -18,6 +17,7 @@
             <span>{{ item.name }}</span>
 
             <el-popover
+              v-if="isDev"
               placement="bottom-start"
               width="70"
               class="operate"
@@ -33,6 +33,7 @@
             <a :href="'#' + child.name">{{ child.name }}</a>
 
             <el-popover
+              v-if="isDev"
               placement="bottom-start"
               width="70"
               class="operate"
@@ -50,6 +51,7 @@
           <a :href="'#' + item.name">{{ item.name }}</a>
 
           <el-popover
+            v-if="isDev"
             placement="bottom-start"
             width="70"
             class="operate"
@@ -62,7 +64,7 @@
           </el-popover>
         </el-menu-item>
       </template>
-      <div class="add">
+      <div v-if="isDev" class="add">
         <el-button type="primary" @click="addCategory()">添加</el-button>
       </div>
     </el-menu>
@@ -101,6 +103,7 @@
 // import db from '../db/index.mjs'
 import { post } from '@/api'
 export default {
+  inject: ['isDev'],
   props: {
     menu: {
       type: Array,

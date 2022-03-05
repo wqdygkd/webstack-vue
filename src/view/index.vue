@@ -26,6 +26,12 @@ export default {
     Aside
   },
 
+  provide () {
+    return {
+      isDev: process.env.NODE_ENV === 'development' && !this.$route.query.preview
+    }
+  },
+
   data () {
     return {
       // active: '',
