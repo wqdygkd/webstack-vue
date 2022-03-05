@@ -22,12 +22,14 @@
 
           <el-col v-for="i in item.web" :key="i.id" :span="6" class="web-item">
             <div class="web-item-inner">
-              <el-image class="logo" lazy :src="getLogo(i.logo)" fit="fit">
-                <div slot="error" class="image-error">{{ i.name.slice(0, 1) }}</div>
-              </el-image>
+              <a :href="i.url" target="_blank">
+                <el-image class="logo" lazy :src="getLogo(i.logo)" fit="fit">
+                  <div slot="error" class="image-error">{{ i.name.slice(0, 1) }}</div>
+                </el-image>
+              </a>
               <div class="right">
                 <p class="name overflowClip_1">
-                  <strong>{{ i.name }}</strong>
+                  <a :href="i.url" target="_blank"><strong>{{ i.name }}</strong></a>
                 </p>
                 <p class="desc overflowClip_2">{{ i.desc }}</p>
               </div>
@@ -223,7 +225,7 @@ export default {
       border: 1px solid #e4ecf3;
       transition: all 0.3s ease;
       &:hover {
-        transform: translateY(-6px);
+        // transform: translateY(-6px);
         box-shadow: 0 13px 40px -24px #0024644d;
       }
       &.custom {
@@ -287,6 +289,10 @@ export default {
 
 p {
   margin: 0;
+}
+a {
+  text-decoration: none;
+  color: #000;
 }
 .overflowClip_1 {
   overflow: hidden;
