@@ -229,6 +229,7 @@ export default {
       &.custom {
         height: 81px;
         padding: 0;
+        overflow: hidden;
       }
 
       /deep/.logo {
