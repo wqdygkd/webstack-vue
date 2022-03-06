@@ -89,7 +89,7 @@
       "id": "9d3a635d04",
       "categoryId": "86bc2a8f2c",
       "url": "https://www.nfmovies.com/",
-      "logo": "nfmovies.webp",
+      "logo": "https://ae01.alicdn.com/kf/H6e1664c4c1e24cb8b8ac83bebd1065256.png",
       "name": "奈菲影视",
       "desc": "永久免费的福利超清影视站，没有套路，完全免费！"
     },
@@ -97,7 +97,7 @@
       "id": "7ab1222fc1",
       "categoryId": "4c7fd5af44",
       "url": "https://c10.wqdy.top/",
-      "logo": "dsm.png",
+      "logo": "https://ae01.alicdn.com/kf/H9a4c32af0e2f48c1babb140ea3f1ebdd8.png",
       "name": "c10",
       "desc": ""
     },
@@ -105,7 +105,7 @@
       "id": "1a79269348",
       "categoryId": "4c7fd5af44",
       "url": "http://c10.wqdy.top:5700",
-      "logo": "qinglong.png",
+      "logo": "https://ae01.alicdn.com/kf/Ha72b1afdeec74383a1d286fbf162d43fu.png",
       "name": "青龙控制面板",
       "desc": ""
     },
@@ -113,7 +113,7 @@
       "id": "e26798122d",
       "categoryId": "4c7fd5af44",
       "url": "http://c10.wqdy.top:1234/",
-      "logo": "yacd.png",
+      "logo": "https://ae01.alicdn.com/kf/Hdcd49cc12a05465ca0138fd12fccdafct.png",
       "name": "yacd",
       "desc": ""
     },
@@ -121,7 +121,7 @@
       "id": "10b32e63bf",
       "categoryId": "4c7fd5af44",
       "url": "https://c10.wqdy.top:8080/",
-      "logo": "bitwarden.png",
+      "logo": "https://ae01.alicdn.com/kf/H737c93208cef4be4a662626ca573f5aaj.png",
       "name": "Bitwarden",
       "desc": ""
     },
@@ -129,7 +129,7 @@
       "id": "fc016f54c3",
       "categoryId": "4c7fd5af44",
       "url": "http://c10.wqdy.top:5800/",
-      "logo": "rclone-browser.png",
+      "logo": "https://ae01.alicdn.com/kf/H9b84a14a591245f091a4a001a696d19dV.png",
       "name": "RcloneBrowser",
       "desc": ""
     },
@@ -137,7 +137,7 @@
       "id": "51dec0474e",
       "categoryId": "aa0dbcb11d",
       "url": "https://kinhdown.com/",
-      "logo": "kinhdown.png",
+      "logo": "https://ae01.alicdn.com/kf/H87ca7f35c2254ecfb31205b12a36df753.png",
       "name": "kinhdown",
       "desc": "百度网盘文件高速下载"
     },
@@ -145,7 +145,7 @@
       "id": "ceaba92432",
       "categoryId": "4e8bbc7866",
       "url": "https://www.iconfont.cn/",
-      "logo": "iconfont.svg",
+      "logo": "https://ae01.alicdn.com/kf/He2b681a6443d46ff98be5626a0fc959bw.png",
       "name": "iconfont",
       "desc": "阿里巴巴矢量图标库"
     },
@@ -153,7 +153,7 @@
       "id": "b47bd2826f",
       "categoryId": "",
       "url": "https://qwerty.dev/",
-      "logo": "qwerty.dev.png",
+      "logo": "https://ae01.alicdn.com/kf/H818ee67302cc4d04ba49d1051b371e1ef.png",
       "name": "QWERTY.DEV",
       "desc": "Unicode tools to help you stand out online."
     },
@@ -161,7 +161,7 @@
       "id": "8cf59572a3",
       "categoryId": "4e8bbc7866",
       "url": "https://iconarchive.com/",
-      "logo": "icon-archive.ico",
+      "logo": "https://ae01.alicdn.com/kf/Hcaa0654eaf0946a5ada5ce30c64e4c40f.png",
       "name": "Icon Archive",
       "desc": "搜索超过73.5万个免费图标。 按类别、艺术家、人气、日期浏览图标。 整理并分享你的收藏夹。  "
     },
@@ -169,7 +169,7 @@
       "id": "9953a08732",
       "categoryId": "4e8bbc7866",
       "url": "https://www.flaticon.com/",
-      "logo": "flaticon.png",
+      "logo": "https://ae01.alicdn.com/kf/H1da7865afef54f819dae6fd51c7dc00ad.png",
       "name": "flaticon",
       "desc": "Download Free Icons and Stickers for your projects.  Resources made by and for designers.  PNG, SVG, EPS, PSD and CSS formats"
     },
@@ -177,7 +177,7 @@
       "id": "7df83517cb",
       "categoryId": "4e8bbc7866",
       "url": "https://fontawesome.com/start",
-      "logo": "fontawesome.svg",
+      "logo": "https://ae01.alicdn.com/kf/Hefdb462e4e0e4a79b2a7d0d6de5cc4c9D.png",
       "name": "Font Awesome",
       "desc": "Get vector icons and social logos on your website with the web’s most popular icon set and toolkit. Always open source and free for commercial use."
     },
@@ -185,63 +185,63 @@
       "id": "2569da32d1",
       "categoryId": "a06342beaf",
       "url": "https://www.freepik.com/",
-      "logo": "",
-      "name": "freepik",
+      "logo": "https://ae01.alicdn.com/kf/H9bfc9c49c7364ce783b3900be8ac87b9d.png",
+      "name": "Freepik",
       "desc": ""
     },
     {
       "id": "8a3bdcffd2",
       "categoryId": "a06342beaf",
       "url": "https://freebiesupply.com/",
-      "logo": "",
-      "name": "freebiesupply",
+      "logo": "https://ae01.alicdn.com/kf/H43708e47fa39466f9f1d8b2f2fa113e0A.png",
+      "name": "Freebie Supply",
       "desc": ""
     },
     {
       "id": "f79b5b6540",
       "categoryId": "a06342beaf",
       "url": "https://freebiesbug.com/",
-      "logo": "",
-      "name": "freebiesbug",
+      "logo": "https://ae01.alicdn.com/kf/H78d08dd84b9e4c8283f74a9b873357caZ.png",
+      "name": "Freebiesbug",
       "desc": ""
     },
     {
       "id": "2ac38a94b1",
       "categoryId": "a06342beaf",
       "url": "https://huaban.com/",
-      "logo": "",
-      "name": "花瓣",
-      "desc": ""
+      "logo": "https://ae01.alicdn.com/kf/H258d5a68f2924833bf93273ba4b0e376T.png",
+      "name": "花瓣网",
+      "desc": "创意灵感天堂，搜索、发现设计灵感、设计素材"
     },
     {
       "id": "7f84e1d86e",
       "categoryId": "a06342beaf",
       "url": "https://dribbble.com/",
-      "logo": "",
-      "name": "dribbble",
+      "logo": "https://ae01.alicdn.com/kf/H543ce30a3e1344e5a41ecfcd38800c3fC.png",
+      "name": "Dribbble",
       "desc": ""
     },
     {
       "id": "55da7ddd8e",
       "categoryId": "a06342beaf",
       "url": "https://www.pinterest.com/",
-      "logo": "",
-      "name": "pinterest",
-      "desc": ""
+      "logo": "https://ae01.alicdn.com/kf/Hd579d2f1882245a59ef535c6d62bdb68t.png",
+      "name": "Pinterest",
+      "desc": "发现想要尝试的食谱、家居创意、时尚灵感及其他创意点子。"
     },
     {
       "id": "a4598d2679",
       "categoryId": "a06342beaf",
       "url": "https://www.zcool.com.cn/",
-      "logo": "",
+      "logo": "https://ae01.alicdn.com/kf/Hb91ea5bb2bdc42d1a0eeb2d93c267dccy.png",
       "name": "站酷 (ZCOOL)",
-      "desc": ""
+      "desc": "中国设计师互动平台"
     },
     {
       "id": "87c992117a",
       "categoryId": "a06342beaf",
       "url": "https://www.yrucd.com/",
-      "logo": "",
+      "logo": "https://ae01.alicdn.com/kf/H724bae21234d47098e54ee4608427205I.png",
       "name": "云端",
       "desc": ""
     },
@@ -249,7 +249,7 @@
       "id": "1bf2466eee",
       "categoryId": "a06342beaf",
       "url": "https://www.uplabs.com/",
-      "logo": "",
+      "logo": "https://ae01.alicdn.com/kf/He038b5fe3cae476fb97c5aecdf6824cah.png",
       "name": "uplabs",
       "desc": ""
     },
@@ -257,7 +257,7 @@
       "id": "97fee4a30a",
       "categoryId": "5af25ea594",
       "url": "https://fonts.google.com/",
-      "logo": "",
+      "logo": "https://ae01.alicdn.com/kf/H30927b8f4552452fa87dba26554ca22am.png",
       "name": "Google Font",
       "desc": ""
     },
@@ -265,7 +265,7 @@
       "id": "acd1fcc8d9",
       "categoryId": "5af25ea594",
       "url": "https://fonts.adobe.com/fonts",
-      "logo": "",
+      "logo": "https://ae01.alicdn.com/kf/H429766dbe7f344c7bc656999524cfdf11.png",
       "name": "Adobe Fonts",
       "desc": ""
     },
@@ -273,103 +273,103 @@
       "id": "e9b253a20f",
       "categoryId": "9e97750862",
       "url": "https://www.splitshire.com/",
-      "logo": "",
-      "name": "splitshire",
-      "desc": ""
+      "logo": "https://ae01.alicdn.com/kf/H549c46ab2eaf4277bf68090bcf8d9bf8U.png",
+      "name": "SplitShire",
+      "desc": "免费库存照片。可用于个人和商业"
     },
     {
       "id": "645e800986",
       "categoryId": "9e97750862",
       "url": "https://unsplash.com/",
-      "logo": "",
-      "name": "unsplash",
-      "desc": ""
+      "logo": "https://ae01.alicdn.com/kf/Hed281923665f48119758e60471869b7e3.png",
+      "name": "Unsplash",
+      "desc": "照片共享网站。免费、无版权"
     },
     {
       "id": "5195fb71a6",
       "categoryId": "b30f15a9ff",
       "url": "https://www.woodo.cn/design/",
-      "logo": "",
-      "name": "吾道",
-      "desc": ""
+      "logo": "https://ae01.alicdn.com/kf/H38146f96d91d47f49426fdb31a6a32fer.png",
+      "name": "吾道幻灯片",
+      "desc": "免版权素材库。PPT在线制作，协作工具，演示文稿，PPT模板下载"
     },
     {
       "id": "9d81a993a5",
       "categoryId": "b7dd5fa731",
       "url": "https://www.blender.org/",
-      "logo": "",
+      "logo": "https://ae01.alicdn.com/kf/Hc832b60e28c340e09600d0e4f6c74dacR.png",
       "name": "blender",
-      "desc": ""
+      "desc": "免费和开源的 3D 创作套件"
     },
     {
       "id": "d7f129fa7f",
       "categoryId": "b7dd5fa731",
       "url": "https://www.adobe.com/cn/products/photoshop.html",
-      "logo": "",
-      "name": "photoshop",
-      "desc": ""
+      "logo": "https://ae01.alicdn.com/kf/Hdea371b9d9204e1bbe81b85427359a23l.png",
+      "name": "Adobe Photoshop",
+      "desc": "照片和设计软件"
     },
     {
       "id": "55f2f8c653",
       "categoryId": "b7dd5fa731",
       "url": "https://affinity.serif.com/zh-cn/",
-      "logo": "",
-      "name": "affinity",
-      "desc": ""
+      "logo": "https://ae01.alicdn.com/kf/H58d2b9fdb8ab4e6786bcdcf5bf02d8b8J.png",
+      "name": "Affinity Designer",
+      "desc": "矢量图形软件"
     },
     {
       "id": "f2dea40d9d",
       "categoryId": "b7dd5fa731",
       "url": "https://www.adobe.com/cn/products/illustrator.html",
-      "logo": "",
-      "name": "illustrator",
-      "desc": ""
+      "logo": "https://ae01.alicdn.com/kf/Haaace9febfa14692b8e414acf815ec8aN.png",
+      "name": "Adobe Illustrator",
+      "desc": "领先的矢量图形软件"
     },
     {
       "id": "8faf8272d9",
       "categoryId": "b7dd5fa731",
       "url": "https://www.sketch.com/",
-      "logo": "",
-      "name": "sketch",
-      "desc": ""
+      "logo": "https://ae01.alicdn.com/kf/H455488b698764bacaadfba6f52b3f10f6.png",
+      "name": "Sketch",
+      "desc": "Design, collaborate, prototype and handoff"
     },
     {
       "id": "21ce63e85f",
       "categoryId": "b7dd5fa731",
       "url": "https://www.figma.com/",
-      "logo": "",
-      "name": "figma",
-      "desc": ""
+      "logo": "https://ae01.alicdn.com/kf/H2ac4652ab22d4b76aabeb6cee766620fJ.png",
+      "name": "Figma",
+      "desc": "the collaborative interface design tool"
     },
     {
       "id": "01d3efb339",
       "categoryId": "b7dd5fa731",
       "url": "https://www.adobe.com/cn/products/aftereffects.html",
-      "logo": "",
-      "name": "aftereffects",
+      "logo": "https://ae01.alicdn.com/kf/Hc0aaaa80d1ad408894ac996d7ba5c7e29.png",
+      "name": "Adobe After Effects",
       "desc": ""
     },
     {
       "id": "743d5ee8ae",
       "categoryId": "bd19328849",
       "url": "https://tinypng.com/",
-      "logo": "",
-      "name": "tinypng",
-      "desc": ""
+      "logo": "https://ae01.alicdn.com/kf/H7034873e65a44d538a803f64e92ac1f83.png",
+      "name": "TinyPNG",
+      "desc": "智能WebP、PNG和JPEG压缩"
     },
     {
       "id": "001b2cb81a",
       "categoryId": "bd19328849",
       "url": "https://ezgif.com/",
-      "logo": "",
-      "name": "ezgif",
-      "desc": "Online GIF maker and image editor"
+      "logo": "https://ae01.alicdn.com/kf/H07e5a9c274bd459dbaaefbf37bdc5410g.png",
+      "name": "Ezgif",
+      "desc": "在线 GIF 制作/编辑工具"
     },
     {
       "id": "8f6b74cee8",
       "categoryId": "bd19328849",
       "url": "https://www.gaoding.com/image",
-      "logo": "",
+      "logo": "https://ae01.alicdn.com/kf/H5dabc817edbe457690f7ca073d097dd27.png",
       "name": "稿定|图片编辑",
       "desc": ""
     },
@@ -377,8 +377,16 @@
       "id": "cd117e40c2",
       "categoryId": "bd19328849",
       "url": "https://ps.gaoding.com/#/",
-      "logo": "",
+      "logo": "https://ae01.alicdn.com/kf/H5dabc817edbe457690f7ca073d097dd27.png",
       "name": "稿定|在线ps",
+      "desc": ""
+    },
+    {
+      "id": "144e17e563",
+      "categoryId": "bd19328849",
+      "url": "https://convertio.co/zh/svg-png/",
+      "logo": "https://ae01.alicdn.com/kf/H652bcc8b5e1d4539a242d1b41cd3239cQ.png",
+      "name": "convertio-SVG到PNG转换器",
       "desc": ""
     }
   ]
