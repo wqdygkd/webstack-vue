@@ -99,7 +99,7 @@
       "url": "https://c10.wqdy.top/",
       "logo": "https://ae01.alicdn.com/kf/H9a4c32af0e2f48c1babb140ea3f1ebdd8.png",
       "name": "c10",
-      "desc": ""
+      "desc": "群辉"
     },
     {
       "id": "1a79269348",
@@ -107,7 +107,7 @@
       "url": "http://c10.wqdy.top:5700",
       "logo": "https://ae01.alicdn.com/kf/Ha72b1afdeec74383a1d286fbf162d43fu.png",
       "name": "青龙控制面板",
-      "desc": ""
+      "desc": "支持python3、javaScript、shell、typescript 的定时任务管理面板"
     },
     {
       "id": "e26798122d",
@@ -115,7 +115,7 @@
       "url": "http://c10.wqdy.top:1234/",
       "logo": "https://ae01.alicdn.com/kf/Hdcd49cc12a05465ca0138fd12fccdafct.png",
       "name": "yacd",
-      "desc": ""
+      "desc": "Clash 面板"
     },
     {
       "id": "10b32e63bf",
@@ -123,7 +123,7 @@
       "url": "https://c10.wqdy.top:8080/",
       "logo": "https://ae01.alicdn.com/kf/H737c93208cef4be4a662626ca573f5aaj.png",
       "name": "Bitwarden",
-      "desc": ""
+      "desc": "密码管理工具"
     },
     {
       "id": "fc016f54c3",
@@ -131,7 +131,7 @@
       "url": "http://c10.wqdy.top:5800/",
       "logo": "https://ae01.alicdn.com/kf/H9b84a14a591245f091a4a001a696d19dV.png",
       "name": "RcloneBrowser",
-      "desc": ""
+      "desc": "Rclone 面板"
     },
     {
       "id": "51dec0474e",
