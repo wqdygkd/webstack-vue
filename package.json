@@ -13,6 +13,7 @@
     "axios": "^0.24.0",
     "core-js": "^3.20.2",
     "element-ui": "^2.15.6",
+    "fractional-index": "^1.0.0",
     "vue": "^2.6.14",
     "vue-router": "^3.5.3"
   },

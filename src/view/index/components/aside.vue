@@ -7,61 +7,49 @@
       text-color="#979898"
       active-text-color="#fff"
       :unique-opened="true"
-      @open="handleOpen"
-      @close="handleClose"
     >
-      <template v-for="item in menu">
+      <template v-for="(item, index) in menu">
         <el-submenu v-if="item.children && item.children.length > 0" :key="item.id" :index="item.id">
           <template slot="title">
             <i :class="item.icon" class="icon" />
             <span>{{ item.name }}</span>
 
-            <el-popover
+            <Popover
               v-if="isDev"
-              placement="bottom-start"
-              width="70"
               class="operate"
-              popper-class="operate-popper"
-              trigger="hover"
-            >
-              <li class="el-dropdown-menu__item" @click="del(item)">删除</li>
-              <li class="el-dropdown-menu__item" @click="edit(item)">编辑</li>
-              <i slot="reference" class="fa fa-ellipsis-h" />
-            </el-popover>
+              :index="index"
+              :menu="menu"
+              @edit="editCategory(item)"
+              @move="moveCategory($event, menu, index)"
+            />
           </template>
-          <el-menu-item v-for="child in item.children" :key="child.id" :index="'#' + child.name">
+          <el-menu-item v-for="(child, childIndex) in item.children" :key="child.id" :index="'#' + child.name">
             <a :href="'#' + child.name">{{ child.name }}</a>
 
-            <el-popover
+            <Popover
               v-if="isDev"
-              placement="bottom-start"
-              width="70"
               class="operate"
-              trigger="hover"
-              popper-class="operate-popper"
-            >
-              <li class="el-dropdown-menu__item" @click="del(child)">删除</li>
-              <li class="el-dropdown-menu__item" @click="edit(child)">编辑</li>
-              <i slot="reference" class="fa fa-ellipsis-h" />
-            </el-popover>
+              :index="childIndex"
+              :menu="item.children"
+              @del="delCategory(child)"
+              @edit="editCategory(child)"
+              @move="moveCategory($event, item.children, childIndex)"
+            />
           </el-menu-item>
         </el-submenu>
         <el-menu-item v-else :key="item.id" :index="'#' + item.name">
           <i :class="item.icon" class="icon" />
           <a :href="'#' + item.name">{{ item.name }}</a>
 
-          <el-popover
+          <Popover
             v-if="isDev"
-            placement="bottom-start"
-            width="70"
             class="operate"
-            trigger="hover"
-            popper-class="operate-popper"
-          >
-            <li class="el-dropdown-menu__item" @click="del(item)">删除</li>
-            <li class="el-dropdown-menu__item" @click="edit(item)">编辑</li>
-            <i slot="reference" class="fa fa-ellipsis-h" />
-          </el-popover>
+            :index="index"
+            :menu="menu"
+            @del="delCategory(item)"
+            @edit="editCategory(item)"
+            @move="moveCategory($event, menu, index)"
+          />
         </el-menu-item>
       </template>
       <div v-if="isDev" class="add">
@@ -89,12 +77,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">
-          取 消
-        </el-button>
-        <el-button type="primary" @click="confirm">
-          确 定
-        </el-button>
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="confirm">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -102,7 +86,13 @@
 <script>
 // import db from '../db/index.mjs'
 import { post } from '@/api'
+import fractionalIndex from 'fractional-index'
+
+import Popover from './popover.vue'
 export default {
+  components: {
+    Popover
+  },
   inject: ['isDev'],
   props: {
     menu: {
@@ -128,25 +118,14 @@ export default {
   },
 
   methods: {
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath)
-    },
-    handleClose (key, keyPath) {
-      console.log(key, keyPath)
-    },
     addCategory () {
       this.dialogFormVisible = true
     },
-    async confirm () {
-      const url = this.form.id ? '/update-category' : '/add-category'
-      const res = await post(url, this.form)
-      if (res.code === 0) {
-        this.dialogFormVisible = false
-        // this.$emit('update')
-      }
+    editCategory (t) {
+      this.dialogFormVisible = true
+      this.form = { ...t }
     },
-
-    del (t) {
+    delCategory (t) {
       this.$confirm('此操作将永久删除, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -163,10 +142,31 @@ export default {
         })
       })
     },
+    async moveCategory (type, menu, index) {
+      const url = '/update-category'
+      const item = menu[index]
 
-    edit (t) {
-      this.dialogFormVisible = true
-      this.form = { ...t }
+      if (type === 1) {
+        const A = menu[index - 2]?.index || '1'
+        const B = menu[index - 1]?.index
+        console.log(A, B)
+        index = fractionalIndex(A, B)
+        console.log(index)
+      } else if (type === 2) {
+
+      }
+
+      await post(url, {
+        id: item.id,
+        index
+      })
+    },
+    async confirm () {
+      const url = this.form.id ? '/update-category' : '/add-category'
+      const res = await post(url, this.form)
+      if (res.code === 0) {
+        this.dialogFormVisible = false
+      }
     },
 
     reset () {
@@ -195,21 +195,21 @@ export default {
   }
 
   .operate {
-      position: absolute;
-      right: 33px;
-      top: 17px;
-      cursor: pointer;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 3px;
-      transition: 0.5s;
-      &:hover {
-        background: rgba(55,53, 47,0.08);
-      }
+    position: absolute;
+    right: 33px;
+    top: 17px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    transition: 0.5s;
+    &:hover {
+      background: rgba(55,53, 47,0.08);
     }
+  }
 
   .icon {
     margin-right: 10px;

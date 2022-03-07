@@ -16,12 +16,13 @@ routers.get('/data', async (request, res) => {
 })
 
 routers.post('/add-category', async (request, res) => {
-  const { parentId, name, icon } = request.body
+  const { parentId, name, icon, index } = request.body
   const flag = await database.addCategory({
     id: nanoid(),
     parentId,
     name,
-    icon
+    icon,
+    index
   })
 
   if (!flag) return res.json({ code: -1 })
@@ -29,8 +30,8 @@ routers.post('/add-category', async (request, res) => {
 })
 
 routers.post('/update-category', async (request, res) => {
-  const { id, parentId, name, icon } = request.body
-  const flag = await database.updateCategory({ id, parentId, name, icon })
+  const { id, parentId, name, icon, index } = request.body
+  const flag = await database.updateCategory({ id, parentId, name, icon, index })
 
   if (!flag) return res.json({ code: -1 })
   res.json({ code: 0 })
@@ -45,22 +46,23 @@ routers.post('/delete-category', async (request, res) => {
 })
 
 routers.post('/add-web', async (request, res) => {
-  const { categoryId, url, logo, name, desc } = request.body
+  const { categoryId, url, logo, name, desc, index } = request.body
   const flag = await database.addWeb({
     id: nanoid(),
     categoryId,
     url,
     logo,
     name,
-    desc
+    desc,
+    index
   })
 
   if (!flag) return res.json({ code: -1 })
   res.json({ code: 0 })
 })
 routers.post('/update-web', async (request, res) => {
-  const { id, categoryId, url, logo, name, desc } = request.body
-  const flag = await database.updateWeb({ id, categoryId, url, logo, name, desc })
+  const { id, categoryId, url, logo, name, desc, index } = request.body
+  const flag = await database.updateWeb({ id, categoryId, url, logo, name, desc, index })
 
   if (!flag) return res.json({ code: -1 })
   res.json({ code: 0 })
