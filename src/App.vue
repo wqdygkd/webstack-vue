@@ -13,14 +13,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 body {
   margin: 0;
 }
 #app {
   height: 100vh;
 }
-.el-container, .el-menu {
-  height: 100%;
-}
+
 </style>

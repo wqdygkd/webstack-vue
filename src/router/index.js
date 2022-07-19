@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', name: 'Index', component: () => import('@/view/index') }
+  { path: '/', name: 'Index', component: () => import('@/view/index') },
+  { path: '/admin', name: 'Admin', component: () => import('@/view/admin') }
 ]
 
 const router = new VueRouter({

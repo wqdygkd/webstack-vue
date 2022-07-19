@@ -2,10 +2,9 @@ import axios from 'axios'
 
 export const instance = axios.create({
   timeout: 120_000,
-  baseURL: 'http://localhost:8087/api'
+  baseURL: 'http://localhost:3000'
 })
 
-// http request 拦截器
 instance.interceptors.request.use(
   config => {
     // 上传
@@ -18,16 +17,10 @@ instance.interceptors.request.use(
   }
 )
 
-// http response 拦截器
 instance.interceptors.response.use(
   response => {
     if (response && (response.status === 200 || response.status === 304 || response.status === 400)) {
-      const data = response.data
-      if (data.code === 0) {
-        return data
-      }
-
-      return Promise.reject(data || 'error')
+      return response.data
     }
   },
   error => {
@@ -36,33 +29,45 @@ instance.interceptors.response.use(
 )
 
 // get请求
-export function get (url, parameters = {}, responseType) {
-  return new Promise((resolve, reject) => {
-    let urlParameters = []
-    for (const key of Object.keys(parameters)) {
-      urlParameters.push(`${key}=${encodeURIComponent(parameters[key])}`)
-    }
-    urlParameters = urlParameters.length > 0 ? `${url}?${urlParameters.join('&')}` : url
-    instance({
-      url: urlParameters,
+export async function get (url, parameters = {}, responseType) {
+  try {
+    const response = await instance({
+      url,
       params: {
-        randomTime: Date.now() // 防止缓存
+        ...parameters,
+        randomTime: Date.now()
       },
       responseType
     })
-      .then(response => {
-        resolve(response)
-      })
-      .catch(error => {
-        reject(error)
-      })
-  })
+    return response
+  } catch (error) {
+    console.log(error)
+    return Promise.reject(error)
+  }
+}
+
+export async function patch (url, data = {}, responseType, properties) {
+  try {
+    const response = await instance({
+      method: 'patch',
+      url,
+      data,
+      responseType,
+      headers: { 'Content-Type': 'multipart/form-data' },
+      ...properties
+    })
+
+    return response
+  } catch (error) {
+    console.log(error)
+    return Promise.reject(error)
+  }
 }
 
 // 封装post请求
-export function post (url, data = {}, responseType, properties) {
-  return new Promise((resolve, reject) => {
-    instance({
+export async function post (url, data = {}, responseType, properties) {
+  try {
+    const response = await instance({
       method: 'post',
       url,
       data,
@@ -70,11 +75,10 @@ export function post (url, data = {}, responseType, properties) {
       headers: { 'Content-Type': 'multipart/form-data' },
       ...properties
     })
-      .then(response => {
-        resolve(response)
-      })
-      .catch(error => {
-        reject(error)
-      })
-  })
+
+    return response
+  } catch (error) {
+    console.log(error)
+    return Promise.reject(error)
+  }
 }

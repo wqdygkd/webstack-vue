@@ -1,18 +1,13 @@
 <template>
   <el-container>
-    <!-- <el-header>
-      <img src="../assets/logo.png" alt="">
-    </el-header> -->
-    <el-container>
-      <!-- <el-button @click="testWeb">testWeb</el-button> -->
-      <!-- <el-button @click="testCategory">testCategory</el-button> -->
-      <el-aside width="201px">
-        <Aside :menu="asideTree" :active="active" />
-      </el-aside>
-      <el-main>
-        <Main :menu="mainTree" :active="active" />
-      </el-main>
-    </el-container>
+    <!-- <el-button @click="testWeb">testWeb</el-button> -->
+    <!-- <el-button @click="testCategory">testCategory</el-button> -->
+    <el-aside width="201px">
+      <Aside :menu="asideTree" :active="active" />
+    </el-aside>
+    <el-main>
+      <Main :menu="mainTree" :active="active" />
+    </el-main>
   </el-container>
 </template>
 
@@ -26,6 +21,7 @@ import { post } from '@/api'
 
 import { toTree } from '@/utils'
 export default {
+  name: 'Index',
   components: {
     Main,
     Aside
@@ -55,9 +51,21 @@ export default {
     this.init()
   },
 
+  mounted () {
+    console.log(this.active)
+    console.log(document.querySelector(this.active))
+    this.$nextTick(() => {
+      document.querySelector(this.active).scrollIntoView({
+        behavior: 'smooth'
+      })
+    })
+  },
+
   methods: {
     async init (val) {
-      const { category, web } = await import('@/db/db.json')
+      let { category, web } = await import('@/db/db.json')
+      category = JSON.parse(JSON.stringify(category))
+      web = JSON.parse(JSON.stringify(web))
 
       let asideTree = toTree(category, category, 'children')
       asideTree = asideTree.sort((a, b) => {
@@ -154,13 +162,7 @@ export default {
 }
 </script>
 
-<style>
-body {
-  margin: 0;
-}
-#app {
-  height: 100vh;
-}
+<style lang="less" scoped>
 .el-container, .el-menu {
   height: 100%;
 }

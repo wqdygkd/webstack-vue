@@ -147,13 +147,15 @@ export default {
       const item = menu[index]
 
       if (type === 1) {
-        const A = menu[index - 2]?.index || '1'
+        const A = menu[index - 2]?.index || null
         const B = menu[index - 1]?.index
-        console.log(A, B)
         index = fractionalIndex(A, B)
-        console.log(index)
+        console.log(A, B, index)
       } else if (type === 2) {
-
+        const A = menu[index + 2]?.index || null
+        const B = menu[index + 1]?.index
+        index = fractionalIndex(A, B)
+        console.log(A, B, index)
       }
 
       await post(url, {

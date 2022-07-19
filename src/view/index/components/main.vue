@@ -23,7 +23,7 @@
           <el-col v-for="i in item.web" :key="i.id" :span="6" class="web-item">
             <div class="web-item-inner">
               <a :href="i.url" target="_blank">
-                <el-image class="logo" lazy :src="getLogo(i.logo)" fit="contain">
+                <el-image class="logo" lazy :src="getLogo(i.logo)" fit="contain" referrerpolicy="no-referrer">
                   <div slot="error" class="image-error">{{ i.name.slice(0, 1) }}</div>
                 </el-image>
               </a>
@@ -127,7 +127,7 @@ export default {
     getLogo (logo) {
       try {
         if (logo.startsWith('https://')) return logo
-        return this.isDev ? require('../assets/images/logos/' + logo) : 'https://cdn.jsdelivr.net/gh/cuilongjin/webstack-vue@main/src/assets/images/logos/' + logo
+        return this.isDev ? require('@/assets/images/logos/' + logo) : 'https://cdn.jsdelivr.net/gh/cuilongjin/webstack-vue@main/src/assets/images/logos/' + logo
       } catch (error) {
         console.log(error)
         return ''
