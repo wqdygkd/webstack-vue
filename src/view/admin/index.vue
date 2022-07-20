@@ -8,6 +8,8 @@
           </el-tabs>
         </template>
 
+        <el-button @click="addWeb">添加</el-button>
+
         <el-table :data="tableData" style="width: 100%">
           <el-table-column prop="name" label="名称" />
           <el-table-column prop="desc" label="简介" />
@@ -58,8 +60,8 @@
 </template>
 
 <script>
-import { post, get, patch, put } from '@/api'
-import { toTree } from '@/utils'
+import { post, get, patch, del } from '@/api'
+import { toTree, nanoid } from '@/utils'
 export default {
   data () {
     return {
@@ -136,9 +138,17 @@ export default {
       const id = (this.activeName2 === '0' || !this.activeName2) ? this.activeName1 === '0' ? '' : this.activeName1 : this.activeName2
       const res = await get('/web', { categoryId: id })
 
-      // 倒序
+      // index正序 + 时间倒序
       res.sort((a, b) => {
-        return a.index > b.index ? -1 : 1
+        const indexA = a.index
+        const indexB = b.index
+        const timeA = a.time
+        const timeB = b.time
+
+        if (indexA && indexB) return indexA > indexB ? 1 : -1
+        if (!indexA && !indexB) return timeA > timeB ? -1 : 1
+        if (indexA) return -1
+        return 1
       })
       this.tableData = res
     },
@@ -155,6 +165,7 @@ export default {
     },
 
     editHandler ({ row }) {
+      this.type = 'edit'
       this.dialogVisible = true
       const categoryId = [this.activeName1]
       if ((this.activeName1 === '0' && this.activeName2 !== '0') || (this.activeName1 !== '0' && this.activeName2)) {
@@ -162,20 +173,34 @@ export default {
       }
       this.form = { ...row, categoryId }
     },
-    deleteHandler ({ row }) {
-
+    async  deleteHandler ({ row }) {
+      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        await del(`web/${row.id}`)
+        this.getWeb()
+      }).catch(() => {})
     },
     moveHandler ({ row, $index }, type) {
 
+    },
+
+    addWeb () {
+      this.type = 'add'
+      this.form = {}
+      this.dialogVisible = true
     },
 
     async onSubmit () {
       const { form } = this
       const category = this.form.categoryId
       const categoryId = !category[1] || category[1] === '0' ? category[0] : category[1]
-
       if (this.type === 'edit') {
         await patch(`web/${form.id}`, { ...form, categoryId })
+      } else if (this.type === 'add') {
+        await post('web', { ...form, categoryId, time: +new Date(), id: nanoid() })
       }
       this.dialogVisible = false
       this.getWeb()

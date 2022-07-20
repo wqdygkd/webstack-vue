@@ -28,7 +28,6 @@ instance.interceptors.response.use(
   }
 )
 
-// get请求
 export async function get (url, parameters = {}, responseType) {
   try {
     const response = await instance({
@@ -64,7 +63,6 @@ export async function patch (url, data = {}, responseType, properties) {
   }
 }
 
-// 封装post请求
 export async function post (url, data = {}, responseType, properties) {
   try {
     const response = await instance({
@@ -72,7 +70,25 @@ export async function post (url, data = {}, responseType, properties) {
       url,
       data,
       responseType,
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: { 'Content-Type': 'application/json' },
+      ...properties
+    })
+
+    return response
+  } catch (error) {
+    console.log(error)
+    return Promise.reject(error)
+  }
+}
+
+export async function del (url, data = {}, responseType, properties) {
+  try {
+    const response = await instance({
+      method: 'delete',
+      url,
+      data,
+      responseType,
+      headers: { 'Content-Type': 'application/json' },
       ...properties
     })
 

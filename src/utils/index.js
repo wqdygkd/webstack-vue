@@ -1,3 +1,5 @@
+import { customAlphabet } from 'nanoid'
+
 export function toTree (list) {
   const map = {}
   for (const index of list) {
@@ -19,3 +21,5 @@ export function toTree (list) {
   }
   return _list
 }
+
+export const nanoid = customAlphabet('1234567890abcdef', 10)
