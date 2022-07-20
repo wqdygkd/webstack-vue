@@ -11,7 +11,13 @@
         <el-button @click="addWeb">添加</el-button>
 
         <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="name" label="名称" />
+          <el-table-column prop="name" label="名称">
+            <template #default="scope">
+              <el-image class="logo" :src="scope.row.logo" />
+              <span>{{ scope.row.name }}</span>
+            </template>
+          </el-table-column>
+
           <el-table-column prop="desc" label="简介" />
           <el-table-column prop="url" label="链接" />
           <el-table-column prop="date" label="添加时间" />
@@ -33,6 +39,19 @@
       :visible.sync="dialogVisible"
     >
       <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="logo">
+          <el-upload
+            class="upload-demo"
+            drag
+            action=""
+            :http-request="handleUpload"
+          >
+            <i class="el-icon-upload" />
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
+        </el-form-item>
+
         <el-form-item label="名称">
           <el-input v-model="form.name" />
         </el-form-item>
@@ -204,11 +223,18 @@ export default {
       }
       this.dialogVisible = false
       this.getWeb()
+    },
+
+    async handleUpload () {
+      await post('https://imgs.top/api/v1/upload')
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-
+.logo {
+  width: 40px;
+  height: 40px;
+}
 </style>
