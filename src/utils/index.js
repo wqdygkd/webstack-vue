@@ -1,14 +1,18 @@
 export function toTree (list) {
   const map = {}
   for (const index of list) {
-    index.children = []
+    // index.children = []
     map[index.id] = index
   }
 
   const _list = []
   for (const index of list) {
     if (map[index.parentId]) {
-      map[index.parentId].children.push(index)
+      if (!map[index.parentId]?.children) {
+        map[index.parentId].children = [index]
+      } else {
+        map[index.parentId].children.push(index)
+      }
     } else if (!index.parentId) {
       _list.push(index)
     }

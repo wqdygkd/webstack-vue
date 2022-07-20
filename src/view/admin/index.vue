@@ -41,10 +41,12 @@
           <el-input v-model="form.url" />
         </el-form-item>
         <el-form-item label="分类">
-          <el-select v-model="form.region" placeholder="请选择分类">
-            <el-option label="分类一" value="category1" />
-            <el-option label="分类二" value="category2" />
-          </el-select>
+          <el-cascader
+            v-model="form.categoryId"
+            :options="category"
+            :props="{ value: 'id', label: 'name'}"
+            placeholder="请选择分类"
+          />
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -83,7 +85,7 @@ export default {
     async init () {
       await this.getCategory()
       const cat1 = this.category[0] || {}
-      const cat2 = cat1.children[0] || {}
+      const cat2 = (cat1.children && cat1.children[0]) || {}
 
       this.activeName1 = cat1.id || '0'
       this.activeName2 = cat2.id || '0'
@@ -102,24 +104,26 @@ export default {
       for (let i = 0; i < category.length; i++) {
         const item = category[i]
 
-        // 排序
-        item.children.sort((a, b) => {
-          return a.index > b.index ? 1 : -1
-        })
-
-        if (item.children.length > 0) {
-          item.children.unshift({
-            children: [],
-            id: '0',
-            index: '0',
-            name: '未分类',
-            parentId: item.id
+        if (item.children) {
+          // 排序
+          item.children.sort((a, b) => {
+            return a.index > b.index ? 1 : -1
           })
+
+          if (item.children.length > 0) {
+            item.children.unshift({
+              // children: [],
+              id: '0',
+              index: '0',
+              name: '未分类',
+              parentId: item.id
+            })
+          }
         }
       }
 
       category.unshift({
-        children: [],
+        // children: [],
         id: '0',
         index: '0',
         name: '未分类'
@@ -142,7 +146,7 @@ export default {
     handleClick (type) {
       if (type === 1) {
         const cat1 = this.category.find(item => item.id === this.activeName1) || {}
-        const cat2 = cat1.children[0] || {}
+        const cat2 = (cat1.children && cat1.children[0]) || {}
         this.activeName1 = cat1.id
         this.activeName2 = cat2.id
       }
@@ -152,7 +156,11 @@ export default {
 
     editHandler ({ row }) {
       this.dialogVisible = true
-      this.form = { ...row }
+      const categoryId = [this.activeName1]
+      if ((this.activeName1 === '0' && this.activeName2 !== '0') || (this.activeName1 !== '0' && this.activeName2)) {
+        categoryId.push(this.activeName2)
+      }
+      this.form = { ...row, categoryId }
     },
     deleteHandler ({ row }) {
 
@@ -163,8 +171,11 @@ export default {
 
     async onSubmit () {
       const { form } = this
+      const category = this.form.categoryId
+      const categoryId = !category[1] || category[1] === '0' ? category[0] : category[1]
+
       if (this.type === 'edit') {
-        await patch(`web/${form.id}`, form)
+        await patch(`web/${form.id}`, { ...form, categoryId })
       }
       this.dialogVisible = false
       this.getWeb()
