@@ -1,11 +1,11 @@
 <template>
-  <div class="aside">
+  <el-scrollbar>
     <el-menu
       :default-active="active"
       :collapse="isCollapse"
-      background-color="#2c2e2f"
+      background-color="#fff"
       text-color="#979898"
-      active-text-color="#fff"
+      active-text-color="#2c2e2f"
       :unique-opened="true"
     >
       <template v-for="(item, index) in menu">
@@ -56,7 +56,6 @@
         <el-button type="primary" @click="addCategory()">添加</el-button>
       </div>
     </el-menu>
-
     <el-dialog title="title" :visible.sync="dialogFormVisible" @close="reset">
       <el-form ref="form" :model="form">
         <el-form-item label="上级">
@@ -81,7 +80,7 @@
         <el-button type="primary" @click="confirm">确 定</el-button>
       </div>
     </el-dialog>
-  </div>
+  </el-scrollbar>
 </template>
 <script>
 // import db from '../db/index.mjs'
@@ -181,13 +180,19 @@ export default {
 }
 </script>
 <style scoped lang="less">
-.aside {
+.el-scrollbar {
   height: 100%;
+  /deep/.el-scrollbar__wrap {
+    overflow: auto;
+  }
+  .el-menu {
+    height: 100%;
+  }
   .el-menu-item {
     position: relative;
     &.is-active {
       a {
-        color: #fff;
+        color: #2c2e2f;
       }
     }
     a {
