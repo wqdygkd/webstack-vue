@@ -2,9 +2,7 @@
   <el-container>
     <!-- <el-button @click="testWeb">testWeb</el-button> -->
     <!-- <el-button @click="testCategory">testCategory</el-button> -->
-    <el-aside width="201px">
-      <Aside :menu="asideTree" :active="active" />
-    </el-aside>
+    <Aside :menu="asideTree" :active="active" />
     <el-main>
       <!-- <Main :menu="mainTree" :active="active" /> -->
     </el-main>
@@ -163,7 +161,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.el-container, .el-menu {
+.el-container {
   height: 100%;
 }
 .el-main {

@@ -1,32 +1,35 @@
 <template>
-  <el-scrollbar>
-    <el-menu
-      :default-active="active"
-      :collapse="isCollapse"
-      background-color="#fff"
-      text-color="#979898"
-      active-text-color="#2c2e2f"
-      :unique-opened="true"
-    >
-      <template v-for="(item, index) in menu">
-        <el-submenu v-if="item.children && item.children.length > 0" :key="item.id" :index="item.id">
-          <template slot="title">
-            <i :class="item.icon" class="icon" />
-            <span>{{ item.name }}</span>
+  <el-aside width="201px" :class="{collapse: isCollapse}">
+    <el-scrollbar>
+      <div class="collapse" @click="closeAside">x</div>
 
-            <Popover
+      <div class="logo">
+        <el-image :src="require('@/assets/logo.png')" />
+      </div>
+
+      <el-menu
+        :default-active="active"
+        :unique-opened="true"
+      >
+        <template v-for="(item, index) in menu">
+          <el-submenu v-if="item.children && item.children.length > 0" :key="item.id" :index="item.id">
+            <template slot="title">
+              <i :class="item.icon" class="icon" />
+              <span>{{ item.name }}</span>
+
+            <!-- <Popover
               v-if="isDev"
               class="operate"
               :index="index"
               :menu="menu"
               @edit="editCategory(item)"
               @move="moveCategory($event, menu, index)"
-            />
-          </template>
-          <el-menu-item v-for="(child, childIndex) in item.children" :key="child.id" :index="'#' + child.name">
-            <a :href="'#' + child.name">{{ child.name }}</a>
+            /> -->
+            </template>
+            <el-menu-item v-for="(child, childIndex) in item.children" :key="child.id" :index="'#' + child.name">
+              <a :href="'#' + child.name">{{ child.name }}</a>
 
-            <Popover
+            <!-- <Popover
               v-if="isDev"
               class="operate"
               :index="childIndex"
@@ -34,14 +37,14 @@
               @del="delCategory(child)"
               @edit="editCategory(child)"
               @move="moveCategory($event, item.children, childIndex)"
-            />
-          </el-menu-item>
-        </el-submenu>
-        <el-menu-item v-else :key="item.id" :index="'#' + item.name">
-          <i :class="item.icon" class="icon" />
-          <a :href="'#' + item.name">{{ item.name }}</a>
+            /> -->
+            </el-menu-item>
+          </el-submenu>
+          <el-menu-item v-else :key="item.id" :index="'#' + item.name">
+            <i :class="item.icon" class="icon" />
+            <a :href="'#' + item.name">{{ item.name }}</a>
 
-          <Popover
+          <!-- <Popover
             v-if="isDev"
             class="operate"
             :index="index"
@@ -49,48 +52,50 @@
             @del="delCategory(item)"
             @edit="editCategory(item)"
             @move="moveCategory($event, menu, index)"
-          />
-        </el-menu-item>
-      </template>
-      <div v-if="isDev" class="add">
-        <el-button type="primary" @click="addCategory()">添加</el-button>
-      </div>
-    </el-menu>
-    <el-dialog title="title" :visible.sync="dialogFormVisible" @close="reset">
-      <el-form ref="form" :model="form">
-        <el-form-item label="上级">
-          <el-select v-model="form.parentId" placeholder="请选择" clearable>
-            <el-option
-              v-for="item in menu"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="名称">
-          <el-input v-model="form.name" />
-        </el-form-item>
-        <el-form-item label="图标">
-          <el-input v-model="form.icon" />
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="confirm">确 定</el-button>
-      </div>
-    </el-dialog>
-  </el-scrollbar>
+          /> -->
+          </el-menu-item>
+        </template>
+        <div v-if="isDev" class="add">
+          <el-button type="primary" @click="addCategory()">添加</el-button>
+        </div>
+      </el-menu>
+
+      <el-dialog title="title" :visible.sync="dialogFormVisible" @close="reset">
+        <el-form ref="form" :model="form">
+          <el-form-item label="上级">
+            <el-select v-model="form.parentId" placeholder="请选择" clearable>
+              <el-option
+                v-for="item in menu"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+              />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="名称">
+            <el-input v-model="form.name" />
+          </el-form-item>
+          <el-form-item label="图标">
+            <el-input v-model="form.icon" />
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="confirm">确 定</el-button>
+        </div>
+      </el-dialog>
+    </el-scrollbar>
+  </el-aside>
 </template>
 <script>
 // import db from '../db/index.mjs'
 import { post } from '@/api'
 import fractionalIndex from 'fractional-index'
 
-import Popover from './popover.vue'
+// import Popover from './popover.vue'
 export default {
   components: {
-    Popover
+    // Popover
   },
   inject: ['isDev'],
   props: {
@@ -117,6 +122,9 @@ export default {
   },
 
   methods: {
+    closeAside () {
+
+    },
     addCategory () {
       this.dialogFormVisible = true
     },
@@ -180,24 +188,74 @@ export default {
 }
 </script>
 <style scoped lang="less">
+@height: 40px;
+@textColor: #979898;
+@textColorActive: #2c2e2f;
+@bgColor: #fff !important;
+
+.el-aside {
+  box-shadow: 0 0 18px 0 #d4dee6;
+
+  transition: all .5s;
+  position: absolute;
+  height: 100%;
+  // &.collapse {
+
+  // }
+
+  @media screen and (min-width: 600px) {
+    // &.el-aside {
+    //   // display: block;
+    // }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .el-aside {
+    // display: block;
+  }
+}
+
 .el-scrollbar {
+
   height: 100%;
   /deep/.el-scrollbar__wrap {
     overflow: auto;
+    padding-right: 17px
   }
   .el-menu {
     height: 100%;
+    border: none;
   }
   .el-menu-item {
-    position: relative;
-    &.is-active {
-      a {
-        color: #2c2e2f;
+    background-color: @bgColor;
+    height: @height;
+    line-height: @height;
+    &.is-active, &:hover {
+      i, a {
+        color: @textColorActive;
       }
     }
-    a {
+    i, a {
+      transition: all .5s ;
+      color: @textColor;
       text-decoration: none;
-      color: #979898;
+    }
+  }
+  /deep/.el-submenu {
+    .el-submenu__title {
+      height: @height;
+      line-height: @height;
+      background-color: @bgColor;
+      i, span {
+        color: @textColor;
+        transition: all .5s ;
+      }
+      &:hover {
+        i, span {
+          color: @textColorActive;
+        }
+      }
     }
   }
 
