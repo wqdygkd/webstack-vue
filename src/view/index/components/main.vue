@@ -1,55 +1,59 @@
 <template>
   <div class="main">
+    <el-scrollbar>
+      <div class="content">
+        <template v-for="item in menu">
+          <div v-if="!(item.id === '0' && (!item.web || item.web.length == 0))" :id="item.name" :key="item.id" class="item">
+            <div class="title">
+              <!-- <i :class="item.icon" class="icon"></i> -->
+              <i class="fa fa-tag icon" />
+              {{ item.name }}
+            </div>
+
+            <el-row v-if="item.web && item.web.length > 0 || item.id === '624e2c7313'" :gutter="20">
+              <el-col v-if="item.id === '624e2c7313' && !isDev" :span="6" class="web-item ">
+                <div class="web-item-inner custom">
+                  <GoogleAd />
+                </div>
+              </el-col>
+
+              <el-col v-for="i in item.web" :key="i.id" :span="6" class="web-item">
+                <div class="web-item-inner">
+                  <a :href="i.url" target="_blank">
+                    <el-image class="logo" lazy :src="getLogo(i.logo)" fit="contain" referrerpolicy="no-referrer">
+                      <div slot="error" class="image-error">{{ i.name.slice(0, 1) }}</div>
+                    </el-image>
+                  </a>
+                  <div class="right">
+                    <p class="name overflowClip_1">
+                      <a :href="i.url" target="_blank"><strong>{{ i.name }}</strong></a>
+                    </p>
+                    <p class="desc overflowClip_2">{{ i.desc }}</p>
+                  </div>
+                  <el-popover
+                    v-if="isDev"
+                    placement="bottom-start"
+                    width="70"
+                    class="operate"
+                    popper-class="operate-popper"
+                  >
+                    <li class="el-dropdown-menu__item" @click="del(i)">删除</li>
+                    <li class="el-dropdown-menu__item" @click="edit(i)">编辑</li>
+                    <i slot="reference" class="fa fa-ellipsis-h" />
+                  </el-popover>
+                </div>
+              </el-col>
+            </el-row>
+            <br>
+          </div>
+        </template>
+      </div>
+    </el-scrollbar>
     <!-- <div>👋Hi, Tahlia!</div> -->
 
     <!-- TODO: 搜索 -->
 
     <!-- TODO: 推广 -->
-    <template v-for="item in menu">
-      <div v-if="!(item.id === '0' && (!item.web || item.web.length == 0))" :id="item.name" :key="item.id" class="item">
-        <div class="title">
-          <!-- <i :class="item.icon" class="icon"></i> -->
-          <i class="fa fa-tag icon" />
-          {{ item.name }}
-        </div>
-
-        <el-row v-if="item.web && item.web.length > 0 || item.id === '624e2c7313'" :gutter="20">
-          <el-col v-if="item.id === '624e2c7313' && !isDev" :span="6" class="web-item ">
-            <div class="web-item-inner custom">
-              <GoogleAd />
-            </div>
-          </el-col>
-
-          <el-col v-for="i in item.web" :key="i.id" :span="6" class="web-item">
-            <div class="web-item-inner">
-              <a :href="i.url" target="_blank">
-                <el-image class="logo" lazy :src="getLogo(i.logo)" fit="contain" referrerpolicy="no-referrer">
-                  <div slot="error" class="image-error">{{ i.name.slice(0, 1) }}</div>
-                </el-image>
-              </a>
-              <div class="right">
-                <p class="name overflowClip_1">
-                  <a :href="i.url" target="_blank"><strong>{{ i.name }}</strong></a>
-                </p>
-                <p class="desc overflowClip_2">{{ i.desc }}</p>
-              </div>
-              <el-popover
-                v-if="isDev"
-                placement="bottom-start"
-                width="70"
-                class="operate"
-                popper-class="operate-popper"
-              >
-                <li class="el-dropdown-menu__item" @click="del(i)">删除</li>
-                <li class="el-dropdown-menu__item" @click="edit(i)">编辑</li>
-                <i slot="reference" class="fa fa-ellipsis-h" />
-              </el-popover>
-            </div>
-          </el-col>
-        </el-row>
-        <br>
-      </div>
-    </template>
 
     <el-button v-if="isDev" class="add" type="primary" @click="addWeb()">添加</el-button>
 
@@ -198,6 +202,21 @@ export default {
 </script>
 
 <style scoped lang="less">
+.main {
+  flex: 1;
+}
+.el-scrollbar {
+  height: 100%;
+  /deep/.el-scrollbar__wrap {
+    overflow-x: hidden;
+  }
+}
+
+.content {
+  width: 1000px;
+  margin: 0 auto;
+}
+
 .item {
   min-height: 100px;
   .title {

@@ -1,23 +1,31 @@
 <template>
-  <el-aside width="201px" :class="{collapse: isCollapse}">
-    <el-scrollbar>
-      <div class="collapse" @click="closeAside">x</div>
-
+  <div class="aside" :class="{ collapse: isCollapse }">
+    <div class="top-bar">
+      <div class="menu" @click="changeAside(false)">菜单</div>
       <div class="logo">
         <el-image :src="require('@/assets/logo.png')" />
       </div>
+    </div>
 
-      <el-menu
-        :default-active="active"
-        :unique-opened="true"
-      >
-        <template v-for="(item, index) in menu">
-          <el-submenu v-if="item.children && item.children.length > 0" :key="item.id" :index="item.id">
+    <div class="v-modal" />
+
+    <el-scrollbar>
+      <div class="collapse-btn" @click="changeAside(true)">x</div>
+      <div class="logo">
+        <el-image :src="require('@/assets/logo.png')" />
+      </div>
+      <el-menu :default-active="active" :unique-opened="true">
+        <template v-for="item in menu">
+          <el-submenu
+            v-if="item.children && item.children.length > 0"
+            :key="item.id"
+            :index="item.id"
+          >
             <template slot="title">
               <i :class="item.icon" class="icon" />
               <span>{{ item.name }}</span>
 
-            <!-- <Popover
+              <!-- <Popover
               v-if="isDev"
               class="operate"
               :index="index"
@@ -26,10 +34,14 @@
               @move="moveCategory($event, menu, index)"
             /> -->
             </template>
-            <el-menu-item v-for="(child, childIndex) in item.children" :key="child.id" :index="'#' + child.name">
+            <el-menu-item
+              v-for="child in item.children"
+              :key="child.id"
+              :index="'#' + child.name"
+            >
               <a :href="'#' + child.name">{{ child.name }}</a>
 
-            <!-- <Popover
+              <!-- <Popover
               v-if="isDev"
               class="operate"
               :index="childIndex"
@@ -44,7 +56,7 @@
             <i :class="item.icon" class="icon" />
             <a :href="'#' + item.name">{{ item.name }}</a>
 
-          <!-- <Popover
+            <!-- <Popover
             v-if="isDev"
             class="operate"
             :index="index"
@@ -85,7 +97,7 @@
         </div>
       </el-dialog>
     </el-scrollbar>
-  </el-aside>
+  </div>
 </template>
 <script>
 // import db from '../db/index.mjs'
@@ -110,7 +122,7 @@ export default {
   },
   data () {
     return {
-      isCollapse: false,
+      isCollapse: true,
       dialogFormVisible: false,
       title: '新增',
       form: {
@@ -122,9 +134,10 @@ export default {
   },
 
   methods: {
-    closeAside () {
-
+    changeAside (flag) {
+      this.isCollapse = flag
     },
+
     addCategory () {
       this.dialogFormVisible = true
     },
@@ -191,71 +204,82 @@ export default {
 @height: 40px;
 @textColor: #979898;
 @textColorActive: #2c2e2f;
-@bgColor: #fff !important;
+@bgColor: #fff;
 
-.el-aside {
-  box-shadow: 0 0 18px 0 #d4dee6;
+.aside {
+  width: 200px;
+  .v-modal {
+    display: none;
+  }
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    .v-modal {
+      position: fixed;
+      display: block;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.5;
+      background: #000;
+      transition: all 0.5s;
+    }
+    .el-scrollbar__wrap {
+      margin-bottom: 0 !important;
+      margin-right: 0 !important;
+    }
 
-  transition: all .5s;
-  position: absolute;
-  height: 100%;
-  // &.collapse {
-
-  // }
-
-  @media screen and (min-width: 600px) {
-    // &.el-aside {
-    //   // display: block;
-    // }
+    &.collapse {
+      .v-modal {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .el-scrollbar {
+        left: -220px;
+      }
+    }
   }
 }
 
-@media screen and (min-width: 600px) {
-  .el-aside {
-    // display: block;
+.top-bar {
+  display: none;
+  background: @bgColor;
+  @media screen and (max-width: 600px) {
+    display: flex;
+  }
+  height: @height;
+  width: 100%;
+
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 20px 0 #d4dee6;
+  .menu {
+    position: absolute;
+    left: 0;
+  }
+  .logo {
+    width: 40px;
+    height: 40px;
   }
 }
 
 .el-scrollbar {
-
+  transition: all 0.5s;
+  box-shadow: 0 0 18px 0 #d4dee6;
+  background: @bgColor;
+  position: absolute;
+  width: 200px;
+  left: 0;
+  top: 0;
   height: 100%;
   /deep/.el-scrollbar__wrap {
-    overflow: auto;
-    padding-right: 17px
+    overflow-x: hidden;
   }
-  .el-menu {
-    height: 100%;
-    border: none;
-  }
-  .el-menu-item {
-    background-color: @bgColor;
-    height: @height;
-    line-height: @height;
-    &.is-active, &:hover {
-      i, a {
-        color: @textColorActive;
-      }
-    }
-    i, a {
-      transition: all .5s ;
-      color: @textColor;
-      text-decoration: none;
-    }
-  }
-  /deep/.el-submenu {
-    .el-submenu__title {
-      height: @height;
-      line-height: @height;
-      background-color: @bgColor;
-      i, span {
-        color: @textColor;
-        transition: all .5s ;
-      }
-      &:hover {
-        i, span {
-          color: @textColorActive;
-        }
-      }
+  .collapse-btn {
+    display: none;
+    @media screen and (max-width: 600px) {
+      display: block;
     }
   }
 
@@ -272,16 +296,53 @@ export default {
     border-radius: 3px;
     transition: 0.5s;
     &:hover {
-      background: rgba(55,53, 47,0.08);
+      background: rgba(55, 53, 47, 0.08);
     }
   }
 
   .icon {
     margin-right: 10px;
   }
+}
 
-  .add {
-    text-align: center;
+.el-menu {
+  height: 100%;
+  border: none;
+  .el-menu-item {
+    background-color: @bgColor !important;
+    height: @height;
+    line-height: @height;
+    &.is-active,
+    &:hover {
+      i,
+      a {
+        color: @textColorActive;
+      }
+    }
+    i,
+    a {
+      transition: all 0.5s;
+      color: @textColor;
+      text-decoration: none;
+    }
+  }
+  /deep/.el-submenu {
+    .el-submenu__title {
+      height: @height;
+      line-height: @height;
+      background-color: @bgColor !important;
+      i,
+      span {
+        color: @textColor;
+        transition: all 0.5s;
+      }
+      &:hover {
+        i,
+        span {
+          color: @textColorActive;
+        }
+      }
+    }
   }
 }
 </style>

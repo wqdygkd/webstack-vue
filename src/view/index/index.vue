@@ -2,15 +2,13 @@
   <el-container>
     <!-- <el-button @click="testWeb">testWeb</el-button> -->
     <!-- <el-button @click="testCategory">testCategory</el-button> -->
-    <Aside :menu="asideTree" :active="active" />
-    <el-main>
-      <!-- <Main :menu="mainTree" :active="active" /> -->
-    </el-main>
+    <Aside ref="aside" :menu="asideTree" :active="active" />
+    <Main :menu="mainTree" :active="active" />
   </el-container>
 </template>
 
 <script>
-// import Main from './components/main.vue'
+import Main from './components/main.vue'
 import Aside from './components/aside.vue'
 // import data from '@/db/db.json'
 
@@ -21,7 +19,7 @@ import { toTree } from '@/utils'
 export default {
   name: 'Index',
   components: {
-    // Main,
+    Main,
     Aside
   },
 
@@ -163,6 +161,9 @@ export default {
 <style lang="less" scoped>
 .el-container {
   height: 100%;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 }
 .el-main {
   box-sizing: border-box;
