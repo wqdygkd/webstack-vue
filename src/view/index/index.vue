@@ -161,7 +161,7 @@ export default {
 <style lang="less" scoped>
 .el-container {
   height: 100%;
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 850px) {
     flex-direction: column;
   }
 }

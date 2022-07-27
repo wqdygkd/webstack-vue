@@ -67,9 +67,9 @@
           /> -->
           </el-menu-item>
         </template>
-        <div v-if="isDev" class="add">
+        <!-- <div v-if="isDev" class="add">
           <el-button type="primary" @click="addCategory()">添加</el-button>
-        </div>
+        </div> -->
       </el-menu>
 
       <el-dialog title="title" :visible.sync="dialogFormVisible" @close="reset">
@@ -205,14 +205,17 @@ export default {
 @textColor: #979898;
 @textColorActive: #2c2e2f;
 @bgColor: #fff;
+@width: 220px;
 
 .aside {
-  width: 200px;
+  width: @width;
+  background: #f1f5f8;
   .v-modal {
     display: none;
   }
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 850px) {
     width: 100%;
+    z-index: 1;
     .v-modal {
       position: fixed;
       display: block;
@@ -235,7 +238,7 @@ export default {
         pointer-events: none;
       }
       .el-scrollbar {
-        left: -220px;
+        left: -@width;
       }
     }
   }
@@ -244,7 +247,7 @@ export default {
 .top-bar {
   display: none;
   background: @bgColor;
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 850px) {
     display: flex;
   }
   height: @height;
@@ -269,7 +272,7 @@ export default {
   box-shadow: 0 0 18px 0 #d4dee6;
   background: @bgColor;
   position: absolute;
-  width: 200px;
+  width: @width;
   left: 0;
   top: 0;
   height: 100%;
@@ -278,7 +281,7 @@ export default {
   }
   .collapse-btn {
     display: none;
-    @media screen and (max-width: 750px) {
+    @media screen and (max-width: 850px) {
       display: block;
     }
   }

@@ -11,7 +11,7 @@
             </div>
 
             <el-row v-if="item.web && item.web.length > 0 || item.id === '624e2c7313'" :gutter="20">
-              <el-col v-if="item.id === '624e2c7313' && !isDev" class="web-item ">
+              <el-col v-if="item.id === '624e2c7313' && !isDev" class="web-item">
                 <div class="web-item-inner custom">
                   <GoogleAd />
                 </div>
@@ -55,7 +55,7 @@
 
     <!-- TODO: 推广 -->
 
-    <el-button v-if="isDev" class="add" type="primary" @click="addWeb()">添加</el-button>
+    <!-- <el-button v-if="isDev" class="add" type="primary" @click="addWeb()">添加</el-button> -->
 
     <el-dialog :title="title" :visible.sync="dialogFormVisible" :close-on-click-modal="false" :show-close="false" @close="reset">
       <el-form ref="form" :model="form">
@@ -83,12 +83,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">
-          取 消
-        </el-button>
-        <el-button type="primary" @click="confirm">
-          确 定
-        </el-button>
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="confirm">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -205,7 +201,7 @@ export default {
 .main {
   flex: 1;
   background: #f1f5f8;
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 850px) {
     height: calc(100% - 40px);
   }
 }
@@ -218,16 +214,7 @@ export default {
 
 .content {
   margin: 0 auto;
-  width: 1000px;
-  @media screen and (max-width: 1300px) {
-    width: 750px;
-  }
-  @media screen and (max-width: 1000px) {
-    width: 500px;
-  }
-  @media screen and (max-width: 750px) {
-    width: 500px;
-  }
+  width: 1112px;
 }
 
 .item {
@@ -289,7 +276,8 @@ export default {
       }
       .right {
         flex: 1;
-        .name, .desc {
+        .name,
+        .desc {
           font-size: 13px;
         }
         .desc {
@@ -310,21 +298,41 @@ export default {
         border-radius: 3px;
         transition: 0.5s;
         &:hover {
-          background: rgba(55,53, 47,0.08);
+          background: rgba(55, 53, 47, 0.08);
         }
       }
     }
-    @media screen and (max-width: 1300px) {
-      width: 33%;
-    }
-    @media screen and (max-width: 1000px) {
-      width: 50%;
-    }
-    @media screen and (max-width: 750px) {
-      width: 50%;
-    }
   }
 }
+
+@media screen and (max-width: 1400px) {
+  .content {
+    width: 828px;
+  }
+  .item .web-item {
+    width: 33%;
+  }
+}
+@media screen and (max-width: 1150px) {
+  .content {
+    width: 544px;
+  }
+  .item .web-item {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 632px) {
+  .content {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  .item .web-item {
+    width: 100%;
+  }
+}
+
 .add {
   position: fixed;
   top: 10px;
@@ -340,17 +348,17 @@ a {
 }
 .overflowClip_1 {
   overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .overflowClip_2 {
   overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 </style>
 
