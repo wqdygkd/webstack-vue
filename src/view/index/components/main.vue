@@ -11,13 +11,13 @@
             </div>
 
             <el-row v-if="item.web && item.web.length > 0 || item.id === '624e2c7313'" :gutter="20">
-              <el-col v-if="item.id === '624e2c7313' && !isDev" :span="6" class="web-item ">
+              <el-col v-if="item.id === '624e2c7313' && !isDev" class="web-item ">
                 <div class="web-item-inner custom">
                   <GoogleAd />
                 </div>
               </el-col>
 
-              <el-col v-for="i in item.web" :key="i.id" :span="6" class="web-item">
+              <el-col v-for="i in item.web" :key="i.id" class="web-item">
                 <div class="web-item-inner">
                   <a :href="i.url" target="_blank">
                     <el-image class="logo" lazy :src="getLogo(i.logo)" fit="contain" referrerpolicy="no-referrer">
@@ -30,7 +30,7 @@
                     </p>
                     <p class="desc overflowClip_2">{{ i.desc }}</p>
                   </div>
-                  <el-popover
+                  <!-- <el-popover
                     v-if="isDev"
                     placement="bottom-start"
                     width="70"
@@ -40,7 +40,7 @@
                     <li class="el-dropdown-menu__item" @click="del(i)">删除</li>
                     <li class="el-dropdown-menu__item" @click="edit(i)">编辑</li>
                     <i slot="reference" class="fa fa-ellipsis-h" />
-                  </el-popover>
+                  </el-popover> -->
                 </div>
               </el-col>
             </el-row>
@@ -204,6 +204,10 @@ export default {
 <style scoped lang="less">
 .main {
   flex: 1;
+  background: #f1f5f8;
+  @media screen and (max-width: 750px) {
+    height: calc(100% - 40px);
+  }
 }
 .el-scrollbar {
   height: 100%;
@@ -213,8 +217,17 @@ export default {
 }
 
 .content {
-  width: 1000px;
   margin: 0 auto;
+  width: 1000px;
+  @media screen and (max-width: 1300px) {
+    width: 750px;
+  }
+  @media screen and (max-width: 1000px) {
+    width: 500px;
+  }
+  @media screen and (max-width: 750px) {
+    width: 500px;
+  }
 }
 
 .item {
@@ -234,15 +247,18 @@ export default {
     border-radius: 4px;
   }
   .web-item {
-    // position: relative;
+    float: left;
+    box-sizing: border-box;
     padding: 10px;
+    width: 25%;
     .web-item-inner {
       position: relative;
       border-radius: 4px;
       height: 51px;
       padding: 15px;
       display: flex;
-      border: 1px solid #e4ecf3;
+      background: #fff;
+      // border: 1px solid #e4ecf3;
       transition: all 0.3s ease;
       &:hover {
         // transform: translateY(-6px);
@@ -298,8 +314,16 @@ export default {
         }
       }
     }
+    @media screen and (max-width: 1300px) {
+      width: 33%;
+    }
+    @media screen and (max-width: 1000px) {
+      width: 50%;
+    }
+    @media screen and (max-width: 750px) {
+      width: 50%;
+    }
   }
-
 }
 .add {
   position: fixed;

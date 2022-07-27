@@ -211,7 +211,7 @@ export default {
   .v-modal {
     display: none;
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 750px) {
     width: 100%;
     .v-modal {
       position: fixed;
@@ -244,7 +244,7 @@ export default {
 .top-bar {
   display: none;
   background: @bgColor;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 750px) {
     display: flex;
   }
   height: @height;
@@ -278,7 +278,7 @@ export default {
   }
   .collapse-btn {
     display: none;
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 750px) {
       display: block;
     }
   }
