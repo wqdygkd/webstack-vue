@@ -123,6 +123,18 @@ export default {
     }
   },
 
+  watch: {
+    menu: {
+      handler () {
+        this.$nextTick(() => {
+          document.querySelector(this.active).scrollIntoView({
+            behavior: 'smooth'
+          })
+        })
+      }
+    }
+  },
+
   methods: {
     getLogo (logo) {
       try {

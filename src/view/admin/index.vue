@@ -34,6 +34,8 @@
       </el-tab-pane>
     </el-tabs>
 
+    <el-button @click="login">登录</el-button>
+
     <el-dialog
       :title="type === 'edit' ? '编辑' : '新增'"
       :visible.sync="dialogVisible"
@@ -227,6 +229,10 @@ export default {
 
     async handleUpload () {
       await post('https://imgs.top/api/v1/upload')
+    },
+
+    login () {
+      window.open('https://github.com/login/oauth/authorize?client_id=eaae0e2551a9260d4b91&redirect_uri=https://localhost:8087/oauth/callback')
     }
   }
 }

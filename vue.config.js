@@ -18,6 +18,7 @@ module.exports = {
       config.devServer = {
         port: 8087,
         disableHostCheck: true,
+        https: true,
         proxy: {
           '/api': {
             target: 'http://localhost:8088',

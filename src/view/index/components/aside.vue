@@ -269,7 +269,7 @@ export default {
 
 .el-scrollbar {
   transition: all 0.5s;
-  box-shadow: 0 0 18px 0 #d4dee6;
+  // box-shadow: 0 0 18px 0 #d4dee6;
   background: @bgColor;
   position: absolute;
   width: @width;

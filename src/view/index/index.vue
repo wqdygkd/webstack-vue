@@ -47,16 +47,6 @@ export default {
     this.init()
   },
 
-  mounted () {
-    console.log(this.active)
-    console.log(document.querySelector(this.active))
-    this.$nextTick(() => {
-      document.querySelector(this.active).scrollIntoView({
-        behavior: 'smooth'
-      })
-    })
-  },
-
   methods: {
     async init (val) {
       let { category, web } = await import('@/db/db.json')
