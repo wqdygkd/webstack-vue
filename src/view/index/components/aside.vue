@@ -22,7 +22,7 @@
             :index="item.id"
           >
             <template slot="title">
-              <i :class="item.icon" class="icon" />
+              <i :class="item.icon" class="icon iconfont" />
               <span>{{ item.name }}</span>
 
               <!-- <Popover

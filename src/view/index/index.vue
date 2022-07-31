@@ -15,7 +15,7 @@ import Aside from './components/aside.vue'
 import fractionalIndex from 'fractional-index'
 import { post } from '@/api'
 
-import { toTree } from '@/utils'
+import { toTree, categoryToTree } from '@/utils'
 export default {
   name: 'Index',
   components: {
@@ -48,15 +48,11 @@ export default {
   },
 
   methods: {
-    async init (val) {
-      let { category, web } = await import('@/db/db.json')
+    async init () {
+      let { category, web } = await import('@/db/db1.json')
       category = JSON.parse(JSON.stringify(category))
       web = JSON.parse(JSON.stringify(web))
-
-      let asideTree = toTree(category, category, 'children')
-      asideTree = asideTree.sort((a, b) => {
-        return a.index < b.index ? -1 : 1
-      })
+      const asideTree = categoryToTree(category)
       this.asideTree = asideTree
 
       const mainTree = [{ id: '0', name: '未分类' }]

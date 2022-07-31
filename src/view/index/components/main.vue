@@ -1,6 +1,7 @@
 <template>
   <div class="main">
     <el-scrollbar>
+      <el-button @click="login">登录</el-button>
       <div class="content">
         <template v-for="item in menu">
           <div v-if="!(item.id === '0' && (!item.web || item.web.length == 0))" :id="item.name" :key="item.id" class="item">
@@ -136,6 +137,10 @@ export default {
   },
 
   methods: {
+    login () {
+      location.href = 'https://github.com/login/oauth/authorize?client_id=eaae0e2551a9260d4b91&redirect_uri=https://localhost:8087/oauth/callback'
+    },
+
     getLogo (logo) {
       try {
         if (logo.startsWith('https://')) return logo

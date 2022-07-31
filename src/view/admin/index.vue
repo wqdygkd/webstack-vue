@@ -1,38 +1,25 @@
 <template>
   <div>
-    <el-tabs v-model="activeName1" @tab-click="handleClick(1)">
-      <el-tab-pane v-for="cat1 in category" :key="cat1.id" :label="cat1.name" :name="cat1.id">
-        <template v-if="cat1.children && cat1.children.length > 0">
-          <el-tabs v-model="activeName2" @tab-click="handleClick(2)">
-            <el-tab-pane v-for="cat2 in cat1.children" :key="cat2.id" :label="cat2.name" :name="cat2.id" />
-          </el-tabs>
-        </template>
-
-        <el-button @click="addWeb">添加</el-button>
-
-        <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="name" label="名称">
-            <template #default="scope">
-              <el-image class="logo" :src="scope.row.logo" />
-              <span>{{ scope.row.name }}</span>
-            </template>
-          </el-table-column>
-
-          <el-table-column prop="desc" label="简介" />
-          <el-table-column prop="url" label="链接" />
-          <el-table-column prop="date" label="添加时间" />
-
-          <el-table-column fixed="right" label="操作" width="180">
-            <template #default="scope">
-              <el-button type="text" size="small" @click="editHandler(scope)">编辑</el-button>
-              <el-button :disabled="scope.$index === 0" type="text" size="small" @click="moveHandler(scope, 1)">上移</el-button>
-              <el-button :disabled="scope.$index === tableData.length - 1" type="text" size="small" @click="moveHandler(scope, 2)">下移</el-button>
-              <el-button type="text" size="small" @click="deleteHandler(scope)">删除</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-tab-pane>
-    </el-tabs>
+    <el-tree
+      :data="category"
+      node-key="id"
+      :default-expand-all="false"
+      draggable
+      :allow-drop="allowDrop"
+      :allow-drag="allowDrag"
+      :props="{ label: 'name'}"
+      :expand-on-click-node="false"
+      @node-drop="handleDrop"
+      @node-drag-start="handleDragStart"
+      @node-drag-enter="handleDragEnter"
+      @node-drag-leave="handleDragLeave"
+      @node-drag-over="handleDragOver"
+      @node-drag-end="handleDragEnd"
+    >
+      <template #default="{ node, data }">
+        <CustomTreeNode :data="data" :node="node" @change="change" />
+      </template>
+    </el-tree>
 
     <el-button @click="login">登录</el-button>
 
@@ -40,7 +27,7 @@
       :title="type === 'edit' ? '编辑' : '新增'"
       :visible.sync="dialogVisible"
     >
-      <el-form ref="form" :model="form" label-width="80px">
+      <el-form v-if="false" ref="form" :model="form" label-width="80px">
         <el-form-item label="logo">
           <el-upload
             class="upload-demo"
@@ -72,6 +59,18 @@
           />
         </el-form-item>
       </el-form>
+
+      <template v-if="formData.data.type === 'category'">
+        <el-form ref="form" :model="formData" label-width="80px">
+          <el-form-item label="名称">
+            <el-input v-model="formData.name" />
+          </el-form-item>
+          <el-form-item label="图标">
+            <el-input v-model="formData.icon" />
+          </el-form-item>
+        </el-form>
+      </template>
+
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="onSubmit">确 定</el-button>
@@ -82,23 +81,36 @@
 
 <script>
 import { post, get, patch, del } from '@/api'
-import { toTree, nanoid } from '@/utils'
+import octokit from '@/api/octokit.js'
+import { toTree, nanoid, categoryToTree } from '@/utils'
+
+import CustomTreeNode from './components/custom-tree-node'
 export default {
+  components: {
+    CustomTreeNode
+  },
   data () {
     return {
       activeName1: '',
       activeName2: '',
       tableData: [],
       category: [],
+      map: {},
 
       type: 'edit',
       dialogVisible: false,
-      form: {
+      formData: {
+        data: {},
+
         name: '',
+        icon: '',
+
         desc: '',
         url: '',
         id: ''
-      }
+      },
+
+      editDate: {}
     }
   },
   created () {
@@ -107,52 +119,76 @@ export default {
   methods: {
     async init () {
       await this.getCategory()
-      const cat1 = this.category[0] || {}
-      const cat2 = (cat1.children && cat1.children[0]) || {}
+      // const cat1 = this.category[0] || {}
+      // const cat2 = (cat1.children && cat1.children[0]) || {}
 
-      this.activeName1 = cat1.id || '0'
-      this.activeName2 = cat2.id || '0'
-      this.getWeb()
+      // this.activeName1 = cat1.id || '0'
+      // this.activeName2 = cat2.id || '0'
+      // this.getWeb()
     },
 
     async getCategory () {
       const res = await get('/category')
-      const category = toTree(res)
+      const { tree: category, map } = categoryToTree(res)
 
-      // 排序
-      category.sort((a, b) => {
-        return a.index > b.index ? 1 : -1
+      // for (let i = 0; i < category.length; i++) {
+      //   const item = category[i]
+      //   if (item.children) {
+      //     if (item.children.length > 0) {
+      //       item.children.unshift({
+      //         // children: [],
+      //         id: '0',
+      //         index: '0',
+      //         name: '未分类',
+      //         parentId: item.id
+      //       })
+      //     }
+      //   }
+      // }
+
+      // category.unshift({
+      //   // children: [],
+      //   id: '0',
+      //   index: '0',
+      //   name: '未分类'
+      // })
+
+      // this.category = category
+      this.getWebNew(map, category)
+      // web = JSON.parse(JSON.stringify(web))
+    },
+
+    async getWebNew (map, category) {
+      const res = await get('/web')
+      // index正序 + 时间倒序
+      res.sort((a, b) => {
+        const indexA = a.index
+        const indexB = b.index
+        const timeA = a.time
+        const timeB = b.time
+
+        if (indexA && indexB) return indexA > indexB ? 1 : -1
+        if (!indexA && !indexB) return timeA > timeB ? -1 : 1
+        if (indexA) return -1
+        return 1
       })
+      res.forEach(item => {
+        const id = item.categoryId
+        if (map[id]) {
+          if (!map[id].children) {
+            // map[id].web = [item]
 
-      for (let i = 0; i < category.length; i++) {
-        const item = category[i]
-
-        if (item.children) {
-          // 排序
-          item.children.sort((a, b) => {
-            return a.index > b.index ? 1 : -1
-          })
-
-          if (item.children.length > 0) {
-            item.children.unshift({
-              // children: [],
-              id: '0',
-              index: '0',
-              name: '未分类',
-              parentId: item.id
-            })
+            this.$set(map[id], 'children', [item])
+          } else {
+            map[id].children.push(item)
           }
+        } else {
+          category.push(item)
         }
-      }
-
-      category.unshift({
-        // children: [],
-        id: '0',
-        index: '0',
-        name: '未分类'
       })
 
       this.category = category
+      this.map = map
     },
 
     async getWeb () {
@@ -215,24 +251,77 @@ export default {
     },
 
     async onSubmit () {
-      const { form } = this
-      const category = this.form.categoryId
-      const categoryId = !category[1] || category[1] === '0' ? category[0] : category[1]
-      if (this.type === 'edit') {
-        await patch(`web/${form.id}`, { ...form, categoryId })
-      } else if (this.type === 'add') {
-        await post('web', { ...form, categoryId, time: +new Date(), id: nanoid() })
+      const { formData } = this
+      if (formData.data.type === 'category') {
+        await octokit.request('PATCH /repos/{owner}/{repo}/labels/{name}', {
+          owner: 'wqdygkd',
+          repo: 'webstack-vue',
+          // name: formData.data.name,
+          // new_name: formData.name,
+          name: 'test',
+          new_name: 'test',
+          description: 'formData.icon|0'
+          // color: 'b01f26'
+        })
       }
-      this.dialogVisible = false
-      this.getWeb()
-    },
 
-    async handleUpload () {
-      await post('https://imgs.top/api/v1/upload')
+      console.log(formData)
+      // const category = this.form.categoryId
+      // const categoryId = !category[1] || category[1] === '0' ? category[0] : category[1]
+      // if (this.type === 'edit') {
+      //   await patch(`web/${form.id}`, { ...form, categoryId })
+      // } else if (this.type === 'add') {
+      //   await post('web', { ...form, categoryId, time: +new Date(), id: nanoid() })
+      // }
+      // this.dialogVisible = false
+      // this.getWeb()
     },
 
     login () {
-      window.open('https://github.com/login/oauth/authorize?client_id=eaae0e2551a9260d4b91&redirect_uri=https://localhost:8087/oauth/callback')
+      window.open('https://github.com/login/oauth/authorize?client_id=Iv1.d09f858f30eada25&redirect_uri=https://localhost:8087/oauth/callback')
+    },
+
+    handleDragStart (node, ev) {
+      console.log('drag start', node)
+    },
+    handleDragEnter (draggingNode, dropNode, ev) {
+      console.log('tree drag enter: ', dropNode.name)
+    },
+    handleDragLeave (draggingNode, dropNode, ev) {
+      console.log('tree drag leave: ', dropNode.name)
+    },
+    handleDragOver (draggingNode, dropNode, ev) {
+      console.log('tree drag over: ', dropNode.name)
+    },
+    handleDragEnd (draggingNode, dropNode, dropType, ev) {
+      console.log('tree drag end: ', dropNode && dropNode.name, dropType)
+    },
+    handleDrop (draggingNode, dropNode, dropType, ev) {
+      console.log('tree drop: ', dropNode.name, dropType)
+    },
+
+    allowDrop (draggingNode, dropNode, type) {
+      if (dropNode.data.id === '0' || (dropNode.level === 2 && type === 'inner')) {
+        return false
+      } else {
+        return true
+      }
+    },
+
+    allowDrag (draggingNode) {
+      console.log(draggingNode)
+      return draggingNode.data.id !== '0'
+    },
+
+    change (data) {
+      this.type = 'edit'
+      this.dialogVisible = true
+
+      this.formData.data = data
+      this.formData.name = data.name
+      this.formData.icon = data.icon
+
+      console.log(data)
     }
   }
 }
@@ -242,5 +331,8 @@ export default {
 .logo {
   width: 40px;
   height: 40px;
+}
+/deep/.el-tree-node__content {
+  height: 30px;
 }
 </style>
