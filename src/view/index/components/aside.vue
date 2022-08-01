@@ -162,27 +162,6 @@ export default {
         })
       })
     },
-    async moveCategory (type, menu, index) {
-      const url = '/update-category'
-      const item = menu[index]
-
-      if (type === 1) {
-        const A = menu[index - 2]?.index || null
-        const B = menu[index - 1]?.index
-        index = fractionalIndex(A, B)
-        console.log(A, B, index)
-      } else if (type === 2) {
-        const A = menu[index + 2]?.index || null
-        const B = menu[index + 1]?.index
-        index = fractionalIndex(A, B)
-        console.log(A, B, index)
-      }
-
-      await post(url, {
-        id: item.id,
-        index
-      })
-    },
     async confirm () {
       const url = this.form.id ? '/update-category' : '/add-category'
       const res = await post(url, this.form)

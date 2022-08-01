@@ -40,7 +40,6 @@ export function categoryToTree (list) {
 
     item.icon = descriptionArray[0]
     item.index = descriptionArray[1]
-    item.id = String(id)
     item.name = newName
     item.type = 'category'
 

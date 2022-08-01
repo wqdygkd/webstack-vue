@@ -125,15 +125,26 @@ export default {
     },
 
     async getCategory () {
-      const res = await octokit.request('GET /repos/{owner}/{repo}/labels', {
-        owner: 'wqdygkd',
-        repo: 'webstack-vue'
-      })
+      try {
+        const res = await octokit.request('GET /repos/{owner}/{repo}/labels', {
+          owner: 'wqdygkd',
+          repo: 'webstack-vue'
+        })
+        const data = res.data || []
+        const { tree: category, map } = categoryToTree(data)
 
-      const data = res.data || []
-      const { tree: category, map } = categoryToTree(data)
-
-      this.getWebNew(map, category)
+        this.getWebNew(map, category)
+      } catch (error) {
+        console.log(error.message)
+        if (error.message === 'Bad credentials') {
+          this.$alert('登录过期', '', {
+            confirmButtonText: '重新登录',
+            callback: action => {
+              this.login()
+            }
+          })
+        }
+      }
     },
 
     async getWebNew (map, category) {
@@ -292,31 +303,42 @@ export default {
     },
     handleDrop (draggingNode, dropNode, dropType, ev) {
       console.log('tree drop: ', draggingNode, dropNode, dropType, ev)
-      const parent = (dropNode.parent && dropNode.parent.data) || { children: this.category }
+      let parent = dropNode.parent && dropNode.parent.data
       const drop = dropNode.data
       const dragging = draggingNode.data
 
-      const dropPosition = parent.findIndex(item => item.id === drop.id)
+      if (Array.isArray(parent)) {
+        parent = { children: this.category }
+      }
+
+      parent.children = parent.children || []
+      const dropPosition = parent.children.findIndex(item => item.id === drop.id)
 
       let A
       let B
       if (dropType === 'before') {
         if (dropPosition === 0) {
           A = null
-          B = drop.index || ' '
+          B = drop.index || 'Q'
         } else {
-          A = parent[dropPosition - 1].index || ' '
-          B = drop.index || ' '
+          A = parent.children[dropPosition - 2].index || null
+          B = drop.index || 'Q'
         }
       } else if (dropType === 'after') {
-        if (dropPosition === parent.length - 1) {
+        if (dropPosition === parent.children.length - 2) {
           A = drop.index || 'Q'
           B = null
         } else {
-          A = drop.index || null
-          B = parent[dropPosition + 1].index || ' '
+          A = drop.index || 'Q'
+          B = parent.children[dropPosition + 2].index || null
         }
+      } else if (dropType === 'inner') {
+        parent = drop
+        const leng = drop.children.length
+        A = leng - 2 === -1 ? 'Q' : drop.children[leng - 2].index
+        B = null
       }
+
       console.log(A, B)
       const index = fractionalIndex(A, B)
       const name = dragging.name
@@ -326,6 +348,13 @@ export default {
       const description = `${icon}|${index}`
 
       console.log(name, newName, description)
+
+      this.submitHandler({
+        ...dragging,
+        newName,
+        index,
+        icon
+      })
     },
 
     allowDrop (draggingNode, dropNode, type) {

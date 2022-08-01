@@ -5,22 +5,16 @@
         <i class="iconfont" :class="data.icon" />
         <span class="category-name" :style="{'background': `#${data.color}`}">{{ data.name }}</span>
       </span>
+      <span>{{ data.index }}</span>
       <span>
-        <el-button
-          type="text"
-          size="mini"
-          @click="() => add(data)"
-        >
+        <el-button type="text" size="mini" @click="() => add(data)">
           新增
         </el-button>
-        <el-button
-          type="text"
-          size="mini"
-          @click="() => change(data)"
-        >
+        <el-button type="text" size="mini" @click="() => change(data)">
           修改
         </el-button>
         <el-button
+          :disabled="data.children && data.children.length > 0"
           type="text"
           size="mini"
           @click="() => remove(node, data)"
