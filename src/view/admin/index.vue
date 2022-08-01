@@ -17,7 +17,7 @@
       @node-drag-end="handleDragEnd"
     >
       <template #default="{ node, data }">
-        <CustomTreeNode :data="data" :node="node" @change="change" />
+        <CustomTreeNode :data="data" :node="node" @change="changeHandler" />
       </template>
     </el-tree>
 
@@ -60,20 +60,20 @@
         </el-form-item>
       </el-form>
 
-      <template v-if="formData.data.type === 'category'">
-        <el-form ref="form" :model="formData" label-width="80px">
+      <template v-if="form.type === 'category'">
+        <el-form ref="form" :model="form" label-width="80px">
           <el-form-item label="名称">
-            <el-input v-model="formData.name" />
+            <el-input v-model="form.newName" />
           </el-form-item>
           <el-form-item label="图标">
-            <el-input v-model="formData.icon" />
+            <el-input v-model="form.newIcon" />
           </el-form-item>
         </el-form>
       </template>
 
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="onSubmit">确 定</el-button>
+        <el-button type="primary" @click="submitHandler(form)">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -83,8 +83,11 @@
 import { post, get, patch, del } from '@/api'
 import octokit from '@/api/octokit.js'
 import { toTree, nanoid, categoryToTree } from '@/utils'
-
+import oauthProvider from '@/utils/config'
 import CustomTreeNode from './components/custom-tree-node'
+
+import fractionalIndex from 'fractional-index'
+
 export default {
   components: {
     CustomTreeNode
@@ -99,9 +102,7 @@ export default {
 
       type: 'edit',
       dialogVisible: false,
-      formData: {
-        data: {},
-
+      form: {
         name: '',
         icon: '',
 
@@ -110,7 +111,7 @@ export default {
         id: ''
       },
 
-      editDate: {}
+      loadingInstance: undefined
     }
   },
   created () {
@@ -118,44 +119,21 @@ export default {
   },
   methods: {
     async init () {
+      this.loadingInstance = this.$loading({ lock: true, spinner: 'el-icon-loading' })
       await this.getCategory()
-      // const cat1 = this.category[0] || {}
-      // const cat2 = (cat1.children && cat1.children[0]) || {}
-
-      // this.activeName1 = cat1.id || '0'
-      // this.activeName2 = cat2.id || '0'
-      // this.getWeb()
+      this.loadingInstance && this.loadingInstance.close()
     },
 
     async getCategory () {
-      const res = await get('/category')
-      const { tree: category, map } = categoryToTree(res)
+      const res = await octokit.request('GET /repos/{owner}/{repo}/labels', {
+        owner: 'wqdygkd',
+        repo: 'webstack-vue'
+      })
 
-      // for (let i = 0; i < category.length; i++) {
-      //   const item = category[i]
-      //   if (item.children) {
-      //     if (item.children.length > 0) {
-      //       item.children.unshift({
-      //         // children: [],
-      //         id: '0',
-      //         index: '0',
-      //         name: '未分类',
-      //         parentId: item.id
-      //       })
-      //     }
-      //   }
-      // }
+      const data = res.data || []
+      const { tree: category, map } = categoryToTree(data)
 
-      // category.unshift({
-      //   // children: [],
-      //   id: '0',
-      //   index: '0',
-      //   name: '未分类'
-      // })
-
-      // this.category = category
       this.getWebNew(map, category)
-      // web = JSON.parse(JSON.stringify(web))
     },
 
     async getWebNew (map, category) {
@@ -210,26 +188,6 @@ export default {
       this.tableData = res
     },
 
-    handleClick (type) {
-      if (type === 1) {
-        const cat1 = this.category.find(item => item.id === this.activeName1) || {}
-        const cat2 = (cat1.children && cat1.children[0]) || {}
-        this.activeName1 = cat1.id
-        this.activeName2 = cat2.id
-      }
-
-      this.getWeb()
-    },
-
-    editHandler ({ row }) {
-      this.type = 'edit'
-      this.dialogVisible = true
-      const categoryId = [this.activeName1]
-      if ((this.activeName1 === '0' && this.activeName2 !== '0') || (this.activeName1 !== '0' && this.activeName2)) {
-        categoryId.push(this.activeName2)
-      }
-      this.form = { ...row, categoryId }
-    },
     async  deleteHandler ({ row }) {
       this.$confirm('此操作将永久删除, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -250,78 +208,148 @@ export default {
       this.dialogVisible = true
     },
 
-    async onSubmit () {
-      const { formData } = this
-      if (formData.data.type === 'category') {
-        await octokit.request('PATCH /repos/{owner}/{repo}/labels/{name}', {
-          owner: 'wqdygkd',
-          repo: 'webstack-vue',
-          // name: formData.data.name,
-          // new_name: formData.name,
-          name: 'test',
-          new_name: 'test',
-          description: 'formData.icon|0'
-          // color: 'b01f26'
-        })
+    changeHandler (data) {
+      this.type = 'edit'
+      this.dialogVisible = true
+
+      this.form = {
+        ...data,
+        newName: data.name,
+        newIcon: data.icon
+      }
+    },
+
+    async submitHandler (form) {
+      this.loadingInstance = this.$loading({
+        lock: true,
+        spinner: 'el-icon-loading'
+      })
+
+      try {
+        await this.onSubmit(form)
+        this.dialogVisible = false
+        this.init()
+      } catch (error) {
+        console.log(error)
       }
 
-      console.log(formData)
-      // const category = this.form.categoryId
-      // const categoryId = !category[1] || category[1] === '0' ? category[0] : category[1]
-      // if (this.type === 'edit') {
-      //   await patch(`web/${form.id}`, { ...form, categoryId })
-      // } else if (this.type === 'add') {
-      //   await post('web', { ...form, categoryId, time: +new Date(), id: nanoid() })
-      // }
-      // this.dialogVisible = false
-      // this.getWeb()
+      this.loadingInstance && this.loadingInstance.close()
+    },
+
+    async onSubmit (form, parent) {
+      if (form.type === 'category') {
+        const name = form.parentName ? `${form.parentName} ${form.name}` : form.name
+        const newName = parent ? `${parent.newName} ${form.newName || form.name}` : form.newName
+
+        const description = form.description
+        const newDescription = `${form.newIcon === undefined ? (form.icon || '') : (form.newIcon || '')}|${form.index || ''}`
+
+        console.log(name, newName)
+        console.log(description, newDescription)
+
+        if (name === newName && description === newDescription) {
+          console.log('无变化')
+        } else {
+          await octokit.request('PATCH /repos/{owner}/{repo}/labels/{name}', {
+            owner: 'wqdygkd',
+            repo: 'webstack-vue',
+            name: name,
+            new_name: newName,
+            description: newDescription
+          // color: 'b01f26'
+          })
+        }
+
+        if (form.children) {
+          await form.children.reduce(async (previousValue, currentValue) => {
+            await previousValue
+            await this.onSubmit(currentValue, { ...form, newName })
+          }, [])
+        }
+      }
     },
 
     login () {
-      window.open('https://github.com/login/oauth/authorize?client_id=Iv1.d09f858f30eada25&redirect_uri=https://localhost:8087/oauth/callback')
+      localStorage.setItem('redirect', 'Admin')
+      const { oauth_uri: oauthUri, client_id: clientId, redirect_uri: redirectUri } = oauthProvider.github
+      location.href = `${oauthUri}?client_id=${clientId}&redirect_uri=${redirectUri}`
     },
 
     handleDragStart (node, ev) {
       console.log('drag start', node)
     },
     handleDragEnter (draggingNode, dropNode, ev) {
-      console.log('tree drag enter: ', dropNode.name)
+      console.log('tree drag enter: ', dropNode.data.name)
     },
     handleDragLeave (draggingNode, dropNode, ev) {
-      console.log('tree drag leave: ', dropNode.name)
+      console.log('tree drag leave: ', dropNode.data.name)
     },
     handleDragOver (draggingNode, dropNode, ev) {
-      console.log('tree drag over: ', dropNode.name)
+      console.log('tree drag over: ', dropNode.data.name)
     },
     handleDragEnd (draggingNode, dropNode, dropType, ev) {
-      console.log('tree drag end: ', dropNode && dropNode.name, dropType)
+      console.log('tree drag end: ', dropNode && dropNode.data.name, dropType)
     },
     handleDrop (draggingNode, dropNode, dropType, ev) {
-      console.log('tree drop: ', dropNode.name, dropType)
+      console.log('tree drop: ', draggingNode, dropNode, dropType, ev)
+      const parent = (dropNode.parent && dropNode.parent.data) || { children: this.category }
+      const drop = dropNode.data
+      const dragging = draggingNode.data
+
+      const dropPosition = parent.findIndex(item => item.id === drop.id)
+
+      let A
+      let B
+      if (dropType === 'before') {
+        if (dropPosition === 0) {
+          A = null
+          B = drop.index || ' '
+        } else {
+          A = parent[dropPosition - 1].index || ' '
+          B = drop.index || ' '
+        }
+      } else if (dropType === 'after') {
+        if (dropPosition === parent.length - 1) {
+          A = drop.index || 'Q'
+          B = null
+        } else {
+          A = drop.index || null
+          B = parent[dropPosition + 1].index || ' '
+        }
+      }
+      console.log(A, B)
+      const index = fractionalIndex(A, B)
+      const name = dragging.name
+      const icon = dragging.icon
+
+      const newName = parent.name ? parent.name + ' ' + dragging.name : dragging.name
+      const description = `${icon}|${index}`
+
+      console.log(name, newName, description)
     },
 
     allowDrop (draggingNode, dropNode, type) {
-      if (dropNode.data.id === '0' || (dropNode.level === 2 && type === 'inner')) {
-        return false
+      console.log('allowDrop', draggingNode, dropNode, type)
+      const draggingData = draggingNode.data
+      const dropData = dropNode.data
+
+      // 拖拽含有子分类
+      if ((draggingData.children || []).some(item => item.type === 'category')) {
+        if (type === 'inner') {
+          return false
+        } else {
+          return true
+        }
       } else {
+        if ((dropNode.level === 2 && type === 'inner')) {
+          return false
+        }
         return true
       }
     },
 
     allowDrag (draggingNode) {
-      console.log(draggingNode)
-      return draggingNode.data.id !== '0'
-    },
-
-    change (data) {
-      this.type = 'edit'
-      this.dialogVisible = true
-
-      this.formData.data = data
-      this.formData.name = data.name
-      this.formData.icon = data.icon
-
-      console.log(data)
+      return true
     }
   }
 }

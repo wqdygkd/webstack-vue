@@ -1,7 +1,7 @@
 const jsonServer = require('json-server')
 const server = jsonServer.create()
 const path = require('path')
-const file = path.join(__dirname, '../db/db.json')
+const file = path.join(__dirname, '../db/db1.json')
 
 const router = jsonServer.router(file)
 const middlewares = jsonServer.defaults()

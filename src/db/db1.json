@@ -1,0 +1,140 @@
+{
+  "category": [
+    {
+        "id": 4380329326,
+        "node_id": "LA_kwDOG6abmc8AAAABBRaFbg",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/test1111",
+        "name": "test1111",
+        "color": "fef2c0",
+        "default": false,
+        "description": "111"
+    },
+    {
+        "id": 4375957130,
+        "node_id": "LA_kwDOG6abmc8AAAABBNPOig",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7",
+        "name": "常用工具",
+        "color": "DF84BB",
+        "default": false,
+        "description": ""
+    },
+    {
+        "id": 4375957477,
+        "node_id": "LA_kwDOG6abmc8AAAABBNPP5Q",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%20%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7",
+        "name": "常用工具 下载工具",
+        "color": "DF84BB",
+        "default": false,
+        "description": ""
+    },
+    {
+        "id": 4375957840,
+        "node_id": "LA_kwDOG6abmc8AAAABBNPRUA",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%20%E5%9C%A8%E7%BA%BF%E5%B7%A5%E5%85%B7",
+        "name": "常用工具 在线工具",
+        "color": "DF84BB",
+        "default": false,
+        "description": ""
+    },
+    {
+        "id": 4375957603,
+        "node_id": "LA_kwDOG6abmc8AAAABBNPQYw",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%20%E8%AE%BE%E8%AE%A1%E5%B7%A5%E5%85%B7",
+        "name": "常用工具 设计工具",
+        "color": "DF84BB",
+        "default": false,
+        "description": ""
+    },
+    {
+        "id": 4375917345,
+        "node_id": "LA_kwDOG6abmc8AAAABBNMzIQ",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/%E5%B8%B8%E7%94%A8%E6%8E%A8%E8%8D%90",
+        "name": "常用推荐",
+        "color": "fbca04",
+        "default": false,
+        "description": ""
+    },
+    {
+        "id": 3874065929,
+        "node_id": "LA_kwDOG6abmc7m6Y4J",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/%E5%BD%B1%E8%A7%86%E8%B5%84%E6%BA%90",
+        "name": "影视资源",
+        "color": "d73a4a",
+        "default": false,
+        "description": ""
+    },
+    {
+        "id": 4375954594,
+        "node_id": "LA_kwDOG6abmc8AAAABBNPEog",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/%E5%BD%B1%E8%A7%86%E8%B5%84%E6%BA%90%20%E5%BD%B1%E8%A7%86%E7%AB%99",
+        "name": "影视资源 影视站",
+        "color": "d73a4a",
+        "default": false,
+        "description": ""
+    },
+    {
+        "id": 4375956531,
+        "node_id": "LA_kwDOG6abmc8AAAABBNPMMw",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/%E6%88%91%E7%9A%84",
+        "name": "我的",
+        "color": "5319e7",
+        "default": false,
+        "description": ""
+    },
+    {
+        "id": 4375962576,
+        "node_id": "LA_kwDOG6abmc8AAAABBNPj0A",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/%E7%B4%A0%E6%9D%90%E8%B5%84%E6%BA%90",
+        "name": "素材资源",
+        "color": "45B9BA",
+        "default": false,
+        "description": ""
+    },
+    {
+        "id": 4375965430,
+        "node_id": "LA_kwDOG6abmc8AAAABBNPu9g",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/%E7%B4%A0%E6%9D%90%E8%B5%84%E6%BA%90%20PPT%E8%B5%84%E6%BA%90",
+        "name": "素材资源 PPT资源",
+        "color": "45B9BA",
+        "default": false,
+        "description": "|0"
+    },
+    {
+        "id": 4375963443,
+        "node_id": "LA_kwDOG6abmc8AAAABBNPnMw",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/%E7%B4%A0%E6%9D%90%E8%B5%84%E6%BA%90%20%E5%9B%BE%E6%A0%87%E7%B4%A0%E6%9D%90",
+        "name": "素材资源 图标素材",
+        "color": "45B9BA",
+        "default": false,
+        "description": ""
+    },
+    {
+        "id": 4375964994,
+        "node_id": "LA_kwDOG6abmc8AAAABBNPtQg",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/%E7%B4%A0%E6%9D%90%E8%B5%84%E6%BA%90%20%E5%AD%97%E4%BD%93%E8%B5%84%E6%BA%90",
+        "name": "素材资源 字体资源",
+        "color": "45B9BA",
+        "default": false,
+        "description": ""
+    },
+    {
+        "id": 4375965188,
+        "node_id": "LA_kwDOG6abmc8AAAABBNPuBA",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/%E7%B4%A0%E6%9D%90%E8%B5%84%E6%BA%90%20%E6%91%84%E5%BD%B1%E5%9B%BE%E5%BA%93",
+        "name": "素材资源 摄影图库",
+        "color": "45B9BA",
+        "default": false,
+        "description": ""
+    },
+    {
+        "id": 4375964596,
+        "node_id": "LA_kwDOG6abmc8AAAABBNPrtA",
+        "url": "https://api.github.com/repos/wqdygkd/webstack-vue/labels/%E7%B4%A0%E6%9D%90%E8%B5%84%E6%BA%90%20%E8%AE%BE%E8%AE%A1%E7%81%B5%E6%84%9F",
+        "name": "素材资源 设计灵感",
+        "color": "45B9BA",
+        "default": false,
+        "description": ""
+    }
+],
+  "web": []
+}

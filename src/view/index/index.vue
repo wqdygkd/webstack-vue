@@ -49,7 +49,7 @@ export default {
 
   methods: {
     async init () {
-      let { category, web } = await import('@/db/db1.json')
+      let { category, web } = await import('@/db/db.json')
       category = JSON.parse(JSON.stringify(category))
       web = JSON.parse(JSON.stringify(web))
       const asideTree = categoryToTree(category)

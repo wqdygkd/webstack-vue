@@ -1,7 +1,10 @@
 <template>
   <span class="custom-tree-node">
     <template v-if="data.type === 'category'">
-      <span class="category-name" :style="{'background': `#${data.color}`}">{{ data.name }}</span>
+      <span>
+        <i class="iconfont" :class="data.icon" />
+        <span class="category-name" :style="{'background': `#${data.color}`}">{{ data.name }}</span>
+      </span>
       <span>
         <el-button
           type="text"
