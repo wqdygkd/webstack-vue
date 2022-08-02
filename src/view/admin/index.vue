@@ -51,14 +51,14 @@
         <el-form-item label="链接">
           <el-input v-model="form.url" />
         </el-form-item>
-        <el-form-item label="分类">
+        <!-- <el-form-item label="分类">
           <el-cascader
             v-model="form.categoryId"
             :options="category"
             :props="{ value: 'id', label: 'name'}"
             placeholder="请选择分类"
           />
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
 
       <template v-if="form.type === 'category'">
@@ -276,7 +276,7 @@ export default {
             name: name,
             new_name: newName,
             description: newDescription,
-            color: newColor.sloce(1)
+            color: newColor.slice(1)
           })
         }
 
@@ -286,6 +286,10 @@ export default {
             await this.onSubmit(currentValue, { ...form, newName, newColor })
           }, [])
         }
+      }
+
+      if (this.type === 'addIssues') {
+
       }
     },
 
