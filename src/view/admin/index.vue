@@ -68,6 +68,9 @@
           <el-form-item label="图标">
             <el-input v-model="form.newIcon" />
           </el-form-item>
+          <el-form-item label="背景">
+            <el-color-picker v-model="form.newColor" />
+          </el-form-item>
         </el-form>
       </template>
 
@@ -82,7 +85,7 @@
 <script>
 import { post, get, patch, del } from '@/api'
 import octokit from '@/api/octokit.js'
-import { toTree, nanoid, categoryToTree } from '@/utils'
+import { toTree, nanoid, labelsToTree } from '@/utils'
 import oauthProvider from '@/utils/config'
 import CustomTreeNode from './components/custom-tree-node'
 
@@ -120,20 +123,37 @@ export default {
   methods: {
     async init () {
       this.loadingInstance = this.$loading({ lock: true, spinner: 'el-icon-loading' })
-      await this.getCategory()
+      const labels = await this.getLabels()
+      const issues = await this.getIssues()
+
+      const { tree: labelsTree, map } = labelsToTree(labels)
+
+      issues.forEach(item => {
+        const id = item.categoryId
+        if (map[id]) {
+          if (!map[id].children) {
+            this.$set(map[id], 'children', [item])
+          } else {
+            map[id].children.push(item)
+          }
+        } else {
+          labelsTree.push(item)
+        }
+      })
+
+      this.category = labelsTree
+      this.map = map
+
       this.loadingInstance && this.loadingInstance.close()
     },
 
-    async getCategory () {
+    async getLabels () {
       try {
         const res = await octokit.request('GET /repos/{owner}/{repo}/labels', {
           owner: 'wqdygkd',
           repo: 'webstack-vue'
         })
-        const data = res.data || []
-        const { tree: category, map } = categoryToTree(data)
-
-        this.getWebNew(map, category)
+        return res.data || []
       } catch (error) {
         console.log(error.message)
         if (error.message === 'Bad credentials') {
@@ -147,45 +167,36 @@ export default {
       }
     },
 
-    async getWebNew (map, category) {
-      const res = await get('/web')
-      // index正序 + 时间倒序
-      res.sort((a, b) => {
-        const indexA = a.index
-        const indexB = b.index
-        const timeA = a.time
-        const timeB = b.time
-
-        if (indexA && indexB) return indexA > indexB ? 1 : -1
-        if (!indexA && !indexB) return timeA > timeB ? -1 : 1
-        if (indexA) return -1
-        return 1
+    async getIssues () {
+      const res = await octokit.request('GET /repos/{owner}/{repo}/issues', {
+        owner: 'wqdygkd',
+        repo: 'webstack-vue'
       })
-      res.forEach(item => {
-        const id = item.categoryId
-        if (map[id]) {
-          if (!map[id].children) {
-            // map[id].web = [item]
 
-            this.$set(map[id], 'children', [item])
-          } else {
-            map[id].children.push(item)
-          }
-        } else {
-          category.push(item)
+      const data = (res.data || []).filter(item => item.author_association === 'OWNER').map(item => {
+        const { body, title: name, labels, id, created_at: time, reactions } = item
+
+        const bodyMap = new Map(body.split('\n').map(item => {
+          const match = item.match(/([^:]*):(.*)/)
+          return [match[1].trim(), match[2].trim()]
+        }))
+
+        return {
+          name,
+          body,
+          id,
+          categoryId: labels[0] && labels[0].id,
+          categoryName: labels[0] && labels[0].name,
+          url: bodyMap.get('链接'),
+          logo: bodyMap.get('图标'),
+          desc: bodyMap.get('说明'),
+          index: bodyMap.get('排序'),
+          time
         }
       })
 
-      this.category = category
-      this.map = map
-    },
-
-    async getWeb () {
-      const id = (this.activeName2 === '0' || !this.activeName2) ? this.activeName1 === '0' ? '' : this.activeName1 : this.activeName2
-      const res = await get('/web', { categoryId: id })
-
       // index正序 + 时间倒序
-      res.sort((a, b) => {
+      return data.sort((a, b) => {
         const indexA = a.index
         const indexB = b.index
         const timeA = a.time
@@ -196,21 +207,17 @@ export default {
         if (indexA) return -1
         return 1
       })
-      this.tableData = res
     },
 
-    async  deleteHandler ({ row }) {
+    async deleteHandler ({ row }) {
       this.$confirm('此操作将永久删除, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
         await del(`web/${row.id}`)
-        this.getWeb()
+        // this.getWeb()
       }).catch(() => {})
-    },
-    moveHandler ({ row, $index }, type) {
-
     },
 
     addWeb () {
@@ -226,7 +233,8 @@ export default {
       this.form = {
         ...data,
         newName: data.name,
-        newIcon: data.icon
+        newIcon: data.icon,
+        newColor: data.color
       }
     },
 
@@ -251,14 +259,15 @@ export default {
       if (form.type === 'category') {
         const name = form.parentName ? `${form.parentName} ${form.name}` : form.name
         const newName = parent ? `${parent.newName} ${form.newName || form.name}` : form.newName
-
+        const newColor = parent ? parent.newColor : form.newColor
         const description = form.description
         const newDescription = `${form.newIcon === undefined ? (form.icon || '') : (form.newIcon || '')}|${form.index || ''}`
 
-        console.log(name, newName)
-        console.log(description, newDescription)
+        // console.log(name, newName)
+        // console.log(description, newDescription)
+        // console.log(newColor)
 
-        if (name === newName && description === newDescription) {
+        if (name === newName && description === newDescription && `#${form.color}` === newColor) {
           console.log('无变化')
         } else {
           await octokit.request('PATCH /repos/{owner}/{repo}/labels/{name}', {
@@ -266,15 +275,15 @@ export default {
             repo: 'webstack-vue',
             name: name,
             new_name: newName,
-            description: newDescription
-          // color: 'b01f26'
+            description: newDescription,
+            color: newColor.sloce(1)
           })
         }
 
         if (form.children) {
           await form.children.reduce(async (previousValue, currentValue) => {
             await previousValue
-            await this.onSubmit(currentValue, { ...form, newName })
+            await this.onSubmit(currentValue, { ...form, newName, newColor })
           }, [])
         }
       }
@@ -301,6 +310,7 @@ export default {
     handleDragEnd (draggingNode, dropNode, dropType, ev) {
       console.log('tree drag end: ', dropNode && dropNode.data.name, dropType)
     },
+
     handleDrop (draggingNode, dropNode, dropType, ev) {
       console.log('tree drop: ', draggingNode, dropNode, dropType, ev)
       let parent = dropNode.parent && dropNode.parent.data
@@ -313,11 +323,11 @@ export default {
 
       parent.children = parent.children || []
       const dropPosition = parent.children.findIndex(item => item.id === drop.id)
-
+      console.log(dropPosition)
       let A
       let B
       if (dropType === 'before') {
-        if (dropPosition === 0) {
+        if (dropPosition <= 1) {
           A = null
           B = drop.index || 'Q'
         } else {

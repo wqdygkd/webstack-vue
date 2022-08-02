@@ -21,11 +21,11 @@ export function toTree (list) {
   }
   return _list
 }
-export function categoryToTree (list) {
+export function labelsToTree (list) {
   const map = {}
 
   list = list.map(item => {
-    const { name, description, id } = item
+    const { name, description, id, color } = item
     let newName
     const nameArray = name.split(' ')
     const nameArrayLength = nameArray.length
@@ -42,6 +42,7 @@ export function categoryToTree (list) {
     item.index = descriptionArray[1]
     item.name = newName
     item.type = 'category'
+    item.color = '#' + color
 
     map[newName] = item
     map[id] = item

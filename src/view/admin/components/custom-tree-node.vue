@@ -3,7 +3,7 @@
     <template v-if="data.type === 'category'">
       <span>
         <i class="iconfont" :class="data.icon" />
-        <span class="category-name" :style="{'background': `#${data.color}`}">{{ data.name }}</span>
+        <span class="category-name" :style="{'background': data.color}">{{ data.name }}</span>
       </span>
       <span>{{ data.index }}</span>
       <span>
@@ -24,7 +24,38 @@
       </span>
     </template>
     <template v-else>
-      <span>{{ data.name }}</span>
+      <div class="el-table issues" style="width: 100%;">
+        <div class="el-table__body-wrapper is-scrolling-none">
+          <table cellspacing="0" cellpadding="0" border="0" class="el-table__body" style="width: 100%;">
+            <tbody>
+              <tr class="el-table__row">
+                <td rowspan="1" colspan="1">
+                  <div class="cell logo">
+                    <el-image :src="data.logo" />
+                  </div>
+                </td>
+                <td rowspan="1" colspan="1">
+                  <div class="cell">
+                    <a :href="data.url">{{ data.name }}</a>
+                  </div>
+                </td>
+                <td rowspan="1" colspan="1">
+                  <div class="cell">{{ data.desc }}</div>
+                </td>
+                <td rowspan="1" colspan="1">
+                  <div class="cell">{{ data.index }}</div>
+                </td>
+                <td rowspan="1" colspan="1">
+                  <div class="cell">{{ data.time }}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- <span>{{ data.name }}</span> -->
+
+      <!-- <span>{{ data.index }}</span> -->
       <span>
         <el-button
           type="text"
@@ -82,6 +113,20 @@ export default {
     padding: 0 10px;
     border-radius: 10px;
     color: #fff;
+  }
+
+  .issues {
+    background: transparent;
+    .el-table__row {
+      &:hover {
+        background: #F5F7FA;
+      }
+    }
+    .logo {
+      width: 30px;
+      height: 30px;
+      padding: 5px;
+    }
   }
 }
 </style>

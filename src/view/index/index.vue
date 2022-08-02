@@ -15,7 +15,7 @@ import Aside from './components/aside.vue'
 import fractionalIndex from 'fractional-index'
 import { post } from '@/api'
 
-import { toTree, categoryToTree } from '@/utils'
+// import { toTree, categoryToTree } from '@/utils'
 export default {
   name: 'Index',
   components: {
@@ -44,7 +44,7 @@ export default {
     }
   },
   created () {
-    this.init()
+    // this.init()
   },
 
   methods: {
