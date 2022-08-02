@@ -22,12 +22,13 @@
     </el-tree>
 
     <el-button @click="login">登录</el-button>
+    <el-button @click="addHandler('addIssues')">新增</el-button>
 
     <el-dialog
       :title="type === 'edit' ? '编辑' : '新增'"
       :visible.sync="dialogVisible"
     >
-      <el-form v-if="false" ref="form" :model="form" label-width="80px">
+      <el-form v-if="type === 'addIssues'" ref="form" :model="form" label-width="80px">
         <el-form-item label="logo">
           <el-upload
             class="upload-demo"
@@ -83,9 +84,8 @@
 </template>
 
 <script>
-import { post, get, patch, del } from '@/api'
 import octokit from '@/api/octokit.js'
-import { toTree, nanoid, labelsToTree } from '@/utils'
+import { labelsToTree } from '@/utils'
 import oauthProvider from '@/utils/config'
 import CustomTreeNode from './components/custom-tree-node'
 
@@ -103,7 +103,6 @@ export default {
       category: [],
       map: {},
 
-      type: 'edit',
       dialogVisible: false,
       form: {
         name: '',
@@ -114,6 +113,7 @@ export default {
         id: ''
       },
 
+      type: '', // addIssues
       loadingInstance: undefined
     }
   },
@@ -215,13 +215,13 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
-        await del(`web/${row.id}`)
+        // await del(`web/${row.id}`)
         // this.getWeb()
       }).catch(() => {})
     },
 
-    addWeb () {
-      this.type = 'add'
+    addHandler (type) {
+      this.type = type
       this.form = {}
       this.dialogVisible = true
     },

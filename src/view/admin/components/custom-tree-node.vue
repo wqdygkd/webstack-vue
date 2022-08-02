@@ -117,15 +117,16 @@ export default {
 
   .issues {
     background: transparent;
-    .el-table__row {
-      &:hover {
-        background: #F5F7FA;
-      }
+    &::before {
+      display: none;
     }
-    .logo {
-      width: 30px;
-      height: 30px;
-      padding: 5px;
+    .el-table__row {
+      background: transparent;
+      .logo {
+        width: 30px;
+        height: 30px;
+        padding: 5px;
+      }
     }
   }
 }
