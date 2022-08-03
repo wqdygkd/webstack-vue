@@ -10,7 +10,7 @@
         <el-button type="text" size="mini" @click="() => add(data)">
           新增
         </el-button>
-        <el-button type="text" size="mini" @click="() => change(data)">
+        <el-button type="text" size="mini" @click="() => change()">
           修改
         </el-button>
         <el-button
@@ -53,15 +53,8 @@
           </table>
         </div>
       </div>
-      <!-- <span>{{ data.name }}</span> -->
-
-      <!-- <span>{{ data.index }}</span> -->
       <span>
-        <el-button
-          type="text"
-          size="mini"
-          @click="() => change(data)"
-        >
+        <el-button type="text" size="mini" @click="change">
           修改
         </el-button>
         <el-button
@@ -90,12 +83,12 @@ export default {
   },
 
   methods: {
-    remove (node, data) {
-      console.log(node, data)
+    remove () {
+      this.$emit('remove', this.data)
     },
 
-    change (data) {
-      this.$emit('change', data)
+    change () {
+      this.$emit('change', this.node)
     }
   }
 }

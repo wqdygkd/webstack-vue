@@ -7,11 +7,6 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   config => {
-    // 上传
-    if (config.url.includes('/upload')) {
-      config.headers['Content-Type'] = 'multipart/form-data'
-      config.headers.Accept = 'application/json'
-    }
     config.headers['Content-Type'] = 'application/json'
     return config
   },
